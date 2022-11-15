@@ -1,22 +1,18 @@
 import { useState } from "react";
 import {
-  Button,
   Box,
-  Text,
-  Image,
-  InputGroup,
-  Input,
-  InputRightElement,
-  Stack,
-  HStack,
-  VStack,
   Flex,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  FormErrorMessage,
+  Image,
+  Input,
+  Stack,
   Radio,
+  HStack,
+  Button,
+  FormLabel,
+  InputGroup,
   RadioGroup,
+  FormControl,
+  InputRightElement,
 } from "@chakra-ui/react";
 import signup from "../../assets/signup.jpg";
 
@@ -35,13 +31,14 @@ const SignUp = () => {
   const isNameError = nameInput === "";
   const isPasswordError = passwordInput === "";
 
+
   return (
     <Box
+      my='50px'
       ml='20%'
       mr='20%'
       boxShadow='dark-lg'
       bg='white'
-      mt='100px'
       borderRadius='15px'
     >
       <Flex display='flex' align-items='flex-start'>
@@ -62,31 +59,25 @@ const SignUp = () => {
             justify-content='center'
             flexDirection='column'
           >
-            <Stack spacing={5} p='7' rounded='md' mt='60px'>
-              <FormControl isInvalid={isNameError}>
-                <FormLabel>Name</FormLabel>
+            <Stack spacing={5} p='7' rounded='md' my='50px'>
+
+              <FormControl isRequired={isNameError} w='350px'>
+                <FormLabel>User Name</FormLabel>
                 <Input
+                  placeholder='User Name'
                   type='text'
                   value={nameInput}
-                  onChange={handleNameChange}
-                />
-                {!isNameError ? (
-                  <FormHelperText>Enter your name.</FormHelperText>
-                ) : (
-                  <FormErrorMessage>Name is required.</FormErrorMessage>
-                )}
+                  onChange={handleNameChange} />
               </FormControl>
 
-              <FormControl isInvalid={isPasswordError}>
+              <FormControl isRequired={isPasswordError} w='350px'>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
-                    htmlSize={4}
-                    width='400px'
-                    pr='4.5rem'
+                    value={passwordInput}
+                    onChange={handlePasswordChange}
                     type={show ? "text" : "password"}
-                    placeholder='Enter password'
-                  />
+                    placeholder='Enter password' />
                   <InputRightElement>
                     <Button h='2rem' size='md' onClick={handleClick}>
                       {show ? "Hide" : "Show"}
@@ -95,34 +86,13 @@ const SignUp = () => {
                 </InputGroup>
               </FormControl>
 
-              <FormControl isInvalid={isPasswordError}>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  type='text'
-                  value={passwordInput}
-                  onChange={handlePasswordChange}
-                />
-                {!isNameError ? (
-                  <FormHelperText>Enter your password.</FormHelperText>
-                ) : (
-                  <FormErrorMessage>Password is required.</FormErrorMessage>
-                )}
-              </FormControl>
-
-              <FormControl isInvalid={isEmailError}>
+              <FormControl isRequired={isEmailError} w='350px'>
                 <FormLabel>Email</FormLabel>
                 <Input
+                  placeholder='Email is required'
                   type='email'
                   value={emailInput}
-                  onChange={handleEmailChange}
-                />
-                {!isEmailError ? (
-                  <FormHelperText>
-                    Enter the email you'd like to receive the newsletter on.
-                  </FormHelperText>
-                ) : (
-                  <FormErrorMessage>Email is required.</FormErrorMessage>
-                )}
+                  onChange={handleEmailChange} />
               </FormControl>
 
               <RadioGroup defaultValue='2'>
@@ -136,7 +106,12 @@ const SignUp = () => {
                 </Stack>
               </RadioGroup>
 
-              <Button h='2.50rem' size='md'>
+              <Button
+                h='2.50rem'
+                size='md'
+                bg='#2081e2'
+                color='white'
+                colorScheme='messenger'>
                 Sign Up
               </Button>
             </Stack>

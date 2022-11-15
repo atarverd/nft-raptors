@@ -8,7 +8,8 @@ import LogIn from "./components/auth/logIn";
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Routes>
-      <Route path='/signUp' element={<SignUp />} />
+      <Route path='/login' element={<LogIn />} />
+      <Route path='/signup' element={<SignUp />} />
     </Routes>
   </ChakraProvider>
 );
