@@ -38,8 +38,8 @@ const Cart = () => {
           <DrawerHeader fontSize='3xl'>Your Cart</DrawerHeader>
           <Divider orientation='horizontal' />
 
-          <Box mt='30px'>
-            <Flex display='flex' justifyContent='space-between'>
+          <Box mt='20px' pl='20px' pr='20px'>
+            <Flex display='flex' justifyContent='space-between' alignItems='center'>
               <Text fontSize='2xl' ml='10px' mt='10px'>1 Item</Text>
               <Button w='70px' h='30px' mr='10px' mt='10px'>Clear All</Button>
             </Flex>
