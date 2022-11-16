@@ -5,7 +5,6 @@ const Main = () => {
   return (
     <div>
       Main
-      <Cart />
     </div>
   )
 }
