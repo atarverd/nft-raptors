@@ -5,7 +5,8 @@ import NftBasicInfo from "../components/nftPage/NftBasicInfo";
 import NftAccordion from "../components/nftPage/NftAccordian";
 import NftTable from "../components/nftPage/NftTable";
 
-import { Box, Flex, Text, Link } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
+import NftChart from "../components/nftPage/NftChart";
 
 const NftPage = () => {
   return (
@@ -17,12 +18,7 @@ const NftPage = () => {
           <NftBasicInfo />
 
           <NftAccordion accordionName='Price Graph'>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.'
-            </Text>
+            <NftChart/>
           </NftAccordion>
 
           <NftAccordion accordionName='History'>
