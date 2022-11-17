@@ -8,6 +8,7 @@ import NftPage from "./pages/nftPage";
 import Main from "./pages/main";
 import UserPage from "./pages/userPage";
 import CollectionPage from "./pages/collectionPage";
+import SearchPage from "./pages/searchPage";
 
 export const App = () => (
   <ChakraProvider theme={theme}>
@@ -19,6 +20,7 @@ export const App = () => (
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/nft/:id' element={<NftPage />} />
+      <Route path='/search/:id' element={<SearchPage />} />
     </Routes>
   </ChakraProvider>
 );
