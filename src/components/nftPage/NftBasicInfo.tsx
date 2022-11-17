@@ -3,15 +3,31 @@ import { Box, Flex, Text, Link, Button } from "@chakra-ui/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
-const NftBasicInfo = () => {
+type TInfo = {
+  collectionId: string;
+  collectionName: string;
+  name: string;
+  favorite: number;
+  currentPrice: number;
+  owner: string;
+};
+
+const NftBasicInfo = ({
+  collectionId,
+  collectionName,
+  name,
+  favorite,
+  currentPrice,
+  owner,
+}: TInfo) => {
   const navigate = useNavigate();
 
-  const navigateToUser = (nameID: string) => {
-    navigate("/" + nameID);
+  const navigateToUser = () => {
+    navigate("/" + owner);
   };
 
-  const navigateToCollection = (collectionID: string) => {
-    navigate("/collection/" + collectionID);
+  const navigateToCollection = (collectionId: string) => {
+    navigate("/collection/" + collectionId);
   };
 
   return (
@@ -20,37 +36,38 @@ const NftBasicInfo = () => {
         <Flex flexDirection='column'>
           <Link
             onClick={() => {
-              navigateToCollection("collectionID");
+              navigateToCollection(collectionId);
             }}
             _hover={{ textDecoration: "none" }}
             color='#2081e2'
           >
-            Collection Name
+            {collectionName}
           </Link>
           <Text as='b' fontSize='2xl'>
-            Item Name
+            {name}
           </Text>
           <Text>
             Owned by &nbsp;
             <Link
-              onClick={() => {
-                navigateToUser("nameID");
-              }}
+              onClick={navigateToUser}
               _hover={{ textDecoration: "none" }}
               color='#2081e2'
             >
-              Name
+              {owner}
             </Link>
           </Text>
           <Text>
-            <FaRegHeart />
+            <Flex>
+              <FaRegHeart />
+              {favorite}
+            </Flex>
           </Text>
         </Flex>
       </Box>
 
       <Box w='500px' h='120px' bg='#fbfdff'>
         <Text>Current Price</Text>
-        <Text>$ 700 </Text>
+        <Text>{currentPrice}$</Text>
         <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2'>
           Add to Cart
         </Button>
