@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box } from "@chakra-ui/react";
-import { FaRegUser, FaWallet, FaShoppingCart } from "react-icons/fa";
+import { FaRegUser, FaWallet } from "react-icons/fa";
+import Cart from "../../components/cart/cart";
 
 const style = {
   height: "50px",
@@ -21,7 +22,7 @@ const HeaderIcons = () => {
         <FaWallet size='30px' />
       </Box>
       <Box ml='10px' cursor='pointer'>
-        <FaShoppingCart size='30px' />
+        <Cart/>
       </Box>
     </Flex>
   );

@@ -16,11 +16,11 @@ export const App = () => (
     <Routes>
       <Route path='/' element={<Main />} />
       <Route path='/:id' element={<UserPage />} />
-      <Route path='collection/:id' element={<CollectionPage />} />
+      <Route path='/collection/:id' element={<CollectionPage />} />
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/nft/:id' element={<NftPage />} />
-      <Route path='/search/:id' element={<SearchPage />} />
+      <Route path='/search/:q' element={<SearchPage />} />
     </Routes>
   </ChakraProvider>
 );
