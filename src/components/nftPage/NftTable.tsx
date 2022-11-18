@@ -25,7 +25,7 @@ type TProp = {
 
 const NftTable = ({ priceHistory }: TProp) => {
   const navigate = useNavigate();
-
+  const priceHistoryCopy=priceHistory.slice()
   const cdPrewOwner = (prevOwner: string) => {
     navigate("/" + prevOwner);
   };
@@ -41,7 +41,7 @@ const NftTable = ({ priceHistory }: TProp) => {
           </Tr>
         </Thead>
         <Tbody>
-          {priceHistory.reverse().map((item) => (
+          {priceHistoryCopy.reverse().map((item) => (
             <Tr>
               <Td>0.4465 WETH</Td>
               <Td>{item.price}$</Td>

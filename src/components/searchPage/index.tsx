@@ -5,7 +5,7 @@ import { Box, Flex } from "@chakra-ui/react";
 const Search = () => {
   return (
     <Box m='15px'>
-      <Flex display='flex' justifyContent='space-around'>
+      <Flex display='flex' justifyContent='space-around' >
         <Box>
           <Flex display='flex'>
             <Accordions />

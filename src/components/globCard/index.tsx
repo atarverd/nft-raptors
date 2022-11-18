@@ -10,7 +10,7 @@ const GlobCard = () => {
         overflow='hidden'
         boxShadow='0 0 24px 4px rgba(0, 0, 0, 0.15)'
       >
-        <Image src={signup} w='200px' h='220px' borderRadius='5px' />
+        <Image src={signup} w='200px' h='220px' borderRadius='5px' transition='transform .2s;' _hover={{'transform': 'scale(1.2)'}}/>
         <Stack p='3' bg='#EBF8FF'>
           <Heading fontSize='2xl'>Card</Heading>
           <Text>Name: AMD</Text>

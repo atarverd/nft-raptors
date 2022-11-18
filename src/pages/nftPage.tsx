@@ -5,9 +5,9 @@ import NftBasicInfo from "../components/nftPage/NftBasicInfo";
 import NftAccordion from "../components/nftPage/NftAccordian";
 import NftTable from "../components/nftPage/NftTable";
 
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Center, Flex, Text } from "@chakra-ui/react";
 import NftChart from "../components/nftPage/NftChart";
-import { type } from "@testing-library/user-event/dist/types/setup/directApi";
+import Loader from '../components/loading'
 
 type THistory = {
   date: string;
@@ -46,16 +46,22 @@ const NftPage = () => {
   useEffect(() => {
     fetch("https://6374fb9208104a9c5f8f398c.mockapi.io/nftItem/1")
       .then((res) => res.json())
-      .then((data) => setNftInfo(data));
+      .then((data) => setNftInfo(data))
+      .then(()=>setIsloading(false))
   }, []);
 
   console.log(nftInfo);
+
+  if(isLoading)
+    return (<Loader></Loader>)
+
   return (
-    <Box ml='15%' mr='15%'>
+    <Box ml='20%' mr='20%' mt='2%' bg='white'>
+      <Center>
       <Flex id='nft-conainer'>
         <NftItemPage />
 
-        <Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='20px'>
+        <Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='5%'>
           <NftBasicInfo
             collectionId={nftInfo.collectionId}
             collectionName={nftInfo.collectionName}
@@ -74,10 +80,13 @@ const NftPage = () => {
           </NftAccordion>
         </Flex>
       </Flex>
-
+      </Center>
+    
+      
       <NftAccordion accordionName='More From This Collection'>
         <div>Her should be similar categories</div>
       </NftAccordion>
+
     </Box>
   );
 };
