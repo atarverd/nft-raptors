@@ -1,8 +1,10 @@
-import React from 'react'
+import Collection from "../components/Collection"
 
 const CollectionPage = () => {
   return (
-    <div>CollectionPage</div>
+    <div>
+      <Collection />
+    </div>
   )
 }
 
