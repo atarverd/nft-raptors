@@ -18,7 +18,7 @@ type FCProps = {
 
 const NftAccordion = ({ children, accordionName }: FCProps) => {
   return (
-    <Box w='500px'>
+    <Box mt='20px'>
       <Accordion defaultIndex={[0]} allowMultiple>
         <AccordionItem>
           <h2>

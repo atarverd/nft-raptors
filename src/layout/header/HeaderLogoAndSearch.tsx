@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   InputRightElement,
 } from "@chakra-ui/react";
-import logoImage from "../../assets/logo.svg";
+import logoImage from "../../assets/logo.png";
 import { useNavigate } from "react-router";
 import { FaSearch } from "react-icons/fa";
 
@@ -23,7 +23,8 @@ const HeaderLogoAndSearch = () => {
   const navigate = useNavigate();
 
   const searchItem = () => {
-    navigate("/search/" + search);
+    if(search)
+      navigate("/search/" + search);  
   };
 
   const handleHomePage = () => {
@@ -37,21 +38,21 @@ const HeaderLogoAndSearch = () => {
         onClick={handleHomePage}
         src={logoImage}
         borderRadius='full'
-        boxSize='40px'
+        boxSize='100px'
       />
-      <Text as='b' ml='0.6rem' mr='3rem' fontSize='1.2rem'>
-        OpenSea
+      <Text as='b'  mr='3rem' fontSize='1.2rem'>
+        raptors
       </Text>
 
       <InputGroup>
         <Input
           onChange={(e) => handleSearch(e)}
           placeholder='Search items, collections, and accounts'
-          h='2.8rem'
+          h='3.8rem'
           bg='#fff'
           borderRadius='15px'
         />
-        <InputRightElement h='45px' w='90px' mr='-3px'>
+        <InputRightElement h='50px' w='110px' m='5px'>
           <Button onClick={searchItem} width='70px' borderRadius='12px'>
             <FaSearch />
           </Button>

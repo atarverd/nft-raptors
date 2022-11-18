@@ -57,15 +57,17 @@ const NftBasicInfo = ({
             </Link>
           </Text>
           <Text>
-            <Flex>
-              <FaRegHeart />
+            <Flex alignItems='center'>
+              <FaRegHeart size='25px'/>
+              <Text ml='5px'>
               {favorite}
+              </Text>
             </Flex>
           </Text>
         </Flex>
       </Box>
 
-      <Box w='500px' h='120px' bg='#fbfdff'>
+      <Box w='500px' h='120px'>
         <Text>Current Price</Text>
         <Text>{currentPrice}$</Text>
         <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2'>
