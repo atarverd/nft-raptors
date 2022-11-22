@@ -1,7 +1,15 @@
 import signup from "../../assets/signup.jpg";
 import { Box, Text, Stack, Image, Button, Heading } from "@chakra-ui/react";
 
-const GlobCard = () => {
+type TNft={
+  nft:{
+    img:string;
+  name:string;
+  currentPrice:number;
+  }
+}
+
+const GlobCard = ({nft}:TNft) => {
   return (
     <Box>
       <Box
@@ -12,7 +20,7 @@ const GlobCard = () => {
       >
 
         <Image
-          src={signup}
+          src={nft.img}
           w='200px'
           h='220px'
           borderRadius='5px'
@@ -20,8 +28,8 @@ const GlobCard = () => {
           _hover={{ 'transform': 'scale(1.1)' }} />
 
         <Stack p='3' bg='#EBF8FF'>
-          <Heading fontSize='2xl'>Card</Heading>
-          <Text>Name: AMD</Text>
+          <Heading fontSize='2xl'>{nft.name}</Heading>
+          <Text>price: {nft.currentPrice}</Text>
           <Button colorScheme='messenger'>Add To Cart</Button>
         </Stack>
       </Box>

@@ -29,18 +29,16 @@ type TNft = {
 };
 
 const NftPage = () => {
-  const [nftInfo, setNftInfo] = useState<TNft>({
-    collectionId: "string",
-    collectionName: "string",
-    currentPrice: 1000,
-    id: "1",
-    isForSold: false,
-    name: "string",
-    owner: "string",
-    picture: "string",
+  const [nftInfo, setNftInfo] = useState<TNft>({collectionId: 'string',
+    collectionName: 'string',
+    currentPrice: 1,
+    id: 'string',
+    isForSold: true,
+    name: 'asdf',
+    owner: 'asdf',
+    picture: 'asdf',
     favorite: 1,
-    priceHistory: [{ price: 100, prevOwner: "Gagp", date: "Nov 1" }],
-  });
+    priceHistory:[{price:1,date:'',prevOwner:''}]});
   const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {

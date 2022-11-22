@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Box,
   Text,
@@ -9,18 +8,55 @@ import {
 } from '@chakra-ui/react'
 import login from '../../assets/login.jpg'
 import signup from '../../assets/signup.jpg'
+import {doc, getDoc} from 'firebase/firestore'
+import { useParams } from 'react-router';
+import  { useEffect, useState } from "react";
+import {db} from '../../firebase-config.js'
+
+type TCollection={
+    collectionName:string;
+    "description": string;
+    "creator": string;
+    "date": {
+      "seconds":number ;
+      "nanoseconds":number;
+    },
+    "logo":string;
+    "background":string;
+
+
+}
 
 const CollectionHeader = () => {
 
   const [show, setShow] = useState(false)
+  const [collection,setCollection]=useState<TCollection>()
 
   const handleToggle = () => setShow(!show)
+
+  const { id } = useParams()
+ 
+  useEffect(()=>{
+    const a=async () => {
+      const snap = await getDoc(doc(db, 'collections', id as string ))
+
+      if (snap.exists()) {
+        console.log(snap.data())
+        //@ts-ignore
+        setCollection(snap.data())
+      }
+      else {
+        console.log("No such document")
+      }
+    }
+    a()
+  },[])
 
   return (
     <Box>
 
       <Box h='300px'>
-        <Image src={login} h='300px' w='full' position='absolute' zIndex='-1' />
+        <Image src={collection?.background} h='300px' w='full' position='absolute'  />
         <Box
           ml='40px'
           border='4px'
@@ -29,7 +65,7 @@ const CollectionHeader = () => {
           top='180px'
           position='absolute' >
           <Image
-            src={signup}
+            src={collection?.logo}
             w='200px'
             h='200px'
             borderRadius='5px'
@@ -39,19 +75,16 @@ const CollectionHeader = () => {
       </Box>
 
       <Box ml='40px' my='20px' mt='30px'>
-        <Text fontSize='4xl' mt='30px'>Otherdeed for Otherside</Text>
-        <Text fontSize='2xl' mt='10px'>By NFT Raptors</Text>
+        <Text fontSize='4xl' mt='30px'>{collection?.collectionName}</Text>
+        <Text fontSize='2xl' mt='10px'>by {collection?.creator}</Text>
         <HStack spacing={5} mt='10px'>
           <Text>Items 100.000</Text>
-          <Text>Created Jun 2022</Text>
-          <Text>Creator fee 20%</Text>
-          <Text>Chain AMD</Text>
+          //@ts-ignore
+          <Text>Created </Text>
         </HStack>
-        <Box maxW='300px' mt='10px'>
+        <Box maxW='30%' mt='10px'>
           <Collapse startingHeight={20} in={show} >
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-            labore wes anderson cred nesciunt sapiente ea proident.
+            {collection?.description}
           </Collapse>
           <Button size='xs' onClick={handleToggle} mt='1rem'>
             Show {show ? 'Less' : 'More'}
