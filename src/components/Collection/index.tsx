@@ -6,6 +6,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase-config.js";
+import Loader from "../loading";
 
 type TNft = {
   id: string;
@@ -17,6 +18,7 @@ type TNft = {
 const Collection = () => {
   const { id } = useParams();
   const [nfts, setNfts] = useState<TNft[]>();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const a = async () => {
       const q = query(collection(db, "nfts"), where("collectionID", "==", id));
@@ -37,19 +39,24 @@ const Collection = () => {
       });
       //@ts-ignore
       setNfts(result);
+      setLoading(true);
     };
     a();
   }, []);
   return (
     <Box>
-      <CollectionHeader />
-      <Flex display='flex' justifyContent='space-around'>
-        <SimpleGrid spacing='40px' columns={5} m='20px'>
-          {nfts?.map((item) => (
-            <GlobCard nft={item} />
-          ))}
-        </SimpleGrid>
-      </Flex>
+      <CollectionHeader nftCount={nfts?.length} />
+      {!loading ? (
+        <Loader />
+      ) : (
+        <Flex display='flex' justifyContent='space-around'>
+          <SimpleGrid spacing='40px' columns={5} m='20px'>
+            {nfts?.map((item) => (
+              <GlobCard nft={item} />
+            ))}
+          </SimpleGrid>
+        </Flex>
+      )}
     </Box>
   );
 };
