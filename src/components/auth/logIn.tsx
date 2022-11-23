@@ -12,7 +12,7 @@ import {
   FormControl,
   InputRightElement,
 } from "@chakra-ui/react";
-import signup from "../../assets/signup.jpg";
+import login from "../../assets/login.jpg";
 
 
 const LogIn = () => {
@@ -40,7 +40,7 @@ const LogIn = () => {
         <HStack>
           <Box padding='15px'>
             <Image
-              src={signup}
+              src={login}
               alt='signup'
               h='600px'
               w='450px'

@@ -12,8 +12,24 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-const NftTable = () => {
+type THistory = {
+  date: string;
+  price: number;
+  prevOwner: string;
+};
+type TProp = {
+  priceHistory: THistory[];
+};
+
+const NftTable = ({ priceHistory }: TProp) => {
+  const navigate = useNavigate();
+  const priceHistoryCopy=priceHistory.slice()
+  const cdPrewOwner = (prevOwner: string) => {
+    navigate("/" + prevOwner);
+  };
+
   return (
     <TableContainer>
       <Table variant='simple'>
@@ -25,15 +41,21 @@ const NftTable = () => {
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>0.4465 WETH</Td>
-            <Td> $ 564.29</Td>
-            <Td>
-              <Link color='#2081e2' _hover={{ textDecoration: "none" }}>
-                Higitus_Figitus
-              </Link>
-            </Td>
-          </Tr>
+          {priceHistoryCopy.reverse().map((item) => (
+            <Tr>
+              <Td>0.4465 WETH</Td>
+              <Td>{item.price}$</Td>
+              <Td>
+                <Link
+                  onClick={() => cdPrewOwner(item.prevOwner)}
+                  color='#2081e2'
+                  _hover={{ textDecoration: "none" }}
+                >
+                  {item.prevOwner}
+                </Link>
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

@@ -1,0 +1,10 @@
+*{
+    font-family: 'Roboto Mono', monospace;
+
+}
+#root{
+    background: linear-gradient(180deg, white 20%, #EBF8FF
+    , #EDFDFD
+    );
+    min-height: 100vh;
+}
