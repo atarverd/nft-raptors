@@ -3,7 +3,7 @@ import { Box, Text, Stack, Image, Button, Heading } from "@chakra-ui/react";
 
 type TNft={
   nft:{
-    img:string;
+  img:string;
   name:string;
   currentPrice:number;
   }
