@@ -29,12 +29,8 @@ type TCollection = {
   },
   "logo": string;
   "background": string;
-
+}
 const CollectionHeader = ({ nftCount }: TProp) => {
-  const [show, setShow] = useState(false);
-  const [collection, setCollection] = useState<TCollection>();
-
-  const handleToggle = () => setShow(!show);
 
 
   const [show, setShow] = useState(false)

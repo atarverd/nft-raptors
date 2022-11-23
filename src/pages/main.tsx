@@ -8,8 +8,8 @@ const Main = () => {
   return (
     <>
       <Carusel />
-      <Categories />
       <TopCollections />
+      <Categories />
     </>
   );
 };

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { db } from '../../firebase-config.js'
 import { useParams } from 'react-router';
 import GlobCard from '../globCard'
+import Loader from "../loading";
 import {
   Box,
   Flex,
@@ -12,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 
 type TNft = {
+  id:string;
   img: string;
   name: string;
   currentPrice: number;
@@ -20,7 +22,7 @@ type TNft = {
 const Collection = () => {
   const { id } = useParams()
   const [nfts, setNfts] = useState<TNft[]>()
-
+  const [loading,setLoading]=useState<boolean>(false)
 
   useEffect(() => {
     const a = async () => {
