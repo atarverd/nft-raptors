@@ -44,7 +44,7 @@ const UserTabs = () => {
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
               <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
               </SimpleGrid>
             </Flex>
           </TabPanel>
@@ -52,8 +52,8 @@ const UserTabs = () => {
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
               <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
               </SimpleGrid>
             </Flex>
           </TabPanel>
@@ -61,9 +61,9 @@ const UserTabs = () => {
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
               <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
-                <GlobCard nft={{ img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
+                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
               </SimpleGrid>
             </Flex>
           </TabPanel>

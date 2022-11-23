@@ -7,6 +7,7 @@ import { db } from '../../firebase-config.js';
 import { collection, query, where, getDocs } from "firebase/firestore";
 
 type TNft = {
+  id:string;
   img: string;
   name: string;
   currentPrice: number;
@@ -46,7 +47,7 @@ const Search = () => {
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       const nft = doc.data()
-      result.push({ img: nft.img, name: nft.name, currentPrice: nft.currentPrice })
+      result.push({id:nft.id, img: nft.img, name: nft.name, currentPrice: nft.currentPrice })
     });
     //@ts-ignore
     setNfts(result)

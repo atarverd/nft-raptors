@@ -35,23 +35,23 @@ const HeaderLogoAndSearch = () => {
 
   return (
     <Flex align='center' ml='5rem' w='70%'>
-      {/* <Image
+       <Image
         cursor='pointer'
         onClick={handleHomePage}
         src={logoImage}
         borderRadius='full'
         boxSize='100px'
       />
+      {/*
       <Text as='b'  mr='3rem' fontSize='1.2rem'>
         raptors
       </Text> */}
       <Box w='300px'>
       <TypeAnimation
       sequence={[
-        'raptors', // Types 'One'
-        3000, // Waits 1s
-        'NFT raptors', // Deletes 'One' and types 'Two'
-        5000, // Waits 2s
+        'Raptors', // Types 'One'
+        1500, // Waits 1s
+        ''
       ]}
       wrapper="div"
       speed={40}

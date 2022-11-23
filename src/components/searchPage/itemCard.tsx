@@ -6,6 +6,7 @@ import GlobCard from "../globCard";
 
 type TNfts = {
   nfts?: {
+    id:string;
     img: string;
     name: string;
     currentPrice: number;
