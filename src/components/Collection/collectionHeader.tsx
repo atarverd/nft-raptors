@@ -8,21 +8,21 @@ import {
 } from '@chakra-ui/react'
 import login from '../../assets/login.jpg'
 import signup from '../../assets/signup.jpg'
-import {doc, getDoc} from 'firebase/firestore'
+import { doc, getDoc } from 'firebase/firestore'
 import { useParams } from 'react-router';
-import  { useEffect, useState } from "react";
-import {db} from '../../firebase-config.js'
+import { useEffect, useState } from "react";
+import { db } from '../../firebase-config.js'
 
-type TCollection={
-    collectionName:string;
-    "description": string;
-    "creator": string;
-    "date": {
-      "seconds":number ;
-      "nanoseconds":number;
-    },
-    "logo":string;
-    "background":string;
+type TCollection = {
+  collectionName: string;
+  "description": string;
+  "creator": string;
+  "date": {
+    "seconds": number;
+    "nanoseconds": number;
+  },
+  "logo": string;
+  "background": string;
 
 
 }
@@ -30,15 +30,15 @@ type TCollection={
 const CollectionHeader = () => {
 
   const [show, setShow] = useState(false)
-  const [collection,setCollection]=useState<TCollection>()
+  const [collection, setCollection] = useState<TCollection>()
 
   const handleToggle = () => setShow(!show)
 
   const { id } = useParams()
- 
-  useEffect(()=>{
-    const a=async () => {
-      const snap = await getDoc(doc(db, 'collections', id as string ))
+
+  useEffect(() => {
+    const a = async () => {
+      const snap = await getDoc(doc(db, 'collections', id as string))
 
       if (snap.exists()) {
         console.log(snap.data())
@@ -50,19 +50,19 @@ const CollectionHeader = () => {
       }
     }
     a()
-  },[])
+  }, [])
 
   return (
     <Box>
 
       <Box h='300px'>
-        <Image src={collection?.background} h='300px' w='full' position='absolute'  />
+        <Image src={collection?.background} h='300px' w='full' position='absolute' />
         <Box
           ml='40px'
           border='4px'
           borderColor='#EDF2F7'
           borderRadius='10px'
-          top='180px'
+          top='280px'
           position='absolute' >
           <Image
             src={collection?.logo}
@@ -74,7 +74,7 @@ const CollectionHeader = () => {
         </Box>
       </Box>
 
-      <Box ml='40px' my='20px' mt='30px'>
+      <Box ml='40px' my='20px' mt='50px'>
         <Text fontSize='4xl' mt='30px'>{collection?.collectionName}</Text>
         <Text fontSize='2xl' mt='10px'>by {collection?.creator}</Text>
         <HStack spacing={5} mt='10px'>
