@@ -1,10 +1,8 @@
-import Collection from "../components/Collection"
+import React from 'react'
 
 const CollectionPage = () => {
   return (
-    <div>
-      <Collection />
-    </div>
+    <div>CollectionPage</div>
   )
 }
 
