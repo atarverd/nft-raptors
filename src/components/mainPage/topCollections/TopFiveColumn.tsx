@@ -25,7 +25,7 @@ type PropsType = {
 
 const TopFiveColumn = ({ data }: PropsType) => {
   return (
-    <TableContainer>
+    <TableContainer w='50%'>
       <Table variant='simple'>
         <Thead>
           <Tr>

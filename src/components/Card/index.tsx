@@ -9,7 +9,7 @@ const Card = ({ data }: PropsType) => {
   console.log(2);
 
   return (
-    <Box bg='#f4f6f3' h='250px' w='100%' borderRadius='15px' cursor='pointer'>
+    <Box bg='#f4f6f3' h='250px' w='80%' borderRadius='15px' cursor='pointer'>
       <Image
         w='100%'
         height='80%'
