@@ -1,12 +1,15 @@
-import React from 'react'
-import Cart from '../components/cart/cart'
+import React from "react";
+import Cart from "../components/cart/cart";
+import TopCollections from "../components/mainPage/topCollections";
+import Categories from "../components/mainPage/categories";
 
 const Main = () => {
   return (
-    <div>
-      Main
-    </div>
-  )
-}
+    <>
+      <Categories />
+      <TopCollections />
+    </>
+  );
+};
 
-export default Main
+export default Main;
