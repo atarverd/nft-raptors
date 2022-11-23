@@ -33,7 +33,7 @@ const UserTabs = () => {
             bg='#fff'
             borderRadius='10px'
           />
-          <InputRightElement h='30px' w='50px' m='5px'>
+          <InputRightElement h='30px' w='50px' pt='10px'>
             <Button borderRadius='12px'>
               <FaSearch />
             </Button>

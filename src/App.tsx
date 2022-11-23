@@ -2,6 +2,7 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import CollectionPage from "./pages/collectionPage";
 import SignUp from "./components/auth/signUp";
 import { Routes, Route } from "react-router";
+import CategoryPage from "./pages/category";
 import SearchPage from "./pages/searchPage";
 import LogIn from "./components/auth/logIn";
 import UserPage from "./pages/userPage";
@@ -18,7 +19,8 @@ export const App = () => (
       <Route path='/:id' element={<UserPage />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/nft/:id' element={<NftPage />} />
-      <Route path='/search/:q' element={<SearchPage />} />
+      <Route path='/category' element={<CategoryPage />} />
+      <Route path='/search/:querys' element={<SearchPage />} />
       <Route path='/collection/:id' element={<CollectionPage />} />
     </Routes>
   </ChakraProvider>

@@ -1,10 +1,12 @@
-*{
-    font-family: 'Roboto Mono', monospace;
-
+* {
+  font-family: "Roboto Mono", monospace;
 }
-#root{
-    background: linear-gradient(180deg, white 20%, #EBF8FF
-    , #EDFDFD
-    );
-    min-height: 100vh;
+
+button {
+  font-family: "Roboto", sans-serif !important;
+}
+
+#root {
+  background: linear-gradient(180deg, white 20%, #ebf8ff, #edfdfd);
+  min-height: 100vh;
 }
