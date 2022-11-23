@@ -8,10 +8,12 @@ import {
   InputGroup,
   InputLeftElement,
   InputRightElement,
+  Box,
 } from "@chakra-ui/react";
 import logoImage from "../../assets/logo.png";
 import { useNavigate } from "react-router";
 import { FaSearch } from "react-icons/fa";
+import { TypeAnimation } from 'react-type-animation';
 
 const HeaderLogoAndSearch = () => {
   const [search, setSearch] = useState("");
@@ -33,7 +35,7 @@ const HeaderLogoAndSearch = () => {
 
   return (
     <Flex align='center' ml='5rem' w='70%'>
-      <Image
+      {/* <Image
         cursor='pointer'
         onClick={handleHomePage}
         src={logoImage}
@@ -42,7 +44,22 @@ const HeaderLogoAndSearch = () => {
       />
       <Text as='b'  mr='3rem' fontSize='1.2rem'>
         raptors
-      </Text>
+      </Text> */}
+      <Box w='300px'>
+      <TypeAnimation
+      sequence={[
+        'raptors', // Types 'One'
+        3000, // Waits 1s
+        'NFT raptors', // Deletes 'One' and types 'Two'
+        5000, // Waits 2s
+      ]}
+      wrapper="div"
+      speed={40}
+      cursor={true}
+      repeat={Infinity}
+      style={{ fontSize: '1.2em' }}
+    />
+      </Box>
 
       <InputGroup>
         <Input
