@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Image, Center } from "@chakra-ui/react";
+import { Box, Image, Center } from "@chakra-ui/react";
 
 type PropsType = {
   data: { name: string; imageUrl: string };
@@ -15,6 +15,8 @@ const Card = ({ data }: PropsType) => {
         height='80%'
         src={data.imageUrl}
         borderTopRadius='15px'
+        transition='transform .2s;'
+        _hover={{ 'transform': 'scale(1.1)' }}
       ></Image>
       <Center mt='1rem'>{data.name}</Center>
     </Box>

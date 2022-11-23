@@ -14,11 +14,16 @@ import {
   AccordionButton,
 } from '@chakra-ui/react'
 
-const Accordions = () => {
+// const propType = {
+//   filterPrice: () => void
+// }
+
+const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
   return (
     <Box>
 
       <Accordion allowToggle defaultIndex={[0]} allowMultiple>
+
         <AccordionItem w='370px'>
           <AccordionButton>
             <Box flex='1' textAlign='left'>
@@ -28,17 +33,22 @@ const Accordions = () => {
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Flex justifyContent='space-evenly' alignItems='center'>
-              <Input w='90px' h='40px' placeholder='Min'></Input>
+              <Input w='90px' h='40px' placeholder='Min' onChange={handleMin}></Input>
               <Text>To</Text>
-              <Input w='90px' h='40px' placeholder='Max'></Input>
+              <Input w='90px' h='40px' placeholder='Max' onChange={handleMax}></Input>
             </Flex>
             <Flex justifyContent='center' alignItems='center'>
               <Box mt='20px'>
-                <Button w='270px' h='40px' colorScheme='messenger'>Apply</Button>
+                <Button
+                  w='270px'
+                  h='40px'
+                  colorScheme='messenger'
+                  onClick={filterPrice} >Apply</Button>
               </Box>
             </Flex>
           </AccordionPanel>
         </AccordionItem>
+
       </Accordion>
 
       <Accordion allowToggle defaultIndex={[0]} allowMultiple>
