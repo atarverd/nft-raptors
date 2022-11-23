@@ -1,3 +1,4 @@
+import CreateCollectionPage from "./pages/createCollection";
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import CollectionPage from "./pages/collectionPage";
 import SignUp from "./components/auth/signUp";
@@ -22,6 +23,7 @@ export const App = () => (
       <Route path='/category' element={<CategoryPage />} />
       <Route path='/search/:querys' element={<SearchPage />} />
       <Route path='/collection/:id' element={<CollectionPage />} />
+      <Route path='/create-collection' element={<CreateCollectionPage />} />
     </Routes>
   </ChakraProvider>
 );
