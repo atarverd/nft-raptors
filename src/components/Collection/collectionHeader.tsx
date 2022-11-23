@@ -1,3 +1,4 @@
+
 import {
   Box,
   Text,
@@ -13,6 +14,11 @@ import { useParams } from 'react-router';
 import { useEffect, useState } from "react";
 import { db } from '../../firebase-config.js'
 
+
+type TProp = {
+  nftCount?: number;
+};
+
 type TCollection = {
   collectionName: string;
   "description": string;
@@ -24,10 +30,12 @@ type TCollection = {
   "logo": string;
   "background": string;
 
+const CollectionHeader = ({ nftCount }: TProp) => {
+  const [show, setShow] = useState(false);
+  const [collection, setCollection] = useState<TCollection>();
 
-}
+  const handleToggle = () => setShow(!show);
 
-const CollectionHeader = () => {
 
   const [show, setShow] = useState(false)
   const [collection, setCollection] = useState<TCollection>()
@@ -41,23 +49,27 @@ const CollectionHeader = () => {
       const snap = await getDoc(doc(db, 'collections', id as string))
 
       if (snap.exists()) {
-        console.log(snap.data())
+        console.log(snap.data());
         //@ts-ignore
-        setCollection(snap.data())
+        setCollection(snap.data());
+      } else {
+        console.log("No such document");
       }
-      else {
-        console.log("No such document")
-      }
-    }
-    a()
-  }, [])
+    };
+    a();
+  }, []);
 
   return (
     <Box>
-
-      <Box h='300px'>
-        <Image src={collection?.background} h='300px' w='full' position='absolute' />
+      <Box h='300px' bg='grey'>
+        <Image
+          src={collection?.background}
+          h='300px'
+          w='full'
+          position='absolute'
+        />
         <Box
+          bg='lightgray'
           ml='40px'
           border='4px'
           borderColor='#EDF2F7'
@@ -74,26 +86,30 @@ const CollectionHeader = () => {
         </Box>
       </Box>
 
-      <Box ml='40px' my='20px' mt='50px'>
-        <Text fontSize='4xl' mt='30px'>{collection?.collectionName}</Text>
-        <Text fontSize='2xl' mt='10px'>by {collection?.creator}</Text>
+      <Box ml='40px' my='20px' mt='30px'>
+        <Text fontSize='4xl' mt='30px'>
+          {collection?.collectionName}
+        </Text>
+        <Text fontSize='2xl' mt='10px'>
+          by {collection?.creator}
+        </Text>
+
         <HStack spacing={5} mt='10px'>
-          <Text>Items 100.000</Text>
+          <Text>Items {nftCount}</Text>
           //@ts-ignore
           <Text>Created </Text>
         </HStack>
         <Box maxW='30%' mt='10px'>
-          <Collapse startingHeight={20} in={show} >
+          <Collapse startingHeight={20} in={show}>
             {collection?.description}
           </Collapse>
           <Button size='xs' onClick={handleToggle} mt='1rem'>
-            Show {show ? 'Less' : 'More'}
+            Show {show ? "Less" : "More"}
           </Button>
         </Box>
       </Box>
-
     </Box>
-  )
-}
+  );
+};
 
-export default CollectionHeader
+export default CollectionHeader;
