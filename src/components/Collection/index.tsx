@@ -1,24 +1,27 @@
-import GlobCard from "../globCard";
-import CollectionHeader from "./collectionHeader";
 
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { useParams } from "react-router";
+import CollectionHeader from './collectionHeader'
 import { useEffect, useState } from "react";
-import { db } from "../../firebase-config.js";
-import Loader from "../loading";
+import { db } from '../../firebase-config.js'
+import { useParams } from 'react-router';
+import GlobCard from '../globCard'
+import {
+  Box,
+  Flex,
+  SimpleGrid
+} from '@chakra-ui/react'
 
 type TNft = {
-  id: string;
   img: string;
   name: string;
   currentPrice: number;
-};
+}
 
 const Collection = () => {
-  const { id } = useParams();
-  const [nfts, setNfts] = useState<TNft[]>();
-  const [loading, setLoading] = useState(false);
+  const { id } = useParams()
+  const [nfts, setNfts] = useState<TNft[]>()
+
+
   useEffect(() => {
     const a = async () => {
       const q = query(collection(db, "nfts"), where("collectionID", "==", id));
@@ -57,6 +60,7 @@ const Collection = () => {
           </SimpleGrid>
         </Flex>
       )}
+
     </Box>
   );
 };

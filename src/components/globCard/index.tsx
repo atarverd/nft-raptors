@@ -18,6 +18,7 @@ const GlobCard = ({ nft }: TNft) => {
     navigate("/nft/" + nft.id);
   };
 
+
   return (
     <Box>
       <Box

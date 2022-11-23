@@ -1,11 +1,19 @@
-import { Box, Text, Image, HStack, Button, Collapse } from "@chakra-ui/react";
-import login from "../../assets/login.jpg";
-import signup from "../../assets/signup.jpg";
-import { doc, getDoc } from "firebase/firestore";
-import { useParams } from "react-router";
+
+import {
+  Box,
+  Text,
+  Image,
+  HStack,
+  Button,
+  Collapse,
+} from '@chakra-ui/react'
+import login from '../../assets/login.jpg'
+import signup from '../../assets/signup.jpg'
+import { doc, getDoc } from 'firebase/firestore'
+import { useParams } from 'react-router';
 import { useEffect, useState } from "react";
-import { db } from "../../firebase-config.js";
-import { type } from "@testing-library/user-event/dist/types/setup/directApi";
+import { db } from '../../firebase-config.js'
+
 
 type TProp = {
   nftCount?: number;
@@ -13,15 +21,14 @@ type TProp = {
 
 type TCollection = {
   collectionName: string;
-  description: string;
-  creator: string;
-  date: {
-    seconds: number;
-    nanoseconds: number;
-  };
-  logo: string;
-  background: string;
-};
+  "description": string;
+  "creator": string;
+  "date": {
+    "seconds": number;
+    "nanoseconds": number;
+  },
+  "logo": string;
+  "background": string;
 
 const CollectionHeader = ({ nftCount }: TProp) => {
   const [show, setShow] = useState(false);
@@ -29,11 +36,17 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
   const handleToggle = () => setShow(!show);
 
-  const { id } = useParams();
+
+  const [show, setShow] = useState(false)
+  const [collection, setCollection] = useState<TCollection>()
+
+  const handleToggle = () => setShow(!show)
+
+  const { id } = useParams()
 
   useEffect(() => {
     const a = async () => {
-      const snap = await getDoc(doc(db, "collections", id as string));
+      const snap = await getDoc(doc(db, 'collections', id as string))
 
       if (snap.exists()) {
         console.log(snap.data());
@@ -61,9 +74,8 @@ const CollectionHeader = ({ nftCount }: TProp) => {
           border='4px'
           borderColor='#EDF2F7'
           borderRadius='10px'
-          top='180px'
-          position='absolute'
-        >
+          top='280px'
+          position='absolute' >
           <Image
             src={collection?.logo}
             w='200px'
@@ -81,6 +93,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
         <Text fontSize='2xl' mt='10px'>
           by {collection?.creator}
         </Text>
+
         <HStack spacing={5} mt='10px'>
           <Text>Items {nftCount}</Text>
           //@ts-ignore
