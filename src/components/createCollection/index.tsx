@@ -2,39 +2,15 @@ import {
   Box,
   Text,
   Flex,
-<<<<<<< HEAD
-  Button,
-  Input,
-  FormControl,
-  FormLabel,
-} from "@chakra-ui/react";
-=======
 } from '@chakra-ui/react'
 import Body from './body'
 import UploadImage from './uploadImage'
 
->>>>>>> development
 
 const CreateCollection = () => {
 
   return (
-<<<<<<< HEAD
-    <Box>
-      <Text fontSize='5xl'>Create a Collection</Text>
-      <Box>
-        <FormControl isRequired>
-          <FormLabel fontSize='3xl'>Logo Image</FormLabel>
-          <Text>This image will also be used for navigation</Text>
-        </FormControl>
-      </Box>
 
-      <Box></Box>
-
-      <Box></Box>
-    </Box>
-  );
-};
-=======
 
     <Flex display='flex' justifyContent='center'>
 
@@ -76,6 +52,6 @@ const CreateCollection = () => {
     </Flex>
   )
 }
->>>>>>> development
+
 
 export default CreateCollection;
