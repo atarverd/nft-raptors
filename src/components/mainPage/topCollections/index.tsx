@@ -9,7 +9,7 @@ const TopCollections = () => {
       <Heading mb='2rem' ml='2rem'>
         Top
       </Heading>
-      <Flex p='5px' justify='space-around'>
+      <Flex p='5px' justify='space-around' gap='2rem'>
         <TopFiveColumn data={data.slice(0, 5)} />
         <TopFiveColumn data={data.slice(5)} />
       </Flex>
