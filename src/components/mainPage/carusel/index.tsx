@@ -5,12 +5,24 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 import "swiper/css";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { TypeAnimation } from "react-type-animation";
 
 const Caruselm = () => {
   return (
     <>
       <Center mb='2rem'>
-        <Heading>Explore, collect, and sell NFTs</Heading>
+        <TypeAnimation
+          sequence={[
+            "Small things make perfection", // Types 'One'
+            3500, // Waits 1s
+            "Small things make perfection, but perfection is no small thing.",
+          ]}
+          wrapper='div'
+          speed={20}
+          cursor={true}
+          repeat={Infinity}
+          style={{ fontSize: "2em", fontStyle: "bold" }}
+        />
       </Center>
       <Flex align='center' justify='center' m='2rem'>
         <Swiper
@@ -30,8 +42,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/aryamularama%20homecard%20squooshed.jpg?auto=format&w=828'
             />
           </SwiperSlide>
@@ -40,8 +51,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/clay%20friends%20homecard.png?auto=format&w=828'
             />
           </SwiperSlide>
@@ -49,8 +59,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/10KTF%20homecard.png?auto=format&w=828'
             />
           </SwiperSlide>
@@ -58,8 +67,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/fragile%20animals%20homecard%20squooshed.jpg?auto=format&w=828'
             />
           </SwiperSlide>
@@ -67,8 +75,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/drip%20ballers%20homecard.png?auto=format&w=828'
             />
           </SwiperSlide>
@@ -76,8 +83,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/files/c6af7968009d1f4d88f82a02eea30cee.png?auto=format&w=828'
             />
           </SwiperSlide>
@@ -85,8 +91,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/shabangrs%20homecard.png?auto=format&w=828'
             />
           </SwiperSlide>
@@ -94,8 +99,7 @@ const Caruselm = () => {
             <Image
               cursor='pointer'
               borderRadius='15px'
-              h='400px'
-              w='400px'
+              h='300px'
               src='https://i.seadn.io/gcs/static/promocards/oma%20oma%20homecard%20squooshed.jpg?auto=format&w=828'
             />
           </SwiperSlide>
