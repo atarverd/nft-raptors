@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import {
   Box,
   Flex,
@@ -31,6 +32,21 @@ const SignUp = () => {
   const isNameError = nameInput === "";
   const isPasswordError = passwordInput === "";
 
+  const auth = getAuth();
+
+  const handleRegistration = () => {
+    createUserWithEmailAndPassword(auth, emailInput, passwordInput)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
 
   return (
     <Box
@@ -60,14 +76,14 @@ const SignUp = () => {
             flexDirection='column'
           >
             <Stack spacing={5} p='7' rounded='md' my='50px'>
-
               <FormControl isRequired={isNameError} w='350px'>
                 <FormLabel>User Name</FormLabel>
                 <Input
                   placeholder='User Name'
                   type='text'
                   value={nameInput}
-                  onChange={handleNameChange} />
+                  onChange={handleNameChange}
+                />
               </FormControl>
 
               <FormControl isRequired={isPasswordError} w='350px'>
@@ -77,7 +93,8 @@ const SignUp = () => {
                     value={passwordInput}
                     onChange={handlePasswordChange}
                     type={show ? "text" : "password"}
-                    placeholder='Enter password' />
+                    placeholder='Enter password'
+                  />
                   <InputRightElement>
                     <Button h='2rem' size='md' onClick={handleClick}>
                       {show ? "Hide" : "Show"}
@@ -92,7 +109,8 @@ const SignUp = () => {
                   placeholder='Email is required'
                   type='email'
                   value={emailInput}
-                  onChange={handleEmailChange} />
+                  onChange={handleEmailChange}
+                />
               </FormControl>
 
               <RadioGroup defaultValue='2'>
@@ -107,11 +125,13 @@ const SignUp = () => {
               </RadioGroup>
 
               <Button
+                onClick={handleRegistration}
                 h='2.50rem'
                 size='md'
                 bg='#2081e2'
                 color='white'
-                colorScheme='messenger'>
+                colorScheme='messenger'
+              >
                 Sign Up
               </Button>
             </Stack>

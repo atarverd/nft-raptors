@@ -13,19 +13,40 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import login from "../../assets/login.jpg";
-
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router";
 
 const LogIn = () => {
-  const [nameInput, setNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const navigate = useNavigate();
 
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setNameInput(e.target.value);
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordInput(e.target.value);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setEmailInput(e.target.value);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPasswordInput(e.target.value);
 
-  const isNameError = nameInput === "";
+  const isNameError = emailInput === "";
   const isPasswordError = passwordInput === "";
+
+  const auth = getAuth();
+
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, emailInput, passwordInput)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+
+        navigate("/");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   return (
     <Box
@@ -55,14 +76,14 @@ const LogIn = () => {
             flexDirection='column'
           >
             <Stack spacing={5} p='7' rounded='md' my='50px'>
-
               <FormControl isRequired={isNameError} w='350px'>
                 <FormLabel>User Name</FormLabel>
                 <Input
                   placeholder='User Name'
                   type='text'
-                  value={nameInput}
-                  onChange={handleNameChange} />
+                  value={emailInput}
+                  onChange={handleEmailChange}
+                />
               </FormControl>
 
               <FormControl isRequired={isPasswordError} w='350px'>
@@ -72,7 +93,8 @@ const LogIn = () => {
                     value={passwordInput}
                     onChange={handlePasswordChange}
                     type={show ? "text" : "password"}
-                    placeholder='Enter password' />
+                    placeholder='Enter password'
+                  />
                   <InputRightElement>
                     <Button h='2rem' size='md' onClick={handleClick}>
                       {show ? "Hide" : "Show"}
@@ -82,11 +104,13 @@ const LogIn = () => {
               </FormControl>
 
               <Button
+                onClick={handleLogin}
                 h='2.50rem'
                 size='md'
                 bg='#2081e2'
                 color='white'
-                colorScheme='messenger'>
+                colorScheme='messenger'
+              >
                 Log In
               </Button>
             </Stack>

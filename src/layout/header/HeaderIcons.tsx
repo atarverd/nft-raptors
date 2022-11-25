@@ -17,19 +17,18 @@ const style = {
 };
 
 const HeaderIcons = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleUserPage = () => {
-    navigate("/MsnQm8QFZUHDEJ8QrYfQ");
+    //navigate("/MsnQm8QFZUHDEJ8QrYfQ");
+    navigate("/login");
   };
 
   return (
     <Flex mr='3rem'>
       <Box ml='10px' cursor='pointer'>
         {/* <FaRegUser size='30px' /> */}
-        <Image src={user} />
-
+        <Image src={user} onClick={handleUserPage} />
       </Box>
       <Box ml='10px' cursor='pointer'>
         <FaWallet size='30px' />
