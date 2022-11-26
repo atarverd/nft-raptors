@@ -13,7 +13,7 @@ const Caruselm = () => {
       <Center mb='2rem'>
         <TypeAnimation
           sequence={[
-            "Small things make perfection", // Types 'One'
+            "Small things make perfection, but perfection", // Types 'One'
             3500, // Waits 1s
             "Small things make perfection, but perfection is no small thing.",
           ]}
@@ -21,7 +21,7 @@ const Caruselm = () => {
           speed={20}
           cursor={true}
           repeat={Infinity}
-          style={{ fontSize: "2em", fontStyle: "bold" }}
+          style={{ fontSize: "1.5em", fontStyle: "bold" }}
         />
       </Center>
       <Flex align='center' justify='center' m='2rem'>
