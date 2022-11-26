@@ -4,7 +4,7 @@ import { FaRegUser, FaWallet } from "react-icons/fa";
 import Cart from "../../components/cart/cart";
 import user from "../../assets/user.png";
 import { Image } from "@chakra-ui/react";
-
+import wallet from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
 
 const style = {
@@ -25,15 +25,15 @@ const HeaderIcons = () => {
   };
 
   return (
-    <Flex mr='3rem'>
+    <Flex mr='4.5rem'>
       <Box ml='10px' cursor='pointer'>
         {/* <FaRegUser size='30px' /> */}
-        <Image src={user} onClick={handleUserPage} />
+        <Image boxSize='35px' src={user} onClick={handleUserPage} />
       </Box>
-      <Box ml='10px' cursor='pointer'>
-        <FaWallet size='30px' />
+      <Box ml='15px' cursor='pointer'>
+        <Image src={wallet} boxSize='35px' />
       </Box>
-      <Box ml='10px' cursor='pointer'>
+      <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
     </Flex>

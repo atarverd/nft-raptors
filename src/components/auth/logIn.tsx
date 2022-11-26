@@ -15,6 +15,8 @@ import {
 import login from "../../assets/login.jpg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router";
+import hiddenEye from "../../assets/hiddenEye.png";
+import eye from "../../assets/eye.png";
 
 const LogIn = () => {
   const [emailInput, setEmailInput] = useState("");
@@ -48,6 +50,10 @@ const LogIn = () => {
       });
   };
 
+  const navigateRagistration = () => {
+    navigate("/signup");
+  };
+
   return (
     <Box
       my='50px'
@@ -77,9 +83,9 @@ const LogIn = () => {
           >
             <Stack spacing={5} p='7' rounded='md' my='50px'>
               <FormControl isRequired={isNameError} w='350px'>
-                <FormLabel>User Name</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <Input
-                  placeholder='User Name'
+                  placeholder='nft@raptors.com'
                   type='text'
                   value={emailInput}
                   onChange={handleEmailChange}
@@ -93,12 +99,18 @@ const LogIn = () => {
                     value={passwordInput}
                     onChange={handlePasswordChange}
                     type={show ? "text" : "password"}
-                    placeholder='Enter password'
+                    placeholder='******'
                   />
                   <InputRightElement>
-                    <Button h='2rem' size='md' onClick={handleClick}>
-                      {show ? "Hide" : "Show"}
-                    </Button>
+                    {show ? (
+                      <Image
+                        onClick={handleClick}
+                        boxSize='20px'
+                        src={hiddenEye}
+                      />
+                    ) : (
+                      <Image onClick={handleClick} boxSize='20px' src={eye} />
+                    )}
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
@@ -111,7 +123,10 @@ const LogIn = () => {
                 color='white'
                 colorScheme='messenger'
               >
-                Log In
+                Sign In
+              </Button>
+              <Button onClick={navigateRagistration} colorScheme='green'>
+                Sign Up
               </Button>
             </Stack>
           </Flex>

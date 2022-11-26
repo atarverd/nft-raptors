@@ -7,6 +7,6 @@ button {
 }
 
 #root {
-  background: linear-gradient(180deg, white 20%, #ebf8ff, #edfdfd);
+  background: linear-gradient(180deg, rgb(235, 240, 248) 10%, #c4f1f9);
   min-height: 100vh;
 }
