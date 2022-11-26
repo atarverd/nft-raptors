@@ -1,15 +1,14 @@
 import { useState } from "react";
-
 import {
   Box,
-  HStack,
-  Button,
-  VStack,
-  Input,
-  Avatar,
-  AvatarBadge,
-  Image,
   Flex,
+  Input,
+  Image,
+  VStack,
+  Button,
+  Avatar,
+  HStack,
+  AvatarBadge,
 } from "@chakra-ui/react";
 
 //@ts-ignore
@@ -28,10 +27,6 @@ const UploadImage = ({ size, h, w }) => {
   const removeSelectedFile = () => {
     //@ts-ignore
     setSelectedFile();
-  };
-  const saveSelectedFile = () => {
-    setSelectedFile(selectedFile);
-    console.log(selectedFile);
   };
 
   return (

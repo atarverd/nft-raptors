@@ -10,8 +10,6 @@ import UploadImage from './uploadImage'
 const CreateCollection = () => {
 
   return (
-
-
     <Flex display='flex' justifyContent='center'>
 
       <Box maxW='600px' mb='30px'>

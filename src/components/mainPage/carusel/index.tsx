@@ -13,9 +13,12 @@ const Caruselm = () => {
       <Center mb='2rem'>
         <TypeAnimation
           sequence={[
-            "Small things make perfection, but perfection", // Types 'One'
-            3500, // Waits 1s
+
+            "Small things make perfection", // Types 'One'
+            1500, // Waits 1s
+
             "Small things make perfection, but perfection is no small thing.",
+            1500
           ]}
           wrapper='div'
           speed={20}
