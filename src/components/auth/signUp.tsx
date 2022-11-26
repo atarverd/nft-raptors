@@ -16,6 +16,8 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 import signup from "../../assets/signup.jpg";
+import hiddenEye from "../../assets/hiddenEye.png";
+import eye from "../../assets/eye.png";
 
 const SignUp = () => {
   const [emailInput, setEmailInput] = useState("");
@@ -77,9 +79,9 @@ const SignUp = () => {
           >
             <Stack spacing={5} p='7' rounded='md' my='50px'>
               <FormControl isRequired={isNameError} w='350px'>
-                <FormLabel>User Name</FormLabel>
+                <FormLabel>Username</FormLabel>
                 <Input
-                  placeholder='User Name'
+                  placeholder='username'
                   type='text'
                   value={nameInput}
                   onChange={handleNameChange}
@@ -93,12 +95,18 @@ const SignUp = () => {
                     value={passwordInput}
                     onChange={handlePasswordChange}
                     type={show ? "text" : "password"}
-                    placeholder='Enter password'
+                    placeholder='******'
                   />
                   <InputRightElement>
-                    <Button h='2rem' size='md' onClick={handleClick}>
-                      {show ? "Hide" : "Show"}
-                    </Button>
+                    {show ? (
+                      <Image
+                        onClick={handleClick}
+                        boxSize='20px'
+                        src={hiddenEye}
+                      />
+                    ) : (
+                      <Image onClick={handleClick} boxSize='20px' src={eye} />
+                    )}
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
@@ -106,7 +114,7 @@ const SignUp = () => {
               <FormControl isRequired={isEmailError} w='350px'>
                 <FormLabel>Email</FormLabel>
                 <Input
-                  placeholder='Email is required'
+                  placeholder='nft@raptors.com'
                   type='email'
                   value={emailInput}
                   onChange={handleEmailChange}
