@@ -20,9 +20,23 @@ const Search = () => {
   const [nfts, setNfts] = useState<TNft[]>();
   const [minPrice, setMinPrice] = useState<number>(-Infinity);
   const [maxPrice, setMaxPrice] = useState<number>(+Infinity);
-  const [isLoading,setIsLoading]=useState<boolean>(true)
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   let copyNfts: any;
+
+  const priceSort = (sortType: string) => {
+    if (sortType === "lowToHigh") {
+      setNfts((old) => [
+        //@ts-ignore
+        ...old?.sort((a, b) => a.currentPrice - b.currentPrice),
+      ]);
+    } else if (sortType === "highToLow") {
+      setNfts((old) => [
+        //@ts-ignore
+        ...old?.sort((a, b) => b.currentPrice - a.currentPrice),
+      ]);
+    }
+  };
 
   const handleMin = (e: any) => {
     let event = e.target.value;
@@ -58,9 +72,9 @@ const Search = () => {
     });
     //@ts-ignore
     setNfts(result);
-    setIsLoading(false)
+    setIsLoading(false);
     //@ts-ignore
-    console.log(result)
+    console.log(result);
   };
 
   useEffect(() => {
@@ -82,25 +96,28 @@ const Search = () => {
 
   return (
     <Box m='15px'>
-      {isLoading?<Loader/>
-      :<Flex display='flex' justifyContent='space-between'>
-      <Box>
-        <Flex display='flex'>
-          <Accordions
-            filterPrice={filterPrice}
-            handleMin={handleMin}
-            handleMax={handleMax}
-          />
-        </Flex>
-      </Box>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Flex display='flex' justifyContent='space-between'>
+          <Box>
+            <Flex display='flex'>
+              <Accordions
+                priceSort={priceSort}
+                filterPrice={filterPrice}
+                handleMin={handleMin}
+                handleMax={handleMax}
+              />
+            </Flex>
+          </Box>
 
-      <Box>
-        <Flex display='flex'>
-          {nfts?.length?<ItemCard nfts={nfts} />:<Empty/>}
+          <Box>
+            <Flex display='flex'>
+              {nfts?.length ? <ItemCard nfts={nfts} /> : <Empty />}
+            </Flex>
+          </Box>
         </Flex>
-      </Box>
-    </Flex>
-      }
+      )}
     </Box>
   );
 };

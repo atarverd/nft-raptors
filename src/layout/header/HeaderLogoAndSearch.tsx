@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Image,
@@ -24,6 +24,20 @@ const HeaderLogoAndSearch = () => {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //@ts-ignore
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        searchItem();
+        event.preventDefault();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, []);
 
   const searchItem = () => {
     if (search) navigate("/search/" + search);
