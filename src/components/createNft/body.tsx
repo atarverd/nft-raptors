@@ -14,11 +14,48 @@ import {
   AccordionPanel,
   AccordionButton,
 } from '@chakra-ui/react'
+import UploadImage from '../createCollection/uploadImage'
+import { db } from '../../firebase-config'
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { getAuth } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 
+type TCollection={
+  collectionName:string;
+  collectionId:string
+}
 
 const Body = () => {
+  const user=getAuth()
+  const [collections,setCollections]=useState<TCollection[]>([])
+  const asynchronus =async () => {
+    console.log(user.currentUser)
+    const q = query(collection(db, "collections"), where("creatorId", "==", '5E820pDzVuTFRznD6m0IooKAlUs2'));
+
+      const querySnapshot = await getDocs(q);
+      let result:any=[]
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        const col=doc.data()
+        result.push({collectionName:col.collectionName,collectionId:doc.id})
+      });
+      setCollections(result)
+      console.log(result)
+  }
+
+  useEffect(()=>{asynchronus();console.log(user.currentUser)},[])
   return (
     <Box>
+      <Text fontSize='4xl'>Create New Item</Text>
+
+      <Box mt='30px'>
+        <Text fontSize='2xl'>Image</Text>
+        <Text>File types supported: JPG, PNG, GIF. Max size: 100mb </Text>
+        <Box mt='10px'>
+          <UploadImage h='200px' w='300px' size='' handleLogoImage={()=>console.log(1)}/>
+        </Box>
+      </Box>
       <Box mt='30px'>
         <Text fontSize='2xl' mt='10px'>Name</Text>
         <Input placeholder='Item Name' mt='10px'></Input>
@@ -44,9 +81,9 @@ const Body = () => {
               <Flex display='flex' flexDirection='column' justifyContent='center'>
                 <RadioGroup defaultValue='1'>
                   <Stack spacing='15px'>
-                    <Radio value='1' size='lg' colorScheme='messenger'>Music</Radio>
-                    <Radio value='2' size='lg' colorScheme='messenger'>Art</Radio>
-                    <Radio value='3' size='lg' colorScheme='messenger'>Sport</Radio>
+                    
+                    {collections?.map(col=><Radio value={col.collectionId} size='lg' colorScheme='messenger'>{col.collectionName}</Radio>)}
+                    
                   </Stack>
                 </RadioGroup>
               </Flex>
