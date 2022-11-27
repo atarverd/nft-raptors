@@ -1,12 +1,12 @@
 import React from "react";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Image, useToast } from "@chakra-ui/react";
 import { FaRegUser, FaWallet } from "react-icons/fa";
 import Cart from "../../components/cart/cart";
 import user from "../../assets/user.png";
-import { Image } from "@chakra-ui/react";
 import wallet from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
-import { getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
+import logOut from "../../assets/logOut.png";
 
 const style = {
   height: "50px",
@@ -19,13 +19,30 @@ const style = {
 
 const HeaderIcons = () => {
   const navigate = useNavigate();
-  const loggedUser = getAuth()
+  const loggedUser = getAuth();
+
+  const toast = useToast();
 
   const handleUserPage = () => {
-    if(loggedUser)
-    navigate('/'+loggedUser.currentUser?.uid)
-   else
-    navigate('/') 
+    if (loggedUser.currentUser) navigate("/" + loggedUser.currentUser?.uid);
+    else navigate("/login");
+  };
+
+  const auth = getAuth();
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+        toast({
+          title: "Logged Out",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+        });
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
 
   return (
@@ -40,6 +57,11 @@ const HeaderIcons = () => {
       <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
+      {auth.currentUser ? (
+        <Box ml='15px' cursor='pointer'>
+          <Image src={logOut} boxSize='30px' onClick={logout} />
+        </Box>
+      ) : null}
     </Flex>
   );
 };

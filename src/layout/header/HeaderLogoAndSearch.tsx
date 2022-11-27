@@ -15,10 +15,9 @@ import { useNavigate } from "react-router";
 import { TypeAnimation } from "react-type-animation";
 import searchIcon from "../../assets/search.svg";
 
-
 const HeaderLogoAndSearch = () => {
   const [search, setSearch] = useState("");
-    const handleSearch = (e: any) => {
+  const handleSearch = (e: any) => {
     setSearch(e.target.value);
   };
 
@@ -43,7 +42,7 @@ const HeaderLogoAndSearch = () => {
   };
 
   const handleHomePage = () => {
-    navigate('/') 
+    navigate("/");
   };
 
   return (
@@ -52,7 +51,6 @@ const HeaderLogoAndSearch = () => {
         cursor='pointer'
         onClick={handleHomePage}
         src={logoImage}
-        borderRadius='full'
         boxSize='100px'
       />
       {/*
@@ -63,7 +61,7 @@ const HeaderLogoAndSearch = () => {
         <TypeAnimation
           sequence={[
             "Raptors", // Types 'One'
-            1500, // Waits 1s
+            3500, // Waits 1s
             "",
           ]}
           wrapper='div'

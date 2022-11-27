@@ -1,4 +1,3 @@
-
 import {
   Box,
   Text,
@@ -6,14 +5,14 @@ import {
   HStack,
   Button,
   Collapse,
-} from '@chakra-ui/react'
-import login from '../../assets/login.jpg'
-import signup from '../../assets/signup.jpg'
-import { doc, getDoc } from 'firebase/firestore'
-import { useParams } from 'react-router';
+  Skeleton,
+} from "@chakra-ui/react";
+import login from "../../assets/login.jpg";
+import signup from "../../assets/signup.jpg";
+import { doc, getDoc } from "firebase/firestore";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { db } from '../../firebase-config.js'
-
+import { db } from "../../firebase-config.js";
 
 type TProp = {
   nftCount?: number;
@@ -21,33 +20,33 @@ type TProp = {
 
 type TCollection = {
   collectionName: string;
-  "description": string;
-  "creator": string;
-  "date": {
-    "seconds": number;
-    "nanoseconds": number;
-  },
-  "logo": string;
-  "background": string;
-}
+  description: string;
+  creator: string;
+  date: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  logo: string;
+  background: string;
+};
 const CollectionHeader = ({ nftCount }: TProp) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [show, setShow] = useState(false);
+  const [collection, setCollection] = useState<TCollection>();
 
+  const handleToggle = () => setShow(!show);
 
-  const [show, setShow] = useState(false)
-  const [collection, setCollection] = useState<TCollection>()
-
-  const handleToggle = () => setShow(!show)
-
-  const { id } = useParams()
+  const { id } = useParams();
 
   useEffect(() => {
     const a = async () => {
-      const snap = await getDoc(doc(db, 'collections', id as string))
+      const snap = await getDoc(doc(db, "collections", id as string));
 
       if (snap.exists()) {
         console.log(snap.data());
         //@ts-ignore
         setCollection(snap.data());
+        setIsLoaded(true);
       } else {
         console.log("No such document");
       }
@@ -57,31 +56,35 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
   return (
     <Box>
-      <Box h='300px' bg='grey'>
-        <Image
-          src={collection?.background}
-          h='300px'
-          w='full'
-          position='absolute'
-        />
-        <Box
-          bg='lightgray'
-          ml='40px'
-          border='4px'
-          borderColor='#EDF2F7'
-          borderRadius='10px'
-          top='280px'
-          position='absolute' >
+      <Skeleton isLoaded={isLoaded}>
+        <Box h='300px'>
           <Image
-            src={collection?.logo}
-            w='200px'
-            h='200px'
-            borderRadius='5px'
-            zIndex='1'
+            src={collection?.background}
+            h='300px'
+            w='full'
+            position='absolute'
           />
-        </Box>
-      </Box>
 
+          <Box
+            ml='40px'
+            border='4px'
+            borderColor='#EDF2F7'
+            borderRadius='10px'
+            top='280px'
+            position='absolute'
+          >
+            {/* <Skeleton isLoaded={isLoaded}> */}
+            <Image
+              src={collection?.logo}
+              w='200px'
+              h='200px'
+              borderRadius='5px'
+              zIndex='1'
+            />
+            {/* </Skeleton> */}
+          </Box>
+        </Box>
+      </Skeleton>
       <Box ml='40px' my='20px' mt='30px'>
         <Text fontSize='4xl' mt='30px'>
           {collection?.collectionName}

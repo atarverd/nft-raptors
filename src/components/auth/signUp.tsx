@@ -14,10 +14,12 @@ import {
   RadioGroup,
   FormControl,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import signup from "../../assets/signup.jpg";
 import hiddenEye from "../../assets/hiddenEye.png";
 import eye from "../../assets/eye.png";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [emailInput, setEmailInput] = useState("");
@@ -36,14 +38,32 @@ const SignUp = () => {
 
   const auth = getAuth();
 
+  const toast = useToast();
+
+  const navigate = useNavigate();
+
   const handleRegistration = () => {
     createUserWithEmailAndPassword(auth, emailInput, passwordInput)
       .then((userCredential) => {
-        // Signed in
+        toast({
+          title: "Account Created and Logged In",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+          status: "success",
+        });
         const user = userCredential.user;
-        // ...
+
+        navigate("/");
       })
       .catch((error) => {
+        toast({
+          title: "Something Went Wrong",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+          status: "error",
+        });
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
