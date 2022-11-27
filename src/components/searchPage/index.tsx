@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { db } from "../../firebase-config.js";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import Loader from "../loading";
+import Empty from "./empty";
 
 type TNft = {
   id: string;
@@ -18,6 +20,7 @@ const Search = () => {
   const [nfts, setNfts] = useState<TNft[]>();
   const [minPrice, setMinPrice] = useState<number>(-Infinity);
   const [maxPrice, setMaxPrice] = useState<number>(+Infinity);
+  const [isLoading,setIsLoading]=useState<boolean>(true)
 
   let copyNfts: any;
 
@@ -47,7 +50,7 @@ const Search = () => {
       // doc.data() is never undefined for query doc snapshots
       const nft = doc.data();
       result.push({
-        id: nft.id,
+        id: doc.id,
         img: nft.img,
         name: nft.name,
         currentPrice: nft.currentPrice,
@@ -55,8 +58,9 @@ const Search = () => {
     });
     //@ts-ignore
     setNfts(result);
+    setIsLoading(false)
     //@ts-ignore
-    copyNfts = result;
+    console.log(result)
   };
 
   useEffect(() => {
@@ -78,23 +82,25 @@ const Search = () => {
 
   return (
     <Box m='15px'>
-      <Flex display='flex' justifyContent='space-around'>
-        <Box>
-          <Flex display='flex'>
-            <Accordions
-              filterPrice={filterPrice}
-              handleMin={handleMin}
-              handleMax={handleMax}
-            />
-          </Flex>
-        </Box>
+      {isLoading?<Loader/>
+      :<Flex display='flex' justifyContent='space-between'>
+      <Box>
+        <Flex display='flex'>
+          <Accordions
+            filterPrice={filterPrice}
+            handleMin={handleMin}
+            handleMax={handleMax}
+          />
+        </Flex>
+      </Box>
 
-        <Box>
-          <Flex display='flex'>
-            <ItemCard nfts={nfts} />
-          </Flex>
-        </Box>
-      </Flex>
+      <Box>
+        <Flex display='flex'>
+          {nfts?.length?<ItemCard nfts={nfts} />:<Empty/>}
+        </Flex>
+      </Box>
+    </Flex>
+      }
     </Box>
   );
 };

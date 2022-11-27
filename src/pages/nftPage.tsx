@@ -26,7 +26,7 @@ type TNft = {
   isForSold: Boolean;
   name: string;
   owner: string;
-  picture: string;
+  img: string;
   favorite: number;
   priceHistory: THistory[];
 };
@@ -40,7 +40,7 @@ const NftPage = () => {
     isForSold: true,
     name: "asdf",
     owner: "asdf",
-    picture: "asdf",
+    img: "asdf",
     favorite: 1,
     priceHistory: [{ price: 1, date: "", prevOwner: "" }],
   });
@@ -71,7 +71,7 @@ const NftPage = () => {
     <Box ml='20%' mr='20%' mt='2%' bg='white'>
       <Center>
         <Flex id='nft-conainer'>
-          <NftItemPage />
+          <NftItemPage img={nftInfo.img}/>
 
           <Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='5%'>
             <NftBasicInfo

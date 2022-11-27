@@ -2,12 +2,56 @@ import {
   Box,
   Text,
   Flex,
+  Button,
 } from '@chakra-ui/react'
+import { useState } from 'react'
 import Body from './body'
 import UploadImage from './uploadImage'
-
+import {ref,getStorage,uploadBytes,getDownloadURL} from 'firebase/storage'
+import {collection,addDoc} from 'firebase/firestore'
+import { db } from '../../firebase-config'
 
 const CreateCollection = () => {
+  const [images,setImages]=useState<any>([])
+  const [name,setName]=useState()
+  const [description,setDescription]=useState()
+  const [category,setCategory]=useState()
+  const storage=getStorage()
+  const handleLogoImage=(img:any)=>{
+      //@ts-ignore
+      setImages(o=>[...o,img])
+      console.log(img)
+  
+  }
+  const handleSubmit=async()=>{
+    let urls:any=[]
+    
+    const a =async()=>{
+      //@ts-ignore
+      for await(const img of images){
+     
+      
+        const imageRef=ref(storage,img.name)
+        //@ts-ignore
+       await uploadBytes(imageRef,img)
+       await getDownloadURL(imageRef).then(url=>{console.log(url);urls.push(url)})
+       
+      }
+    }
+    await a()
+    await addDoc(collection(db,'collections'),{
+      collectionName:name,
+      description,
+      category,
+      logo:urls[0],
+      feature:urls[1],
+      background:urls[2],
+      creator:'atarverd',
+      date:new Date,
+      volume:0
+    })
+  }
+
 
   return (
     <Flex display='flex' justifyContent='center'>
@@ -19,7 +63,7 @@ const CreateCollection = () => {
           <Text fontSize='2xl'>Logo Image</Text>
           <Text>This image will also be used for navigation</Text>
           <Box mt='10px'>
-            <UploadImage size='2xl' h='' w='' />
+            <UploadImage size='2xl' h='' w='' handleLogoImage={handleLogoImage}/>
           </Box>
         </Box>
 
@@ -29,7 +73,7 @@ const CreateCollection = () => {
             category pages, or other promotional areas of NFT Raptors
           </Text>
           <Box mt='10px'>
-            <UploadImage h='200px' w='300px' size='' />
+            <UploadImage h='200px' w='300px' size='' handleLogoImage={handleLogoImage}/>
           </Box>
         </Box>
 
@@ -40,12 +84,16 @@ const CreateCollection = () => {
             devices
           </Text>
           <Box mt='10px'>
-            <UploadImage h='300px' w='600px' size='' />
+            <UploadImage h='300px' w='600px' size='' handleLogoImage={handleLogoImage}/>
           </Box>
         </Box>
 
-        <Body />
-
+        <Body setName={setName} setDescription={setDescription} setCategory={setCategory}/>
+        <Box mt='30px'>
+        <Flex justifyContent='center'>
+          <Button colorScheme='messenger' w='300px' onClick={handleSubmit}>Create Collection</Button>
+        </Flex>
+      </Box>
       </Box>
     </Flex>
   )
