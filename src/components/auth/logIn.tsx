@@ -11,6 +11,7 @@ import {
   InputGroup,
   FormControl,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import login from "../../assets/login.jpg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -24,7 +25,7 @@ const LogIn = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const navigate = useNavigate();
-
+  const toast = useToast();
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmailInput(e.target.value);
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -38,13 +39,26 @@ const LogIn = () => {
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, emailInput, passwordInput)
       .then((userCredential) => {
-        // Signed in
+        toast({
+          title: "Logged In",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+          status: "success",
+        });
         const user = userCredential.user;
 
         navigate("/");
         // ...
       })
       .catch((error) => {
+        toast({
+          title: "Invalid Email or Password",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+          status: "error",
+        });
         const errorCode = error.code;
         const errorMessage = error.message;
       });

@@ -7,18 +7,16 @@ import "swiper/css";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 const Caruselm = () => {
-
   return (
     <>
-      <Center mb='2rem' >
+      <Center mb='2rem'>
         <TypeAnimation
           sequence={[
-
-            "Small things make perfection", // Types 'One'
+            "Small things make perfection, but", // Types 'One'
             1500, // Waits 1s
 
             "Small things make perfection, but perfection is no small thing.",
-            1500
+            1500,
           ]}
           wrapper='div'
           speed={20}
