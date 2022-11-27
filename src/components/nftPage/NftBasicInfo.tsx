@@ -10,6 +10,7 @@ type TInfo = {
   favorite: number;
   currentPrice: number;
   owner: string;
+  ownerId: string;
 };
 
 const NftBasicInfo = ({
@@ -19,11 +20,12 @@ const NftBasicInfo = ({
   favorite,
   currentPrice,
   owner,
+  ownerId,
 }: TInfo) => {
   const navigate = useNavigate();
 
   const navigateToUser = () => {
-    navigate("/" + owner);
+    navigate("/" + ownerId);
   };
 
   const navigateToCollection = (collectionId: string) => {
@@ -58,10 +60,8 @@ const NftBasicInfo = ({
           </Text>
           <Text>
             <Flex alignItems='center'>
-              <FaRegHeart size='25px'/>
-              <Text ml='5px'>
-              {favorite}
-              </Text>
+              <FaRegHeart size='25px' />
+              <Text ml='5px'>{favorite}</Text>
             </Flex>
           </Text>
         </Flex>

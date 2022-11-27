@@ -12,18 +12,16 @@ import {
   AccordionIcon,
   AccordionPanel,
   AccordionButton,
-} from '@chakra-ui/react'
+} from "@chakra-ui/react";
 
 // const propType = {
 //   filterPrice: () => void
 // }
 
-const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
+const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: any) => {
   return (
     <Box>
-
       <Accordion allowToggle defaultIndex={[0]} allowMultiple>
-
         <AccordionItem w='370px'>
           <AccordionButton>
             <Box flex='1' textAlign='left'>
@@ -33,9 +31,19 @@ const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
           </AccordionButton>
           <AccordionPanel pb={4}>
             <Flex justifyContent='space-evenly' alignItems='center'>
-              <Input w='90px' h='40px' placeholder='Min' onChange={handleMin}></Input>
+              <Input
+                w='90px'
+                h='40px'
+                placeholder='Min'
+                onChange={handleMin}
+              ></Input>
               <Text>To</Text>
-              <Input w='90px' h='40px' placeholder='Max' onChange={handleMax}></Input>
+              <Input
+                w='90px'
+                h='40px'
+                placeholder='Max'
+                onChange={handleMax}
+              ></Input>
             </Flex>
             <Flex justifyContent='center' alignItems='center'>
               <Box mt='20px'>
@@ -43,12 +51,14 @@ const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
                   w='270px'
                   h='40px'
                   colorScheme='messenger'
-                  onClick={filterPrice} >Apply</Button>
+                  onClick={filterPrice}
+                >
+                  Apply
+                </Button>
               </Box>
             </Flex>
           </AccordionPanel>
         </AccordionItem>
-
       </Accordion>
 
       <Accordion allowToggle defaultIndex={[0]} allowMultiple>
@@ -62,10 +72,28 @@ const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
           <AccordionPanel pb={4}>
             <Flex display='flex' flexDirection='column' justifyContent='center'>
               <VStack spacing={4}>
-                <Button w='270px' h='40px' colorScheme='messenger'>Recently Created</Button>
-                <Button w='270px' h='40px' colorScheme='messenger'>Price Low To High</Button>
-                <Button w='270px' h='40px' colorScheme='messenger'>Price High To Low</Button>
-                <Button w='270px' h='40px' colorScheme='messenger'>Oldest</Button>
+                <Button w='270px' h='40px' colorScheme='messenger'>
+                  Recently Created
+                </Button>
+                <Button
+                  onClick={() => priceSort("lowToHigh")}
+                  w='270px'
+                  h='40px'
+                  colorScheme='messenger'
+                >
+                  Price Low To High
+                </Button>
+                <Button
+                  onClick={() => priceSort("highToLow")}
+                  w='270px'
+                  h='40px'
+                  colorScheme='messenger'
+                >
+                  Price High To Low
+                </Button>
+                <Button w='270px' h='40px' colorScheme='messenger'>
+                  Oldest
+                </Button>
               </VStack>
             </Flex>
           </AccordionPanel>
@@ -97,9 +125,8 @@ const Accordions = ({ filterPrice, handleMin, handleMax }: any) => {
           </AccordionPanel>
         </AccordionItem>
       </Accordion>
-
     </Box>
-  )
-}
+  );
+};
 
-export default Accordions
+export default Accordions;
