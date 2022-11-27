@@ -14,15 +14,39 @@ import {
 } from '@chakra-ui/react'
 import GlobCard from '../globCard'
 import { FaSearch } from "react-icons/fa";
-
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+import { db } from '../../firebase-config';
 
 const UserTabs = () => {
+
+  const {id}=useParams()
+  const [ownedNfts,setOwnedNfts]=useState([])
+  const asyncronus =async()=>{
+    const q = query(collection(db, "nfts"), where("ownerId", "==", id as string ));
+
+    const querySnapshot = await getDocs(q);
+    let result:any=[]
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      const nft=doc.data()
+      result.push({id:doc.id,img:nft.img,name:nft.name,currentPrice:nft.currentPrice})
+    });
+    setOwnedNfts(result)
+  }
+
+  useEffect(()=>{
+    asyncronus()
+  },[])
+
+
   return (
     <Box>
       <Tabs size='md' variant='enclosed-colored' mt='20px'>
         <TabList>
-          <Tab>Collected</Tab>
-          <Tab>Created</Tab>
+          <Tab>Owned</Tab>
           <Tab>Favorited</Tab>
         </TabList>
 
@@ -44,19 +68,12 @@ const UserTabs = () => {
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
               <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
+                {ownedNfts?.map(nft=><GlobCard nft={nft} />)}
               </SimpleGrid>
             </Flex>
           </TabPanel>
 
-          <TabPanel>
-            <Flex display='flex' justifyContent='space-around'>
-              <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
-                <GlobCard nft={{id:'asdfasd', img: 'asd', name: 'sad', currentPrice: 555 }} />
-              </SimpleGrid>
-            </Flex>
-          </TabPanel>
+         
 
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>

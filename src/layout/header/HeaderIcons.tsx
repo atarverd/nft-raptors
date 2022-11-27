@@ -6,6 +6,7 @@ import user from "../../assets/user.png";
 import { Image } from "@chakra-ui/react";
 import wallet from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
+import { getAuth } from "firebase/auth";
 
 const style = {
   height: "50px",
@@ -18,10 +19,13 @@ const style = {
 
 const HeaderIcons = () => {
   const navigate = useNavigate();
+  const loggedUser = getAuth()
 
   const handleUserPage = () => {
-    //navigate("/MsnQm8QFZUHDEJ8QrYfQ");
-    navigate("/login");
+    if(loggedUser)
+    navigate('/'+loggedUser.currentUser?.uid)
+   else
+    navigate('/') 
   };
 
   return (
