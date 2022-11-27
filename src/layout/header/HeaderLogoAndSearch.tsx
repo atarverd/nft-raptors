@@ -12,14 +12,13 @@ import {
 } from "@chakra-ui/react";
 import logoImage from "../../assets/logo.png";
 import { useNavigate } from "react-router";
-import { FaSearch } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import searchIcon from "../../assets/search.svg";
 
+
 const HeaderLogoAndSearch = () => {
   const [search, setSearch] = useState("");
-
-  const handleSearch = (e: any) => {
+    const handleSearch = (e: any) => {
     setSearch(e.target.value);
   };
 
@@ -30,7 +29,7 @@ const HeaderLogoAndSearch = () => {
   };
 
   const handleHomePage = () => {
-    navigate("/");
+    navigate('/') 
   };
 
   return (

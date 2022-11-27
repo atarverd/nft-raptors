@@ -18,7 +18,7 @@ import { useColorModeValue } from "@chakra-ui/react";
 
 export const App = () => (
     
-       <ChakraProvider theme={theme}>
+    <ChakraProvider theme={theme}>
     <ColorModeSwitcher />
     <Header />
     <Routes>
