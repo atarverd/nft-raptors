@@ -43,6 +43,7 @@ const Body = () => {
   const toast = useToast();
   const navigate = useNavigate();
 
+
   const handleChoosedCollection = (e: any) => {
     let id = collections?.find((el) => el.collectionName === e)?.collectionId;
     setChoosedCollections({ collectionName: e, collectionId: id as string });
@@ -116,6 +117,7 @@ const Body = () => {
       where("creatorId", "==", "CVdhOe8IdCMbDAQDWIaUkJJiYnJ2")
     );
 
+
     const querySnapshot = await getDocs(q);
     let result: any = [];
     querySnapshot.forEach((doc) => {
@@ -126,12 +128,13 @@ const Body = () => {
     setCollections(result);
   };
 
+
   useEffect(() => {
     asynchronus();
   }, []);
   return (
     <Box>
-      <Text fontSize='4xl'>Create New Item</Text>
+      <Text fontSize='4xl'>Create New Nft</Text>
 
       <Box mt='30px'>
         <Text fontSize='2xl'>Image</Text>
@@ -143,6 +146,7 @@ const Body = () => {
             size=''
             handleLogoImage={handleImage}
           />
+
         </Box>
       </Box>
       <Box mt='30px'>
@@ -193,6 +197,7 @@ const Body = () => {
                         {col.collectionName}
                       </Radio>
                     ))}
+
                   </Stack>
                 </RadioGroup>
               </Flex>

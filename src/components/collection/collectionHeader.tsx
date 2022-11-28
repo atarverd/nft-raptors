@@ -1,6 +1,7 @@
 import {
   Box,
   Text,
+  Flex,
   Image,
   HStack,
   Button,
@@ -10,9 +11,10 @@ import {
 import login from "../../assets/login.jpg";
 import signup from "../../assets/signup.jpg";
 import { doc, getDoc } from "firebase/firestore";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase-config.js";
+import { getAuth } from 'firebase/auth'
 
 type TProp = {
   nftCount?: number;
@@ -22,6 +24,7 @@ type TCollection = {
   collectionName: string;
   description: string;
   creator: string;
+  creatorId: string;
   date: {
     seconds: number;
     nanoseconds: number;
@@ -29,21 +32,30 @@ type TCollection = {
   logo: string;
   background: string;
 };
+
 const CollectionHeader = ({ nftCount }: TProp) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [show, setShow] = useState(false);
   const [collection, setCollection] = useState<TCollection>();
 
   const handleToggle = () => setShow(!show);
+  const navigate = useNavigate()
+
+
+  const navigaetToCreateNft = () => {
+    navigate('/create-nft')
+  }
+
 
   const { id } = useParams();
+  const user = getAuth()
 
   useEffect(() => {
     const a = async () => {
       const snap = await getDoc(doc(db, "collections", id as string));
 
       if (snap.exists()) {
-        console.log(snap.data());
+        console.log(snap.data().creatorId);
         //@ts-ignore
         setCollection(snap.data());
         setIsLoaded(true);
@@ -85,17 +97,28 @@ const CollectionHeader = ({ nftCount }: TProp) => {
           </Box>
         </Box>
       </Skeleton>
-      <Box ml='40px' my='20px' mt='50px'>
-        <Text fontSize='4xl' mt='30px'>
-          {collection?.collectionName}
-        </Text>
+      <Box mx='40px' my='20px' mt='50px'>
+        <Flex justifyContent='space-between' alignItems='center'>
+          <Text fontSize='4xl' mt='30px'>
+            {collection?.collectionName}
+          </Text>
+          {true &&
+            <Button
+              colorScheme='messenger'
+              onClick={navigaetToCreateNft}
+              w='200px'
+              mt='35px'>
+              Create Nft
+            </Button>
+          }
+
+        </Flex>
         <Text fontSize='2xl' mt='10px'>
           by {collection?.creator}
         </Text>
 
         <HStack spacing={5} mt='10px'>
           <Text>Items {nftCount}</Text>
-          //@ts-ignore
           <Text>Created </Text>
         </HStack>
         <Box maxW='30%' mt='10px'>

@@ -19,13 +19,14 @@ const Collection = () => {
   const [nfts, setNfts] = useState<TNft[]>();
   const [loading, setLoading] = useState<boolean>(false);
 
+
   useEffect(() => {
     const a = async () => {
       const q = query(collection(db, "nfts"), where("collectionId", "==", id));
 
       const querySnapshot = await getDocs(q);
       //@ts-ignore
-      const result = [];
+      const result: any = [];
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
@@ -40,6 +41,7 @@ const Collection = () => {
       //@ts-ignore
       setNfts(result);
       setLoading(true);
+      console.log(result)
     };
     a();
   }, []);
