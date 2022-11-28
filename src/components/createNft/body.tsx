@@ -20,40 +20,40 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { getAuth } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 
-type TCollection={
-  collectionName:string;
-  collectionId:string
+type TCollection = {
+  collectionName: string;
+  collectionId: string
 }
 
 const Body = () => {
-  const user=getAuth()
-  const [collections,setCollections]=useState<TCollection[]>([])
-  const asynchronus =async () => {
+  const user = getAuth()
+  const [collections, setCollections] = useState<TCollection[]>([])
+  const asynchronus = async () => {
     console.log(user.currentUser)
     const q = query(collection(db, "collections"), where("creatorId", "==", '5E820pDzVuTFRznD6m0IooKAlUs2'));
 
-      const querySnapshot = await getDocs(q);
-      let result:any=[]
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        const col=doc.data()
-        result.push({collectionName:col.collectionName,collectionId:doc.id})
-      });
-      setCollections(result)
-      console.log(result)
+    const querySnapshot = await getDocs(q);
+    let result: any = []
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data());
+      const col = doc.data()
+      result.push({ collectionName: col.collectionName, collectionId: doc.id })
+    });
+    setCollections(result)
+    console.log(result)
   }
 
-  useEffect(()=>{asynchronus();console.log(user.currentUser)},[])
+  useEffect(() => { asynchronus(); console.log(user.currentUser) }, [])
   return (
     <Box>
-      <Text fontSize='4xl'>Create New Item</Text>
+      <Text fontSize='4xl'>Create New Nft</Text>
 
       <Box mt='30px'>
         <Text fontSize='2xl'>Image</Text>
         <Text>File types supported: JPG, PNG, GIF. Max size: 100mb </Text>
         <Box mt='10px'>
-          <UploadImage h='200px' w='300px' size='' handleLogoImage={()=>console.log(1)}/>
+          <UploadImage h='200px' w='300px' size='' handleLogoImage={() => console.log(1)} />
         </Box>
       </Box>
       <Box mt='30px'>
@@ -81,9 +81,9 @@ const Body = () => {
               <Flex display='flex' flexDirection='column' justifyContent='center'>
                 <RadioGroup defaultValue='1'>
                   <Stack spacing='15px'>
-                    
-                    {collections?.map(col=><Radio value={col.collectionId} size='lg' colorScheme='messenger'>{col.collectionName}</Radio>)}
-                    
+
+                    {collections?.map(col => <Radio value={col.collectionId} size='lg' colorScheme='messenger'>{col.collectionName}</Radio>)}
+
                   </Stack>
                 </RadioGroup>
               </Flex>
