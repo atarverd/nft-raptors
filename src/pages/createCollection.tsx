@@ -5,7 +5,7 @@ const CreateCollectionPage = () => {
     <div>
       <CreateCollection />
     </div>
-  )
-}
+  );
+};
 
-export default CreateCollectionPage
+export default CreateCollectionPage;
