@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Box, Image, useToast } from "@chakra-ui/react";
 import { FaRegUser, FaWallet } from "react-icons/fa";
 import Cart from "../../components/cart/cart";
-import user from "../../assets/user.png";
+import userLogo from "../../assets/user.png";
 import wallet from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut,onAuthStateChanged } from "firebase/auth";
 import logOut from "../../assets/logOut.png";
 
 const style = {
@@ -20,7 +20,7 @@ const style = {
 const HeaderIcons = () => {
   const navigate = useNavigate();
   const loggedUser = getAuth();
-
+  const [user,setUser]=useState(false)
   const toast = useToast();
 
   const handleUserPage = () => {
@@ -29,6 +29,20 @@ const HeaderIcons = () => {
   };
 
   const auth = getAuth();
+  
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        setUser(true)
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
+  },[])
   const logout = () => {
     signOut(auth)
       .then(() => {
@@ -49,7 +63,7 @@ const HeaderIcons = () => {
     <Flex mr='4.5rem'>
       <Box ml='10px' cursor='pointer'>
         {/* <FaRegUser size='30px' /> */}
-        <Image boxSize='35px' src={user} onClick={handleUserPage} />
+        <Image boxSize='35px' src={userLogo} onClick={handleUserPage} />
       </Box>
       <Box ml='15px' cursor='pointer'>
         <Image src={wallet} boxSize='35px' />
@@ -57,7 +71,7 @@ const HeaderIcons = () => {
       <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
-      {auth.currentUser ? (
+      {user ? (
         <Box ml='15px' cursor='pointer'>
           <Image src={logOut} boxSize='30px' onClick={logout} />
         </Box>

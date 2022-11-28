@@ -49,7 +49,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
   const { id } = useParams();
   const user = getAuth()
-
+  const isCreator=user?.currentUser?.uid===collection?.creatorId
   useEffect(() => {
     const a = async () => {
       const snap = await getDoc(doc(db, "collections", id as string));
@@ -102,7 +102,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
           <Text fontSize='4xl' mt='30px'>
             {collection?.collectionName}
           </Text>
-          {true &&
+          {isCreator &&
             <Button
               colorScheme='messenger'
               onClick={navigaetToCreateNft}
