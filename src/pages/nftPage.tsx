@@ -23,7 +23,7 @@ type TNft = {
   collectionName: string;
   currentPrice: number;
   id: string;
-  isForSold: Boolean;
+  isForSold: boolean;
   name: string;
   owner: string;
   img: string;
@@ -84,6 +84,7 @@ const NftPage = () => {
               currentPrice={nftInfo.currentPrice}
               owner={nftInfo.owner}
               ownerId={nftInfo.ownerId}
+              isForSold={nftInfo.isForSold}
             />
 
             <NftAccordion accordionName='Price Graph'>

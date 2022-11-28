@@ -114,7 +114,7 @@ const Body = () => {
   const asynchronus = async () => {
     const q = query(
       collection(db, "collections"),
-      where("creatorId", "==", "CVdhOe8IdCMbDAQDWIaUkJJiYnJ2")
+      where("creatorId", "==", user.currentUser?.uid)
     );
 
 

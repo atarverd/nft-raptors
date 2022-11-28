@@ -4,14 +4,17 @@ import Body from "./body";
 import UploadImage from "./uploadImage";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../../firebase-config";
-
+import { auth, db } from "../../firebase-config";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const CreateCollection = () => {
   const [images, setImages] = useState<any>([]);
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
   const storage = getStorage();
+  const user=getAuth()
+  const navigate=useNavigate()
 
   const handleLogoImage = (img: any) => {
     //@ts-ignore
@@ -60,16 +63,18 @@ const CreateCollection = () => {
       feature: urls[1],
       background: urls[2],
       creator: "atarverd",
+      creatorId:user?.currentUser?.uid,
       date: new Date(),
       volume: 0,
-    }).then(() =>
-      toast({
-        title: "Successfully Created",
-        duration: 3000,
-        position: "top-right",
-        variant: "subtle",
-      })
-    );
+    }).then(docRef=>navigate('/collection/'+docRef.id))
+      .then(() =>
+        toast({
+          title: "Successfully Created",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+        })
+      );
   };
 
   return (
