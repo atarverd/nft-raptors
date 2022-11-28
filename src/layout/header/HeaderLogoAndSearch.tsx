@@ -23,22 +23,9 @@ const HeaderLogoAndSearch = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    //@ts-ignore
-    const listener = (event) => {
-      if (event.code === "Enter" || event.code === "NumpadEnter") {
-        searchItem();
-        event.preventDefault();
-      }
-    };
-    document.addEventListener("keydown", listener);
-    return () => {
-      document.removeEventListener("keydown", listener);
-    };
-  }, []);
-
   const searchItem = () => {
     if (search) navigate("/search/" + search);
+    setSearch("");
   };
 
   const handleHomePage = () => {
@@ -74,6 +61,7 @@ const HeaderLogoAndSearch = () => {
 
       <InputGroup>
         <Input
+          value={search}
           onChange={(e) => handleSearch(e)}
           placeholder='Search items, collections, and accounts'
           h='3.8rem'
