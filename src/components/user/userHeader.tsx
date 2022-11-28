@@ -1,17 +1,11 @@
-import {
-  Box,
-  Text,
-  Image,
-} from '@chakra-ui/react'
-import UserTabs from './userTabs';
-import login from '../../assets/login.jpg'
-import signup from '../../assets/signup.jpg'
+import { Box, Text, Image } from "@chakra-ui/react";
+import UserTabs from "./userTabs";
+import login from "../../assets/login.jpg";
+import signup from "../../assets/signup.jpg";
 
 const UserHeader = () => {
-
   return (
     <Box>
-
       <Box h='300px'>
         <Image src={signup} h='300px' w='full' position='absolute' />
         <Box
@@ -19,8 +13,9 @@ const UserHeader = () => {
           border='4px'
           borderColor='#EDF2F7'
           borderRadius='10px'
-          top='280px'
-          position='absolute' >
+          top='27%'
+          position='absolute'
+        >
           <Image
             src={login}
             w='200px'
@@ -32,12 +27,13 @@ const UserHeader = () => {
       </Box>
 
       <Box ml='40px' my='20px' mt='50px'>
-        <Text fontSize='4xl' mt='30px'>for example</Text>
+        <Text fontSize='4xl' mt='30px'>
+          for example
+        </Text>
         <UserTabs />
       </Box>
-
     </Box>
-  )
-}
+  );
+};
 
-export default UserHeader
+export default UserHeader;

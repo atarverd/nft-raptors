@@ -21,6 +21,21 @@ const CreateCollection = () => {
 
   const toast = useToast();
 
+  const collectionValidator = () => {
+    const imgIsValid = images.every((el: any) => el !== undefined);
+    if (imgIsValid && name && description && category) {
+      handleSubmit();
+    } else {
+      toast({
+        title: "Some Fields Are Empty",
+        duration: 3000,
+        position: "top-right",
+        variant: "subtle",
+        status: "error",
+      });
+    }
+  };
+
   const handleSubmit = async () => {
     let urls: any = [];
 
@@ -115,7 +130,11 @@ const CreateCollection = () => {
         />
         <Box mt='30px'>
           <Flex justifyContent='center'>
-            <Button colorScheme='messenger' w='300px' onClick={handleSubmit}>
+            <Button
+              colorScheme='messenger'
+              w='300px'
+              onClick={collectionValidator}
+            >
               Create Collection
             </Button>
           </Flex>
