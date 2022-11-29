@@ -9,6 +9,8 @@ import {
   MenuList,
   MenuItem,
   Button,
+  Collapse,
+  SkeletonText,
 } from "@chakra-ui/react";
 import UserTabs from "./userTabs";
 import login from "../../assets/login.jpg";
@@ -71,15 +73,15 @@ const UserHeader = () => {
   return (
     <Box>
 
-      <Box h='300px'>
-        <Image src={signup} h='300px' w='full' position='absolute' />
+     <Box h='300px' bgImage={`url(${signup})`}bgPosition="center"
+  bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
+        {/* <Image src={signup} h='300px' w='full' position='absolute' /> */}
         <Box
           ml='40px'
           border='4px'
           borderColor='#EDF2F7'
           borderRadius='10px'
-          top='27%'
-          position='absolute'
+          width='max-content'
         >
           <Image
             src={login}
@@ -92,21 +94,12 @@ const UserHeader = () => {
       </Box>
 
       <Box ml='40px' my='20px' mt='50px'>
-        <Text fontSize='4xl' mt='30px'>
+        
+        
+        <Flex justifyContent='space-between' alignItems='center'>
+         <Text fontSize='4xl' mt='30px'>
           {userData?.username}
         </Text>
-        <Box maxW='30%' mt='10px'>
-          <Collapse startingHeight={20} in={show}>
-            <SkeletonText isLoaded={isLoaded}>{userData?.bio}</SkeletonText>
-          </Collapse>
-          <Button size='xs' onClick={handleToggle} mt='1rem'>
-            Show {show ? "Less" : "More"}
-          </Button>
-        </Box>
-        <Flex justifyContent='space-between' alignItems='center'>
-          <Text fontSize='4xl' mt='30px'>
-            for example
-          </Text>
           <Box mt='35px' mr='40px'>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -119,9 +112,17 @@ const UserHeader = () => {
             </Menu>
           </Box>
         </Flex>
+        <Box maxW='30%' mt='10px'>
+          <Collapse startingHeight={20} in={show}>
+            {userData?.bio}
+          </Collapse>
+          <Button size='xs' onClick={handleToggle} mt='1rem'>
+            Show {show ? "Less" : "More"}
+          </Button>
+        </Box>
         <UserTabs />
       </Box>
-
+      
 
     </Box >
   );

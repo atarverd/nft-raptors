@@ -69,21 +69,16 @@ const CollectionHeader = ({ nftCount }: TProp) => {
   return (
     <Box>
       <Skeleton isLoaded={isLoaded}>
-        <Box h='300px'>
-          <Image
-            src={collection?.background}
-            h='300px'
-            w='full'
-            position='absolute'
-          />
-
+        <Box h='300px' bgImage={`url(${collection?.background})`}bgPosition="center"
+  bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
           <Box
             ml='40px'
             border='4px'
             borderColor='#EDF2F7'
             borderRadius='10px'
-            top='370px'
-            position='absolute'
+            width='max-content'
+            // top='370px'
+            // position='absolute'
           >
             {/* <Skeleton isLoaded={isLoaded}> */}
             <Image

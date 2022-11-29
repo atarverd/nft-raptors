@@ -5,8 +5,12 @@ const styles = {
   global: (props: Record<string, any>) => ({
     body: {
       color: mode("gray.800", "whiteAlpha.900")(props),
-      bg: mode("gray.100", "#0c1821")(props),
+      bg: mode("gray.100", "black")(props),
     },
+    input:{
+      color:mode('black','black')(props),
+      bg: mode("red", "red")(props),
+    }
   }),
 };
 
@@ -15,7 +19,7 @@ const components = {
     // setup light/dark mode component defaults
     baseStyle: (props: StyleFunctionProps | Record<string, any>) => ({
       dialog: {
-        bg: mode("white", "#141214")(props),
+        bg: mode("black", "red")(props),
       },
     }),
   },
