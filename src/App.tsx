@@ -3,6 +3,7 @@ import { Center, ChakraProvider } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CollectionPage from "./pages/collectionPage";
 import CreateNftPage from "./pages/createNftPage";
+import SettingsPage from "./pages/settingsPage";
 import ListNftpage from "./pages/listNftPage";
 import SignUp from "./components/auth/signUp";
 import { Routes, Route } from "react-router";
@@ -13,13 +14,12 @@ import UserPage from "./pages/userPage";
 import NftPage from "./pages/nftPage";
 import Header from "./layout/header";
 import Main from "./pages/main";
-import { useColorModeValue } from "@chakra-ui/react";
 import theme from "./theme";
 
 
 export const App = () => (
-    
-    <ChakraProvider theme={theme}>
+
+  <ChakraProvider theme={theme}>
     <ColorModeSwitcher />
     <Header />
     <Routes>
@@ -29,6 +29,7 @@ export const App = () => (
       <Route path='/signup' element={<SignUp />} />
       <Route path='/nft/:id' element={<NftPage />} />
       <Route path='/list/:id' element={<ListNftpage />} />
+      <Route path='/settings' element={<SettingsPage />} />
       <Route path='/category' element={<CategoryPage />} />
       <Route path='/create-nft' element={<CreateNftPage />} />
       <Route path='/search/:querys' element={<SearchPage />} />
