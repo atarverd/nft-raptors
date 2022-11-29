@@ -38,14 +38,14 @@ const HeaderIcons = () => {
         setUser(true)
         // ...
       } else {
-        // User is signed out
-        // ...
+        setUser(false)
       }
     });
   },[])
   const logout = () => {
     signOut(auth)
       .then(() => {
+       
         navigate("/");
         toast({
           title: "Logged Out",

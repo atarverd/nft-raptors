@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../../firebase-config";
+import { setDoc,doc } from "firebase/firestore";
 import {
   Box,
   Flex,
@@ -32,7 +34,7 @@ const SignUp = () => {
   const handleEmailChange = (e: any) => setEmailInput(e.target.value);
   const handleNameChange = (e: any) => setNameInput(e.target.value);
   const handlePasswordChange = (e: any) => setPasswordInput(e.target.value);
-  const handleGender = (e: any) => setGender(e.target.value);
+  const handleGender = (e: any) => setGender(e);
 
   const isEmailError = emailInput === "";
   const isNameError = nameInput === "";
@@ -61,16 +63,25 @@ const SignUp = () => {
   const handleRegistration = () => {
     createUserWithEmailAndPassword(auth, emailInput, passwordInput)
       .then((userCredential) => {
-        toast({
-          title: "Account Created and Logged In",
-          duration: 3000,
-          position: "top-right",
-          variant: "subtle",
-          status: "success",
-        });
         const user = userCredential.user;
-
-        navigate("/");
+        setDoc(doc(db, "users", user.uid), {
+          username:nameInput,
+          email:emailInput,
+          gender,
+          isPaymentConnected:false,
+          paymentMethod:{},
+          balance:0,
+          favorites:[]
+        }).then(()=>{
+          toast({
+            title: "Account Created and Logged In",
+            duration: 3000,
+            position: "top-right",
+            variant: "subtle",
+            status: "success",
+          });
+          navigate("/");
+        })
       })
       .catch((error) => {
         toast({

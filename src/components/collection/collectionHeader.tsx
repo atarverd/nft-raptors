@@ -82,7 +82,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
             border='4px'
             borderColor='#EDF2F7'
             borderRadius='10px'
-            top='27%'
+            top='370px'
             position='absolute'
           >
             {/* <Skeleton isLoaded={isLoaded}> */}
