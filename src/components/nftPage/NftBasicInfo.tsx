@@ -4,7 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
 import {useParams} from 'react-router-dom'
-
+import {buyNft} from '../../utils/buyNft'
 type TInfo = {
   collectionId: string;
   collectionName: string;
@@ -83,7 +83,7 @@ const NftBasicInfo = ({
         ?<Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={navigateToListNft}>
         List Nft
       </Button>
-          :isForSold && <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2'>
+          :isForSold && <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={()=>buyNft(user?.currentUser?.uid as string,ownerId,id as string,currentPrice)}>
           Add to Cart
         </Button>
         }
