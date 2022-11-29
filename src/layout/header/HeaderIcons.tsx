@@ -11,6 +11,7 @@ import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import logOutDark from "../../assets/logOutWhite.png";
 import logOutLight from "../../assets/logOut.png";
 
+
 const style = {
   height: "50px",
   width: "40px",
@@ -24,6 +25,7 @@ const HeaderIcons = () => {
   const navigate = useNavigate();
   const loggedUser = getAuth();
   const [user, setUser] = useState(false);
+
   const toast = useToast();
   const { colorMode } = useColorMode();
 
@@ -42,14 +44,15 @@ const HeaderIcons = () => {
         setUser(true);
         // ...
       } else {
-        // User is signed out
-        // ...
+        setUser(false)
       }
     });
   }, []);
+
   const logout = () => {
     signOut(auth)
       .then(() => {
+       
         navigate("/");
         toast({
           title: "Logged Out",
