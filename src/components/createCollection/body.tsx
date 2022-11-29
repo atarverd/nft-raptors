@@ -15,18 +15,19 @@ import {
   AccordionButton,
 } from '@chakra-ui/react'
 
+//@ts-ignore
 
-const Body = () => {
+const Body = ({setName,setDescription,setCategory}) => {
   return (
     <Box>
       <Box mt='30px'>
         <Text fontSize='2xl' mt='10px'>Name</Text>
-        <Input placeholder='Example: Raptor' mt='10px'></Input>
+        <Input placeholder='Example: Raptor' mt='10px' onChange={(e)=>setName(e.target.value)}></Input>
       </Box>
 
       <Box mt='30px'>
         <Text fontSize='2xl' mt='10px'>Description</Text>
-        <Textarea mt='10px' />
+        <Textarea mt='10px'  onChange={(e)=>setDescription(e.target.value)}/>
       </Box>
 
       <Box mt='30px'>
@@ -42,11 +43,11 @@ const Body = () => {
             </AccordionButton>
             <AccordionPanel pb={4}>
               <Flex display='flex' flexDirection='column' justifyContent='center'>
-                <RadioGroup defaultValue='1'>
+                <RadioGroup defaultValue='1' onChange={(e)=>setCategory(e)}>
                   <Stack spacing='15px'>
-                    <Radio value='1' size='lg' colorScheme='messenger'>Music</Radio>
-                    <Radio value='2' size='lg' colorScheme='messenger'>Art</Radio>
-                    <Radio value='3' size='lg' colorScheme='messenger'>Sport</Radio>
+                    <Radio value='music' size='lg' colorScheme='messenger'>Music</Radio>
+                    <Radio value='art' size='lg' colorScheme='messenger'>Art</Radio>
+                    <Radio value='sport' size='lg' colorScheme='messenger'>Sport</Radio>
                   </Stack>
                 </RadioGroup>
               </Flex>
@@ -55,11 +56,7 @@ const Body = () => {
         </Accordion>
       </Box>
 
-      <Box mt='30px'>
-        <Flex justifyContent='center'>
-          <Button colorScheme='messenger' w='300px'>Create Collection</Button>
-        </Flex>
-      </Box>
+      
 
     </Box>
   )

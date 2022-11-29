@@ -12,14 +12,17 @@ import {
 } from "@chakra-ui/react";
 
 //@ts-ignore
-const UploadImage = ({ size, h, w }) => {
+const UploadImage = ({ size, h, w,handleLogoImage}) => {
 
   const [selectedFile, setSelectedFile] = useState();
 
 
   const onChange = (e: any) => {
-    if (e.target.files && e.target.files.length > 0)
+    if (e.target.files && e.target.files.length > 0){
+      
       setSelectedFile(e.target.files[0]);
+      handleLogoImage(e.target.files[0])
+    }
     console.log(e.target.files[0])
   };
 

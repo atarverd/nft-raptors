@@ -7,7 +7,7 @@ const Categories = () => {
   return (
     <Box mt='3rem'>
       <Heading ml='2rem'>Browse by category</Heading>
-      <Grid templateColumns='repeat(3,1fr)' gap={6} m='2rem'>
+      <Grid templateColumns='repeat(3,1fr)' gap={6}  p='2rem'>
         {categoryData.map((category) => {
           return <Card data={category} />;
         })}

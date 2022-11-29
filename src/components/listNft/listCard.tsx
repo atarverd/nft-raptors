@@ -12,7 +12,7 @@ type TNft = {
     id: string;
     img: string;
     name: string;
-    currentPrice: number;
+    price:number
   };
 };
 
@@ -46,7 +46,7 @@ const ListCard = ({ nft }: TNft) => {
           <Heading onClick={toNftPage} fontSize='1xl'>
             {nft.name} Name: Raptors
           </Heading>
-          <Text>price: {nft.currentPrice}</Text>
+          <Text>price: {nft.price}</Text>
         </Stack>
       </Box>
     </Box>

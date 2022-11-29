@@ -23,12 +23,13 @@ type TNft = {
   collectionName: string;
   currentPrice: number;
   id: string;
-  isForSold: Boolean;
+  isForSold: boolean;
   name: string;
   owner: string;
-  picture: string;
+  img: string;
   favorite: number;
   priceHistory: THistory[];
+  ownerId: string;
 };
 
 const NftPage = () => {
@@ -40,9 +41,10 @@ const NftPage = () => {
     isForSold: true,
     name: "asdf",
     owner: "asdf",
-    picture: "asdf",
+    img: "asdf",
     favorite: 1,
     priceHistory: [{ price: 1, date: "", prevOwner: "" }],
+    ownerId: "string",
   });
   const [isLoading, setIsloading] = useState(true);
   let { id } = useParams();
@@ -71,7 +73,7 @@ const NftPage = () => {
     <Box ml='20%' mr='20%' mt='2%' bg='white'>
       <Center>
         <Flex id='nft-conainer'>
-          <NftItemPage />
+          <NftItemPage img={nftInfo.img} />
 
           <Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='5%'>
             <NftBasicInfo
@@ -81,6 +83,8 @@ const NftPage = () => {
               favorite={nftInfo.favorite}
               currentPrice={nftInfo.currentPrice}
               owner={nftInfo.owner}
+              ownerId={nftInfo.ownerId}
+              isForSold={nftInfo.isForSold}
             />
 
             <NftAccordion accordionName='Price Graph'>

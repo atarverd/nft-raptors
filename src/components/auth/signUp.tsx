@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../../firebase-config";
+import { setDoc,doc } from "firebase/firestore";
 import {
   Box,
   Flex,
@@ -14,21 +16,25 @@ import {
   RadioGroup,
   FormControl,
   InputRightElement,
+  useToast,
 } from "@chakra-ui/react";
 import signup from "../../assets/signup.jpg";
 import hiddenEye from "../../assets/hiddenEye.png";
 import eye from "../../assets/eye.png";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [emailInput, setEmailInput] = useState("");
   const [nameInput, setNameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [show, setShow] = useState(false);
+  const [gender, setGender] = useState("Male");
   const handleClick = () => setShow(!show);
 
   const handleEmailChange = (e: any) => setEmailInput(e.target.value);
   const handleNameChange = (e: any) => setNameInput(e.target.value);
   const handlePasswordChange = (e: any) => setPasswordInput(e.target.value);
+  const handleGender = (e: any) => setGender(e);
 
   const isEmailError = emailInput === "";
   const isNameError = nameInput === "";
@@ -36,14 +42,55 @@ const SignUp = () => {
 
   const auth = getAuth();
 
+  const toast = useToast();
+
+  const navigate = useNavigate();
+
+  const validateRegistration = () => {
+    if (nameInput && passwordInput && emailInput) {
+      handleRegistration();
+    } else {
+      toast({
+        title: "Some Fields Are Empty",
+        duration: 3000,
+        position: "top-right",
+        variant: "subtle",
+        status: "error",
+      });
+    }
+  };
+
   const handleRegistration = () => {
     createUserWithEmailAndPassword(auth, emailInput, passwordInput)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
-        // ...
+        setDoc(doc(db, "users", user.uid), {
+          username:nameInput,
+          email:emailInput,
+          gender,
+          isPaymentConnected:false,
+          paymentMethod:{},
+          balance:0,
+          favorites:[]
+        }).then(()=>{
+          toast({
+            title: "Account Created and Logged In",
+            duration: 3000,
+            position: "top-right",
+            variant: "subtle",
+            status: "success",
+          });
+          navigate("/");
+        })
       })
       .catch((error) => {
+        toast({
+          title: "Something Went Wrong",
+          duration: 3000,
+          position: "top-right",
+          variant: "subtle",
+          status: "error",
+        });
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -121,19 +168,19 @@ const SignUp = () => {
                 />
               </FormControl>
 
-              <RadioGroup defaultValue='2'>
+              <RadioGroup onChange={handleGender} defaultValue='2'>
                 <Stack spacing={5} direction='row'>
-                  <Radio colorScheme='blue' value='1'>
+                  <Radio colorScheme='blue' value='Male'>
                     Male
                   </Radio>
-                  <Radio colorScheme='pink' value='2'>
+                  <Radio colorScheme='pink' value='Female'>
                     Female
                   </Radio>
                 </Stack>
               </RadioGroup>
 
               <Button
-                onClick={handleRegistration}
+                onClick={validateRegistration}
                 h='2.50rem'
                 size='md'
                 bg='#2081e2'

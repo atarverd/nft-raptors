@@ -2,7 +2,9 @@ import React from "react";
 import { Box, Flex, Text, Link, Button } from "@chakra-ui/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
-
+import { getAuth } from "firebase/auth";
+import {useParams} from 'react-router-dom'
+import {buyNft} from '../../utils/buyNft'
 type TInfo = {
   collectionId: string;
   collectionName: string;
@@ -10,6 +12,8 @@ type TInfo = {
   favorite: number;
   currentPrice: number;
   owner: string;
+  ownerId: string;
+  isForSold:boolean;
 };
 
 const NftBasicInfo = ({
@@ -19,13 +23,20 @@ const NftBasicInfo = ({
   favorite,
   currentPrice,
   owner,
+  ownerId,
+  isForSold,
 }: TInfo) => {
+  const {id}=useParams()
   const navigate = useNavigate();
-
+  const user=getAuth()
+  const isOwner=user?.currentUser?.uid===ownerId
+  console.log(isOwner)
   const navigateToUser = () => {
-    navigate("/" + owner);
+    navigate("/" + ownerId);
   };
-
+  const navigateToListNft = () => {
+    navigate("/list/" + id);
+  };
   const navigateToCollection = (collectionId: string) => {
     navigate("/collection/" + collectionId);
   };
@@ -58,10 +69,8 @@ const NftBasicInfo = ({
           </Text>
           <Text>
             <Flex alignItems='center'>
-              <FaRegHeart size='25px'/>
-              <Text ml='5px'>
-              {favorite}
-              </Text>
+              <FaRegHeart size='25px' />
+              <Text ml='5px'>{favorite}</Text>
             </Flex>
           </Text>
         </Flex>
@@ -70,9 +79,14 @@ const NftBasicInfo = ({
       <Box w='500px' h='120px'>
         <Text>Current Price</Text>
         <Text>{currentPrice}$</Text>
-        <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2'>
+       {isOwner
+        ?<Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={navigateToListNft}>
+        List Nft
+      </Button>
+          :isForSold && <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={()=>buyNft(user?.currentUser?.uid as string,ownerId,id as string,currentPrice)}>
           Add to Cart
         </Button>
+        }
       </Box>
     </>
   );

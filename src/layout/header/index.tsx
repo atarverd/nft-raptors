@@ -8,7 +8,7 @@ const Header = () => {
     <Box
       as='header'
       h='150px'
-      bgGradient='linear(to-b, #EDFDFD,  rgb(235, 240, 248) )'
+      // bgGradient='linear(to-b, #EDFDFD,  rgb(235, 240, 248) )'
     >
       <Flex align='center' h='100%'>
         <HeaderLogoAndSearch />
