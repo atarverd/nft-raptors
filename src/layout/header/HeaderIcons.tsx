@@ -5,7 +5,7 @@ import Cart from "../../components/cart/cart";
 import userLogo from "../../assets/user.png";
 import wallet from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
-import { getAuth, signOut,onAuthStateChanged } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import logOut from "../../assets/logOut.png";
 
 const style = {
@@ -20,7 +20,7 @@ const style = {
 const HeaderIcons = () => {
   const navigate = useNavigate();
   const loggedUser = getAuth();
-  const [user,setUser]=useState(false)
+  const [user, setUser] = useState(false)
   const toast = useToast();
 
   const handleUserPage = () => {
@@ -29,8 +29,8 @@ const HeaderIcons = () => {
   };
 
   const auth = getAuth();
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -41,7 +41,7 @@ const HeaderIcons = () => {
         setUser(false)
       }
     });
-  },[])
+  }, [])
   const logout = () => {
     signOut(auth)
       .then(() => {
