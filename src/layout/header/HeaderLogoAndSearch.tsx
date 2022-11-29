@@ -9,6 +9,7 @@ import {
   InputLeftElement,
   InputRightElement,
   Box,
+  useColorMode,
 } from "@chakra-ui/react";
 import logoImage from "../../assets/logo.png";
 import { useNavigate } from "react-router";
@@ -22,6 +23,7 @@ const HeaderLogoAndSearch = () => {
   };
 
   const navigate = useNavigate();
+  const { colorMode } = useColorMode();
 
   const searchItem = () => {
     if (search) navigate("/search/" + search);
@@ -39,6 +41,7 @@ const HeaderLogoAndSearch = () => {
         onClick={handleHomePage}
         src={logoImage}
         boxSize='100px'
+        mr='1%'
       />
       {/*
       <Text as='b'  mr='3rem' fontSize='1.2rem'>

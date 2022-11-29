@@ -1,11 +1,11 @@
-import { mode, StyleFunctionProps } from '@chakra-ui/theme-tools';
-import { extendTheme } from '@chakra-ui/react';
+import { mode, StyleFunctionProps } from "@chakra-ui/theme-tools";
+import { extendTheme } from "@chakra-ui/react";
 
 const styles = {
   global: (props: Record<string, any>) => ({
     body: {
-      color: mode('gray.800', 'whiteAlpha.900')(props),
-      bg: mode('gray.100', '#010317')(props),
+      color: mode("gray.800", "whiteAlpha.900")(props),
+      bg: mode("gray.100", "#0c1821")(props),
     },
   }),
 };
@@ -15,7 +15,7 @@ const components = {
     // setup light/dark mode component defaults
     baseStyle: (props: StyleFunctionProps | Record<string, any>) => ({
       dialog: {
-        bg: mode('white', '#141214')(props),
+        bg: mode("white", "#141214")(props),
       },
     }),
   },
