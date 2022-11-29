@@ -15,13 +15,13 @@ import {
   AccordionButton,
   useToast,
 } from "@chakra-ui/react";
-import UploadImage from "../createCollection/uploadImage";
-import { db } from "../../firebase-config";
-import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { db } from "../../firebase-config";
 import { useEffect, useState } from "react";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
+import UploadImage from "../createCollection/uploadImage";
+import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
+import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 type TCollection = {
   collectionName: string;
