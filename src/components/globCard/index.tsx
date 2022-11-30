@@ -1,6 +1,9 @@
 import signup from "../../assets/signup.jpg";
 import { Box, Text, Stack, Image, Button, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../features/cartSlice";
+import { AppDispatch } from "../../store/store";
 
 type TNft = {
   nft: {
@@ -14,10 +17,13 @@ type TNft = {
 const GlobCard = ({ nft }: TNft) => {
   const navigate = useNavigate();
 
+  const dispatch: AppDispatch = useDispatch();
+
+  console.log(nft);
+
   const toNftPage = () => {
     navigate("/nft/" + nft.id);
   };
-
 
   return (
     <Box>
@@ -26,11 +32,12 @@ const GlobCard = ({ nft }: TNft) => {
         borderRadius='8px'
         overflow='hidden'
         boxShadow='0 0 24px 4px rgba(0, 0, 0, 0.15)'
+        bg='white'
       >
         <Image
           onClick={toNftPage}
           src={nft.img}
-          w='200px'
+          w={[100,150,200]}
           h='220px'
           borderRadius='5px'
           transition='transform .2s;'
@@ -38,11 +45,16 @@ const GlobCard = ({ nft }: TNft) => {
         />
 
         <Stack p='3' bg='#EBF8FF'>
-          <Heading onClick={toNftPage} fontSize='2xl'>
+          <Text onClick={toNftPage} fontSize='2xl'  noOfLines={1}>
             {nft.name}
-          </Heading>
+          </Text>
           <Text>price: {nft.currentPrice}</Text>
-          <Button colorScheme='messenger'>Add To Cart</Button>
+          <Button
+            onClick={() => dispatch(addToCart(nft))}
+            colorScheme='messenger'
+          >
+            Add To Cart
+          </Button>
         </Stack>
       </Box>
     </Box>
