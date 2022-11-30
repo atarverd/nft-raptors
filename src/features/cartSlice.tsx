@@ -20,7 +20,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<TNft>) => {
-      state.cart.push(action.payload);
+      let validator=state.cart.find(item=>item.id===action.payload.id)
+      if(!validator)
+        state.cart.push(action.payload);
     },
   },
 });
