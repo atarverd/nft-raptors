@@ -1,5 +1,5 @@
 import CreateCollectionPage from "./pages/createCollection";
-import { Center, ChakraProvider,theme } from "@chakra-ui/react";
+import { Center, ChakraProvider, theme } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CollectionPage from "./pages/collectionPage";
 import CreateNftPage from "./pages/createNftPage";
@@ -14,7 +14,6 @@ import UserPage from "./pages/userPage";
 import NftPage from "./pages/nftPage";
 import Header from "./layout/header";
 import Main from "./pages/main";
-import theme from "./theme";
 
 
 export const App = () => (
