@@ -16,7 +16,6 @@ import Header from "./layout/header";
 import Main from "./pages/main";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import theme from "./theme";
 
 
 export const App = () => (

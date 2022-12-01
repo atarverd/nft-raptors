@@ -101,22 +101,6 @@ const UserHeader = () => {
       </Box>
 
       <Box ml='40px' my='20px' mt='50px'>
-
-        <Box maxW='30%' mt='10px'>
-          <Collapse startingHeight={20} in={show}>
-            <SkeletonText isLoaded={isLoaded}>{userData?.bio}</SkeletonText>
-          </Collapse>
-          <Button size='xs' onClick={handleToggle} mt='1rem'>
-            Show {show ? "Less" : "More"}
-          </Button>
-        </Box>
-
-        <Flex justifyContent='space-between' alignItems='center'>
-          <Text fontSize='4xl' mt='30px'>
-            for example
-          </Text>
-        
-        
         <Flex justifyContent='space-between' alignItems='center'>
          <Text fontSize='4xl' mt='30px'>
           {userData?.username}
@@ -132,9 +116,10 @@ const UserHeader = () => {
               </MenuList>
             </Menu>
           </Box>
+          
         </Flex>
-      </Box>
-        <Box maxW='30%' mt='10px'>
+      
+      <Box maxW='30%' mt='10px'>
           <Collapse startingHeight={20} in={show}>
             {userData?.bio}
           </Collapse>
@@ -142,10 +127,11 @@ const UserHeader = () => {
             Show {show ? "Less" : "More"}
           </Button>
         </Box>
+        </Box>
         <UserTabs />
+        
       </Box>
-     
-    </Box >
+
   );
 };
 
