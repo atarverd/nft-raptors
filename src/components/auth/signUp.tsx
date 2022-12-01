@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { db } from "../../firebase-config";
-import { setDoc,doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import {
   Box,
   Flex,
@@ -65,14 +65,17 @@ const SignUp = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setDoc(doc(db, "users", user.uid), {
-          username:nameInput,
-          email:emailInput,
+          username: nameInput,
+          email: emailInput,
           gender,
-          isPaymentConnected:false,
-          paymentMethod:{},
-          balance:0,
-          favorites:[]
-        }).then(()=>{
+          isPaymentConnected: false,
+          paymentMethod: {},
+          balance: 0,
+          favorites: [],
+          bio: '',
+          userLogo: 'https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg',
+          userBackground: 'https://tse1.mm.bing.net/th?id=OIP.qdXw46RAz1BXbH0KmzD1GAHaEK&pid=Api&P=0'
+        }).then(() => {
           toast({
             title: "Account Created and Logged In",
             duration: 3000,

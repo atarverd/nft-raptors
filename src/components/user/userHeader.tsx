@@ -28,7 +28,9 @@ type TUserData = {
   isPaymentConnected: boolean;
   paymentMethod: string;
   username: string;
-  bio: string
+  bio: string;
+  userLogo: string;
+  userBackground: string;
 }
 
 const UserHeader = () => {
@@ -44,7 +46,9 @@ const UserHeader = () => {
     "balance": 0,
     "username": "user1",
     "gender": "Male",
-    bio: 'asdfasd'
+    bio: 'asdfasd',
+    userLogo: '',
+    userBackground: ''
   })
 
   const { id } = useParams()
@@ -80,8 +84,8 @@ const UserHeader = () => {
   return (
     <Box>
 
-     <Box h='300px' bgImage={`url(${signup})`}bgPosition="center"
-  bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
+      <Box h='300px' bgImage={`url(${userData?.userBackground})`} bgPosition="center"
+        bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
         {/* <Image src={signup} h='300px' w='full' position='absolute' /> */}
         <Box
           ml='40px'
@@ -91,7 +95,7 @@ const UserHeader = () => {
           width='max-content'
         >
           <Image
-            src={login}
+            src={userData?.userLogo}
             w='200px'
             h='200px'
             borderRadius='5px'
@@ -102,9 +106,9 @@ const UserHeader = () => {
 
       <Box ml='40px' my='20px' mt='50px'>
         <Flex justifyContent='space-between' alignItems='center'>
-         <Text fontSize='4xl' mt='30px'>
-          {userData?.username}
-        </Text>
+          <Text fontSize='4xl' mt='30px'>
+            {userData?.username}
+          </Text>
           <Box mt='35px' mr='40px'>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -116,10 +120,10 @@ const UserHeader = () => {
               </MenuList>
             </Menu>
           </Box>
-          
+
         </Flex>
-      
-      <Box maxW='30%' mt='10px'>
+
+        <Box maxW='30%' mt='10px'>
           <Collapse startingHeight={20} in={show}>
             {userData?.bio}
           </Collapse>
@@ -127,10 +131,10 @@ const UserHeader = () => {
             Show {show ? "Less" : "More"}
           </Button>
         </Box>
-        </Box>
-        <UserTabs />
-        
       </Box>
+      <UserTabs />
+
+    </Box>
 
   );
 };

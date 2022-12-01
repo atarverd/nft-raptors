@@ -26,7 +26,7 @@ type PropsType = {
 const TopFiveColumn = ({ data }: any) => {
   console.log(data)
   return (
-    <TableContainer w={['','70%','40%']}>
+    <TableContainer w={['', '70%', '45%']}>
       <Table variant='simple'>
         <Thead>
           <Tr>
@@ -36,7 +36,7 @@ const TopFiveColumn = ({ data }: any) => {
           </Tr>
         </Thead>
         <Tbody>
-          {data.map((collection:any,i:number) => {
+          {data.map((collection: any, i: number) => {
             return (
               <Tr cursor='pointer'>
                 <Td>
