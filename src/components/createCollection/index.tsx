@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-let images:any=[]
+let images: any = []
 
 const CreateCollection = () => {
   const [logoImage, setLogoImage] = useState<any>();
@@ -20,8 +20,8 @@ const CreateCollection = () => {
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
   const storage = getStorage();
-  const user=getAuth()
-  const navigate=useNavigate()
+  const user = getAuth()
+  const navigate = useNavigate()
 
   const handleLogoImage = (img: any) => {
     //@ts-ignore
@@ -31,7 +31,7 @@ const CreateCollection = () => {
   const toast = useToast();
 
   const collectionValidator = () => {
-    images=[logoImage,featureImage,bgImage]
+    images = [logoImage, featureImage, bgImage]
     const imgIsValid = images.every((el: any) => el !== undefined);
     if (imgIsValid && name && description && category) {
       handleSubmit();
@@ -70,16 +70,16 @@ const CreateCollection = () => {
       feature: urls[1],
       background: urls[2],
       creator: "atarverd",
-      creatorId:user?.currentUser?.uid,
+      creatorId: user?.currentUser?.uid,
       date: new Date(),
       volume: 0,
-    }).then(docRef=>navigate('/collection/'+docRef.id))
+    }).then(docRef => navigate('/collection/' + docRef.id))
       .then(() =>
         toast({
           title: "Successfully Created",
           duration: 3000,
           position: "top-right",
-          variant: "subtle",
+          status: "success",
         })
       );
   };
