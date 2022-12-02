@@ -12,6 +12,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
+import {formatter} from '../../utils/formatValue'
 const ListInfo = () => {
   const [price, setPrice] = useState<number>(0)
   const { id } = useParams()
@@ -42,7 +43,7 @@ const ListInfo = () => {
         <Text fontSize='2xl'>Summary</Text>
         <Flex justifyContent='space-between' alignItems='center'>
           <Text mt='15px'>Listing price</Text>
-          <Text pt='15px'>{price} $</Text>
+          <Text pt='15px'>{formatter.format(price)} $</Text>
         </Flex>
 
         <Flex justifyContent='space-between' alignItems='center'>
@@ -55,7 +56,7 @@ const ListInfo = () => {
 
       <Flex justifyContent='space-between' alignItems='center'>
         <Text fontSize='2xl' mt='15px'>Total earnings</Text>
-        <Text fontSize='2xl' pt='15px'>{price - price * 2.5 / 100} $</Text>
+        <Text fontSize='2xl' pt='15px'>{formatter.format(price - price * 2.5 / 100)} $</Text>
       </Flex>
       <Button colorScheme='messenger' mt='15px' w='300px' onClick={handleList}>Complete Listing</Button>
 
