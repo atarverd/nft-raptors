@@ -12,13 +12,13 @@ type TNft = {
   img: string;
   name: string;
   currentPrice: number;
+  ownerId: string;
 };
 
 const Collection = () => {
   const { id } = useParams();
   const [nfts, setNfts] = useState<TNft[]>();
   const [loading, setLoading] = useState<boolean>(false);
-
 
   useEffect(() => {
     const a = async () => {
@@ -41,7 +41,7 @@ const Collection = () => {
       //@ts-ignore
       setNfts(result);
       setLoading(true);
-      console.log(result)
+      console.log(result);
     };
     a();
   }, []);
