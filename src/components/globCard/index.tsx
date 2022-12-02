@@ -2,8 +2,10 @@ import signup from "../../assets/signup.jpg";
 import { Box, Text, Stack, Image, Button, Heading } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../features/cartSlice";
+import { addToCart, deleteFromCart } from "../../features/cartSlice";
 import { AppDispatch } from "../../store/store";
+import { useState } from "react";
+import { getAuth } from "firebase/auth";
 
 type TNft = {
   nft: {
@@ -11,15 +13,31 @@ type TNft = {
     img: string;
     name: string;
     currentPrice: number;
+    ownerId: string;
   };
 };
 
 const GlobCard = ({ nft }: TNft) => {
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const navigate = useNavigate();
-
   const dispatch: AppDispatch = useDispatch();
+  const user = getAuth();
 
-  console.log(nft);
+  const isOwner = nft.ownerId === user?.currentUser?.uid;
+
+  console.log(isOwner);
+
+  const handleAddClick = () => {
+    setIsAddedToCart((prev) => {
+      return !prev;
+    });
+
+    if (!isAddedToCart) {
+      dispatch(addToCart(nft));
+    } else {
+      dispatch(deleteFromCart(nft.id));
+    }
+  };
 
   const toNftPage = () => {
     navigate("/nft/" + nft.id);
@@ -37,7 +55,7 @@ const GlobCard = ({ nft }: TNft) => {
         <Image
           onClick={toNftPage}
           src={nft.img}
-          w={[100,150,200]}
+          w={[100, 150, 200]}
           h='220px'
           borderRadius='5px'
           transition='transform .2s;'
@@ -45,16 +63,26 @@ const GlobCard = ({ nft }: TNft) => {
         />
 
         <Stack p='3' bg='#EBF8FF'>
-          <Text onClick={toNftPage} fontSize='2xl'  noOfLines={1}>
+          <Text onClick={toNftPage} fontSize='2xl' noOfLines={1}>
             {nft.name}
           </Text>
           <Text>price: {nft.currentPrice}</Text>
-          <Button
-            onClick={() => dispatch(addToCart(nft))}
-            colorScheme='messenger'
-          >
-            Add To Cart
-          </Button>
+
+          {isOwner ? (
+            <Button
+              colorScheme='messenger'
+              onClick={() => navigate("/list/" + nft.id)}
+            >
+              List NFT
+            </Button>
+          ) : (
+            <Button
+              onClick={handleAddClick}
+              colorScheme={isAddedToCart ? "red" : "messenger"}
+            >
+              {!isAddedToCart ? "Add To Cart" : "Remove"}
+            </Button>
+          )}
         </Stack>
       </Box>
     </Box>
