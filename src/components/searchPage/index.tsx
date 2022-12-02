@@ -13,6 +13,7 @@ type TNft = {
   img: string;
   name: string;
   currentPrice: number;
+  ownerId: string;
 };
 
 const Search = () => {
@@ -68,6 +69,7 @@ const Search = () => {
         img: nft.img,
         name: nft.name,
         currentPrice: nft.currentPrice,
+        ownerId: nft.ownerId,
       });
     });
     //@ts-ignore

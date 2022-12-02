@@ -41,6 +41,7 @@ const UserTabs = () => {
         img: nft.img,
         name: nft.name,
         currentPrice: nft.currentPrice,
+        ownerId: nft.ownerId,
       });
     });
     setOwnedNfts(result);
@@ -88,30 +89,14 @@ const UserTabs = () => {
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
               <SimpleGrid spacing='40px' columns={5} m='20px'>
-                <GlobCard
+                {/* <GlobCard
                   nft={{
                     id: "asdfasd",
                     img: "asd",
                     name: "sad",
                     currentPrice: 555,
-                  }}
-                />
-                <GlobCard
-                  nft={{
-                    id: "asdfasd",
-                    img: "asd",
-                    name: "sad",
-                    currentPrice: 555,
-                  }}
-                />
-                <GlobCard
-                  nft={{
-                    id: "asdfasd",
-                    img: "asd",
-                    name: "sad",
-                    currentPrice: 555,
-                  }}
-                />
+                  }} */}
+                {/* /> */}
               </SimpleGrid>
             </Flex>
           </TabPanel>

@@ -35,16 +35,13 @@ const NftTable = ({ priceHistory }: TProp) => {
       <Table variant='simple'>
         <Thead>
           <Tr>
-            <Th>Price</Th>
-            <Th>USD Price</Th>
             <Th>Previous Owner</Th>
+            <Th>USD Price</Th>
           </Tr>
         </Thead>
         <Tbody>
           {priceHistoryCopy?.reverse().map((item) => (
             <Tr>
-              <Td>0.4465 WETH</Td>
-              <Td>{item.price}$</Td>
               <Td>
                 <Link
                   onClick={() => cdPrewOwner(item.prevOwner)}
@@ -54,6 +51,7 @@ const NftTable = ({ priceHistory }: TProp) => {
                   {item.prevOwner}
                 </Link>
               </Td>
+              <Td>{item.price}$</Td>
             </Tr>
           ))}
         </Tbody>

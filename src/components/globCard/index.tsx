@@ -2,8 +2,10 @@ import signup from "../../assets/signup.jpg";
 import { Box, Text, Stack, Image, Button, Heading, useColorMode } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../features/cartSlice";
+import { addToCart, deleteFromCart } from "../../features/cartSlice";
 import { AppDispatch } from "../../store/store";
+import { useState } from "react";
+import { getAuth } from "firebase/auth";
 
 type TNft = {
   nft: {
@@ -11,14 +13,34 @@ type TNft = {
     img: string;
     name: string;
     currentPrice: number;
+    ownerId: string;
   };
 };
 
 const GlobCard = ({ nft }: TNft) => {
 
-  const navigate = useNavigate();
   const { colorMode } = useColorMode();
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
+  const user = getAuth();
+
+  const isOwner = nft.ownerId === user?.currentUser?.uid;
+
+  console.log(isOwner);
+
+
+  const handleAddClick = () => {
+    setIsAddedToCart((prev) => {
+      return !prev;
+    });
+
+    if (!isAddedToCart) {
+      dispatch(addToCart(nft));
+    } else {
+      dispatch(deleteFromCart(nft.id));
+    }
+  };
 
   const toNftPage = () => {
     navigate("/nft/" + nft.id);
@@ -58,6 +80,25 @@ const GlobCard = ({ nft }: TNft) => {
           >
             Add To Cart
           </Button>
+
+          {isOwner ? (
+            <Button
+              bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
+            color='white'
+              onClick={() => navigate("/list/" + nft.id)}
+            >
+              List NFT
+            </Button>
+          ) : (
+            <Button
+              onClick={handleAddClick}
+              bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
+              color='white'
+              colorScheme={isAddedToCart ? "red" : "messenger"}
+            >
+              {!isAddedToCart ? "Add To Cart" : "Remove"}
+            </Button>
+          )}
         </Stack>
       </Box>
     </Box>
