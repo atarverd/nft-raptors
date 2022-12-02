@@ -1,5 +1,10 @@
-import React from "react";
-import { Flex, Image, Center, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Image,
+  Center,
+  Text,
+  useColorMode
+} from "@chakra-ui/react";
 
 type PropsType = {
   data: { name: string; imageUrl: string };
@@ -7,21 +12,23 @@ type PropsType = {
 
 const Card = ({ data }: PropsType) => {
 
+  const { colorMode } = useColorMode()
+
   return (
     <Flex
-      bg='#f4f6f3'
+      bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}
       // h='250px'
       borderRadius='15px'
       cursor='pointer'
       flexDirection='column'
       transition='transform .2s;'
-        _hover={{ transform: "scale(1.1)" }}
+      _hover={{ transform: "scale(1.1)" }}
     >
       <Image
         w='100%'
         src={data.imageUrl}
         borderTopRadius='15px'
-        
+
       ></Image>
       <Center m='1rem'>
         <Text>
