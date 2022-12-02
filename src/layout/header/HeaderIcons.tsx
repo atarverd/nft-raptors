@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Flex, Box, Image, useToast, useColorMode } from "@chakra-ui/react";
+import React, { useEffect, useState, useRef } from "react";
+import { Flex, Box, Image, useToast, useColorMode, useDisclosure } from "@chakra-ui/react";
 import { FaRegUser, FaWallet } from "react-icons/fa";
 import Cart from "../../components/cart/cart";
 import userDark from "../../assets/userWhite.png";
 import userLight from "../../assets/user.png";
-import walletDark from "../../assets/walletWhite.png";
-import walletLight from "../../assets/wallet.png";
 import { useNavigate } from "react-router";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import logOutDark from "../../assets/logOutWhite.png";
 import logOutLight from "../../assets/logOut.png";
+import CardModal from "../../components/cardModal";
 
 
 const style = {
@@ -22,6 +21,7 @@ const style = {
 };
 
 const HeaderIcons = () => {
+
   const navigate = useNavigate();
   const loggedUser = getAuth();
   const [user, setUser] = useState(false);
@@ -52,7 +52,7 @@ const HeaderIcons = () => {
   const logout = () => {
     signOut(auth)
       .then(() => {
-       
+
         navigate("/");
         toast({
           title: "Logged Out",
@@ -77,10 +77,7 @@ const HeaderIcons = () => {
         />
       </Box>
       <Box ml='15px' cursor='pointer'>
-        <Image
-          src={colorMode === "light" ? walletLight : walletDark}
-          boxSize='35px'
-        />
+        <CardModal />
       </Box>
       <Box ml='15px' cursor='pointer'>
         <Cart />
