@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { data } from "../../../topCollectionsData";
 import { collectionObjFrame } from "../../../topCollectionsData";
-
 import {
   Box,
   Flex,
@@ -18,6 +17,7 @@ import {
   TableContainer,
   HStack,
 } from "@chakra-ui/react";
+import {formatter} from '../../../utils/formatValue'
 
 type PropsType = {
   data: collectionObjFrame[];
@@ -47,7 +47,7 @@ const TopFiveColumn = ({ data }: any) => {
                   </HStack>
                 </Td>
                 <Td>by {collection.creator}</Td>
-                <Td isNumeric>{collection.volume}</Td>
+                <Td isNumeric>{formatter.format(collection.volume)}</Td>
               </Tr>
             );
           })}
