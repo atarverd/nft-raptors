@@ -6,6 +6,8 @@ import { addToCart, deleteFromCart } from "../../features/cartSlice";
 import { AppDispatch } from "../../store/store";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
+import { RootState } from "../../store/store";
+import { checkItemIsInArray } from "../../utils/checkItemInArray";
 
 type TNft = {
   nft: {
@@ -24,18 +26,13 @@ const GlobCard = ({ nft }: TNft) => {
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const user = getAuth();
+  const { cart } = useSelector((state: RootState) => state.cart);
 
   const isOwner = nft.ownerId === user?.currentUser?.uid;
 
-  console.log(isOwner);
-
-
   const handleAddClick = () => {
-    setIsAddedToCart((prev) => {
-      return !prev;
-    });
-
-    if (!isAddedToCart) {
+    if (!checkItemIsInArray(cart, nft.id)) {
+      console.log(1);
       dispatch(addToCart(nft));
     } else {
       dispatch(deleteFromCart(nft.id));
@@ -94,9 +91,11 @@ const GlobCard = ({ nft }: TNft) => {
               onClick={handleAddClick}
               bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
               color='white'
-              colorScheme={isAddedToCart ? "red" : "messenger"}
+               colorScheme={
+                checkItemIsInArray(cart, nft.id) ? "red" : "messenger"
+              }
             >
-              {!isAddedToCart ? "Add To Cart" : "Remove"}
+              {checkItemIsInArray(cart, nft.id) ? "Remove" : "Add to Cart"}
             </Button>
           )}
         </Stack>

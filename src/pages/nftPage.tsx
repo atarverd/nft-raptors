@@ -12,6 +12,9 @@ import { db } from "../firebase-config.js";
 import { doc, getDoc } from "firebase/firestore";
 import { Routes, Route, useParams } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store/store";
+
 type THistory = {
   date: string;
   price: number;
@@ -85,6 +88,8 @@ const NftPage = () => {
               owner={nftInfo.owner}
               ownerId={nftInfo.ownerId}
               isForSold={nftInfo.isForSold}
+              id={nftInfo.id}
+              img={nftInfo.img}
             />
 
             <NftAccordion accordionName='Price Graph'>
