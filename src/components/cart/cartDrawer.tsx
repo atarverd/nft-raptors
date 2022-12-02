@@ -15,7 +15,7 @@ const CartDrawer = () => {
   console.log(state.cart)
   return (
     <DrawerBody maxH='65%'>
-        {state.cart.map((item:TItem)=><CartItem {...item}/>)}
+        <CartItem/>
     </DrawerBody>
   )
 }
