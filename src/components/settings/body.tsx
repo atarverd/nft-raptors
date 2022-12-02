@@ -4,11 +4,35 @@ import {
   Text,
   Button,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
+import { useState } from 'react';
+import { getAuth } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { updateUser } from "../../utils/updateUser";
 import UploadImage from "../createCollection/uploadImage";
 
 
 const SettingsBody = () => {
+
+  const [bio, setBio] = useState('')
+  const [logoImage, setLogoImage] = useState('')
+  const [backgroundImage, setBackgroundImage] = useState('')
+
+  const user = getAuth()
+  const toast = useToast()
+  const navigate = useNavigate()
+
+  const handleUpdate = () => {
+    updateUser(user?.currentUser?.uid as string, logoImage, backgroundImage, bio)
+      .then(() => toast({
+        title: 'Successfully Updated',
+        status: 'success',
+        duration: 3000,
+        position: "top-right"
+      }))
+      .then(() => navigate('/' + user?.currentUser?.uid))
+  }
 
   return (
     <Box>
@@ -21,7 +45,7 @@ const SettingsBody = () => {
             h=''
             w=''
             size='2xl'
-            handleLogoImage=''
+            handleLogoImage={setLogoImage}
           />
         </Box>
       </Box>
@@ -33,7 +57,7 @@ const SettingsBody = () => {
             h='200px'
             w='300px'
             size=''
-            handleLogoImage=''
+            handleLogoImage={setBackgroundImage}
           />
         </Box>
       </Box>
@@ -45,14 +69,15 @@ const SettingsBody = () => {
         <Textarea
           mt='10px'
           placeholder='Provide detailed description of your item'
+          onChange={(e) => setBio(e.target.value)}
         />
       </Box>
 
 
       <Box mt='30px'>
         <Flex justifyContent='center'>
-          <Button colorScheme='messenger' w='200px'>
-            Save
+          <Button colorScheme='messenger' w='200px' onClick={handleUpdate}>
+            Update
           </Button>
         </Flex>
       </Box>

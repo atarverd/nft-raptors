@@ -7,24 +7,31 @@ import { collection, addDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase-config";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+
+
+
+let images: any = []
+
 const CreateCollection = () => {
-  const [images, setImages] = useState<any>([]);
+  const [logoImage, setLogoImage] = useState<any>();
+  const [featureImage, setFeatureImage] = useState<any>();
+  const [bgImage, setBgImage] = useState<any>();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [category, setCategory] = useState();
   const storage = getStorage();
-  const user=getAuth()
-  const navigate=useNavigate()
+  const user = getAuth()
+  const navigate = useNavigate()
 
   const handleLogoImage = (img: any) => {
     //@ts-ignore
-    setImages((o) => [...o, img]);
-    console.log(img);
+    setImages(img);
   };
 
   const toast = useToast();
 
   const collectionValidator = () => {
+    images = [logoImage, featureImage, bgImage]
     const imgIsValid = images.every((el: any) => el !== undefined);
     if (imgIsValid && name && description && category) {
       handleSubmit();
@@ -63,16 +70,16 @@ const CreateCollection = () => {
       feature: urls[1],
       background: urls[2],
       creator: "atarverd",
-      creatorId:user?.currentUser?.uid,
+      creatorId: user?.currentUser?.uid,
       date: new Date(),
       volume: 0,
-    }).then(docRef=>navigate('/collection/'+docRef.id))
+    }).then(docRef => navigate('/collection/' + docRef.id))
       .then(() =>
         toast({
           title: "Successfully Created",
           duration: 3000,
           position: "top-right",
-          variant: "subtle",
+          status: "success",
         })
       );
   };
@@ -90,7 +97,7 @@ const CreateCollection = () => {
               size='2xl'
               h=''
               w=''
-              handleLogoImage={handleLogoImage}
+              handleLogoImage={setLogoImage}
             />
           </Box>
         </Box>
@@ -106,7 +113,7 @@ const CreateCollection = () => {
               h='200px'
               w='300px'
               size=''
-              handleLogoImage={handleLogoImage}
+              handleLogoImage={setFeatureImage}
             />
           </Box>
         </Box>
@@ -123,7 +130,7 @@ const CreateCollection = () => {
               h='300px'
               w='600px'
               size=''
-              handleLogoImage={handleLogoImage}
+              handleLogoImage={setBgImage}
             />
           </Box>
         </Box>
