@@ -27,8 +27,8 @@ const TopCollections = () => {
         Top
       </Heading>
       <Flex p='5px' justify='space-around' gap='2rem' flexWrap='wrap'>
-        <TopFiveColumn data={data.slice(0, 5)} />
-        <TopFiveColumn data={data.slice(5)} />
+        <TopFiveColumn data={data.slice(0, 5)} from={1} />
+        <TopFiveColumn data={data.slice(5)}  from={6}/>
       </Flex>
     </>
   );

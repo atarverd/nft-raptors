@@ -21,9 +21,10 @@ import {formatter} from '../../../utils/formatValue'
 
 type PropsType = {
   data: collectionObjFrame[];
+  from:number
 };
 
-const TopFiveColumn = ({ data }: any) => {
+const TopFiveColumn = ({ data,from }: any) => {
   console.log(data)
   return (
     <TableContainer w={['', '70%', '45%']}>
@@ -41,7 +42,7 @@ const TopFiveColumn = ({ data }: any) => {
               <Tr cursor='pointer'>
                 <Td>
                   <HStack spacing='2rem'>
-                    <Text>{i}</Text>
+                    <Text>{from+i}</Text>
                     <Avatar src={collection.logo} />
                     <Text ml='2.2rem'>{collection.collectionName}</Text>
                   </HStack>
