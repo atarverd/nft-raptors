@@ -52,7 +52,7 @@ const Collection = () => {
         <Loader />
       ) : (
         <Flex display='flex' justifyContent='space-around'>
-          <SimpleGrid spacing='40px' columns={5} m='20px'>
+          <SimpleGrid spacing='40px' columns={[1, 3, 5]} m='20px'>
             {nfts?.map((item) => (
               <GlobCard nft={item} />
             ))}

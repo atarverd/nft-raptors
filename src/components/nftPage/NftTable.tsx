@@ -25,13 +25,13 @@ type TProp = {
 
 const NftTable = ({ priceHistory }: TProp) => {
   const navigate = useNavigate();
-  const priceHistoryCopy=priceHistory?.slice()
+  const priceHistoryCopy = priceHistory?.slice()
   const cdPrewOwner = (prevOwner: string) => {
     navigate("/" + prevOwner);
   };
 
   return (
-    <TableContainer>
+    <TableContainer h='300px' overflowY='scroll'>
       <Table variant='simple'>
         <Thead>
           <Tr>
