@@ -1,10 +1,37 @@
 import React from "react";
 import { Box, Flex, Text, Button } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, AppDispatch } from "../../store/store";
+import { clearAllFromCart } from "../../features/cartSlice";
+import { buyNft } from "../../utils/buyNft";
+import { getAuth } from "firebase/auth";
+
+type TProps = {
+  sellerId: string;
+  itemId: string;
+  price: number;
+};
 
 const CartFooter = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const clearCartAfterPurchase = () => {
+    dispatch(clearAllFromCart());
+  };
+
   const { cart } = useSelector((state: RootState) => state.cart);
+
+  const user = getAuth();
+
+  const cartNfts = cart.reduce<TProps[]>((prev, cur) => {
+    prev.push({
+      sellerId: cur.ownerId,
+      itemId: cur.id,
+      price: cur.currentPrice,
+    });
+
+    return prev;
+  }, []);
 
   return (
     <Box position='absolute' bottom='20px' left='40px'>
@@ -21,8 +48,18 @@ const CartFooter = () => {
 
       <Box mt='20px'>
         <Flex display='flex' justifyContent='space-around'>
-          <Button colorScheme='blue' w='250px'>
-            Save
+          <Button
+            onClick={() =>
+              buyNft(
+                user?.currentUser?.uid as string,
+                cartNfts,
+                clearCartAfterPurchase
+              )
+            }
+            colorScheme='blue'
+            w='250px'
+          >
+            Buy
           </Button>
         </Flex>
       </Box>

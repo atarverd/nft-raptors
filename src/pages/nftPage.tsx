@@ -12,9 +12,6 @@ import { db } from "../firebase-config.js";
 import { doc, getDoc } from "firebase/firestore";
 import { Routes, Route, useParams } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store/store";
-
 type THistory = {
   date: string;
   price: number;
@@ -73,12 +70,12 @@ const NftPage = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <Box ml='20%' mr='20%' my='2%'>
+    <Box ml='20%' mr='20%' mt='2%' bg='white'>
       <Center>
         <Flex id='nft-conainer'>
           <NftItemPage img={nftInfo.img} />
 
-          <Flex id='nft-info' flexDirection='column' gap={5} mt='3%' ml='5%'>
+          <Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='5%'>
             <NftBasicInfo
               collectionId={nftInfo.collectionId}
               collectionName={nftInfo.collectionName}
@@ -103,6 +100,9 @@ const NftPage = () => {
         </Flex>
       </Center>
 
+      <NftAccordion accordionName='More From This Collection'>
+        <div>Her should be similar categories</div>
+      </NftAccordion>
     </Box>
   );
 };

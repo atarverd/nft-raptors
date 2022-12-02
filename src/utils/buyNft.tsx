@@ -1,42 +1,66 @@
-import { db } from '../firebase-config.js'
-import { doc, updateDoc, getDoc, arrayUnion, increment } from "firebase/firestore";
+import { db } from "../firebase-config.js";
+import {
+  doc,
+  updateDoc,
+  getDoc,
+  arrayUnion,
+  increment,
+} from "firebase/firestore";
 
 type TProps = {
-    buyerId: string;
-    sellerId: string;
-    itemId: string
-    price: number;
-}
-export const buyNft = async (buyerId: string, sellerId: string, itemId: string, price: number) => {
-    let buyerName = ''
-    const buyerRef = doc(db, "users", buyerId);
-    const sellerRef = doc(db, "users", sellerId);
-    const nftRef = doc(db, 'nfts', itemId)
+  sellerId: string;
+  itemId: string;
+  price: number;
+};
 
-    const buyerSnap = await getDoc(buyerRef);
-    const sellerSnap = await getDoc(sellerRef);
-    const nftSnap = await getDoc(nftRef);
+export const buyNft = async (
+  buyerId: string,
+  cartArr: TProps[],
+  fn: () => void
+) => {
+  let buyerName = "";
+  const buyerRef = doc(db, "users", buyerId);
+  const buyerSnap = await getDoc(buyerRef);
 
-    if (buyerSnap.exists() && sellerSnap.exists() && nftSnap.exists()) {
-        updateDoc(buyerRef, { balance: increment(-price) })
-        updateDoc(sellerRef, { balance: increment(price - price * 2.5 / 100) })
-        updateDoc(doc(db, 'collections', nftSnap.data().collectionId), { volume: increment(price) })
+  const total = cartArr.reduce((prev, cur) => {
+    prev = prev + Number(cur.price);
+    return prev;
+  }, 0);
+  //@ts-ignore
+  console.log(buyerSnap.exists(), buyerSnap.data().balance, total);
 
-        buyerName = buyerSnap.data().username
-        updateDoc(doc(db, "nfts", itemId as string), {
-            isForSold: false,
-            currentPrice: price,
-            ownerId: buyerId,
-            owner: buyerName,
-            priceHistory: arrayUnion({
-                data: new Date(),
-                prevOwner: sellerSnap.data().username,
-                price: price
-            })
-        })
-    } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+  if (buyerSnap.exists() && buyerSnap.data().balance >= total) {
+    updateDoc(buyerRef, { balance: increment(-total) });
+    buyerName = buyerSnap.data().username;
+
+    for await (let nft of cartArr) {
+      const sellerRef = doc(db, "users", nft.sellerId);
+      const nftRef = doc(db, "nfts", nft.itemId);
+
+      const sellerSnap = await getDoc(sellerRef);
+      const nftSnap = await getDoc(nftRef);
+
+      if (nftSnap.exists() && sellerSnap.exists()) {
+        await updateDoc(sellerRef, {
+          balance: increment(nft.price - (nft.price * 2.5) / 100),
+        });
+        await updateDoc(doc(db, "collections", nftSnap.data().collectionId), {
+          volume: increment(nft.price),
+        });
+        await updateDoc(doc(db, "nfts", nft.itemId as string), {
+          isForSold: false,
+          currentPrice: nft.price,
+          ownerId: buyerId,
+          owner: buyerName,
+          priceHistory: arrayUnion({
+            data: new Date(),
+            prevOwner: sellerSnap.data().username,
+            price: nft.price,
+          }),
+        }).then(() => {
+          fn();
+        });
+      }
     }
-
-}
+  }
+};
