@@ -3,8 +3,14 @@ import { Box, Flex, Text, Link, Button } from "@chakra-ui/react";
 import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
-import {useParams} from 'react-router-dom'
-import {buyNft} from '../../utils/buyNft'
+import { useParams } from "react-router-dom";
+import { buyNft } from "../../utils/buyNft";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { addToCart, deleteFromCart } from "../../features/cartSlice";
+import { checkItemIsInArray } from "../../utils/checkItemInArray";
+
 type TInfo = {
   collectionId: string;
   collectionName: string;
@@ -13,7 +19,9 @@ type TInfo = {
   currentPrice: number;
   owner: string;
   ownerId: string;
-  isForSold:boolean;
+  isForSold: boolean;
+  id: string;
+  img: string;
 };
 
 const NftBasicInfo = ({
@@ -25,12 +33,16 @@ const NftBasicInfo = ({
   owner,
   ownerId,
   isForSold,
+  img,
 }: TInfo) => {
-  const {id}=useParams()
+  const { id } = useParams();
   const navigate = useNavigate();
-  const user=getAuth()
-  const isOwner=user?.currentUser?.uid===ownerId
-  console.log(isOwner)
+  const user = getAuth();
+  const isOwner = user?.currentUser?.uid === ownerId;
+
+  const dispatch: AppDispatch = useDispatch();
+  const { cart } = useSelector((state: RootState) => state.cart);
+
   const navigateToUser = () => {
     navigate("/" + ownerId);
   };
@@ -41,6 +53,22 @@ const NftBasicInfo = ({
     navigate("/collection/" + collectionId);
   };
 
+  const handleAddClick = () => {
+    if (!checkItemIsInArray(cart, id as string)) {
+      console.log(1);
+      dispatch(
+        addToCart({
+          id: id as string,
+          name,
+          img,
+          currentPrice,
+          ownerId,
+        })
+      );
+    } else {
+      dispatch(deleteFromCart(id as string));
+    }
+  };
   return (
     <>
       <Box w='500px' h='120px'>
@@ -79,14 +107,42 @@ const NftBasicInfo = ({
       <Box w='500px' h='120px'>
         <Text>Current Price</Text>
         <Text>{currentPrice}$</Text>
-       {isOwner
-        ?<Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={navigateToListNft}>
-        List Nft
-      </Button>
-          :isForSold && <Button colorScheme='messenger' w='200px' color='#fff' bg='#2081e2' onClick={()=>buyNft(user?.currentUser?.uid as string,ownerId,id as string,currentPrice)}>
-          Add to Cart
-        </Button>
-        }
+        {isOwner ? (
+          <Button
+            colorScheme='messenger'
+            w='200px'
+            color='#fff'
+            bg='#2081e2'
+            onClick={navigateToListNft}
+          >
+            List Nft
+          </Button>
+        ) : (
+          isForSold && (
+            <Button
+              onClick={() => handleAddClick()}
+              colorScheme={
+                checkItemIsInArray(cart, id as string) ? "red" : "messenger"
+              }
+              w='200px'
+              color='#fff'
+              bg='#2081e2'
+
+              // onClick={() =>
+              //   buyNft(
+              //     user?.currentUser?.uid as string,
+              //     ownerId,
+              //     id as string,
+              //     currentPrice
+              //   )
+              // }
+            >
+              {checkItemIsInArray(cart, id as string)
+                ? "Remove"
+                : "Add to Cart"}
+            </Button>
+          )
+        )}
       </Box>
     </>
   );
