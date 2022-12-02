@@ -1,22 +1,24 @@
 import CreateCollectionPage from "./pages/createCollection";
-import { Center, ChakraProvider } from "@chakra-ui/react";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import CollectionPage from "./pages/collectionPage";
+import { ChakraProvider } from "@chakra-ui/react";
 import CreateNftPage from "./pages/createNftPage";
 import SettingsPage from "./pages/settingsPage";
 import ListNftpage from "./pages/listNftPage";
 import SignUp from "./components/auth/signUp";
+import LiveList from "./components/liveLine";
 import { Routes, Route } from "react-router";
 import CategoryPage from "./pages/category";
 import SearchPage from "./pages/searchPage";
 import LogIn from "./components/auth/logIn";
 import UserPage from "./pages/userPage";
+import { Provider } from "react-redux";
 import NftPage from "./pages/nftPage";
 import Header from "./layout/header";
-import Main from "./pages/main";
-import { Provider } from "react-redux";
 import store from "./store/store";
+import Main from "./pages/main";
 import theme from "./theme";
+
 
 export const App = () => (
   <Provider store={store}>
@@ -37,6 +39,7 @@ export const App = () => (
         <Route path='/collection/:id' element={<CollectionPage />} />
         <Route path='/create-collection' element={<CreateCollectionPage />} />
       </Routes>
+      <LiveList />
     </ChakraProvider>
   </Provider>
 );

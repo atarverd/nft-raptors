@@ -101,24 +101,20 @@ const Search = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <Flex display='flex' justifyContent='space-between'>
-          <Box>
-            <Flex display='flex'>
-              <Accordions
-                priceSort={priceSort}
-                filterPrice={filterPrice}
-                handleMin={handleMin}
-                handleMax={handleMax}
-              />
-            </Flex>
-          </Box>
+        <Box display={['block', 'flex']} justifyContent='space-between'>
+          <Flex display='flex'>
+            <Accordions
+              priceSort={priceSort}
+              filterPrice={filterPrice}
+              handleMin={handleMin}
+              handleMax={handleMax}
+            />
+          </Flex>
 
-          <Box>
-            <Flex display='flex'>
-              {nfts?.length ? <ItemCard nfts={nfts} /> : <Empty />}
-            </Flex>
-          </Box>
-        </Flex>
+          <Flex display='flex'>
+            {nfts?.length ? <ItemCard nfts={nfts} /> : <Empty />}
+          </Flex>
+        </Box>
       )}
     </Box>
   );

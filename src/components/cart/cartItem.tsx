@@ -6,7 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { AppDispatch } from "../../store/store";
 import { deleteFromCart } from "../../features/cartSlice";
-
+type TItem={
+  currentPrice:number;
+  id:string;
+  img:string;
+  name:string;
+}
 const CartItem = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
   const dispatch: AppDispatch = useDispatch();
@@ -31,6 +36,8 @@ const CartItem = () => {
           </Flex>
         );
       })}
+
+
     </Box>
   );
 };

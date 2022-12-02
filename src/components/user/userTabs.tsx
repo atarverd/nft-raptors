@@ -57,7 +57,7 @@ const UserTabs = () => {
 
   return (
     <Box>
-      <Tabs size='md' variant='enclosed-colored' mt='20px'>
+      <Tabs size='md' variant='enclosed-colored' mt='20px' ml='40px'>
         <TabList>
           <Tab>Owned</Tab>
           <Tab>Favorited</Tab>
@@ -76,7 +76,7 @@ const UserTabs = () => {
         <TabPanels mt='20px'>
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
-              <SimpleGrid spacing='40px' columns={5} m='20px'>
+              <SimpleGrid spacing='40px' columns={[1, 3, 5]} m='20px'>
                 {ownedNfts
                   ?.filter((el: any) => el.name.includes(search))
                   .map((nft) => (
