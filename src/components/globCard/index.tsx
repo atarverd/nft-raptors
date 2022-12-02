@@ -1,5 +1,13 @@
 import signup from "../../assets/signup.jpg";
-import { Box, Text, Stack, Image, Button, Heading, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Stack,
+  Image,
+  Button,
+  Heading,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, deleteFromCart } from "../../features/cartSlice";
@@ -20,7 +28,6 @@ type TNft = {
 };
 
 const GlobCard = ({ nft }: TNft) => {
-
   const { colorMode } = useColorMode();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const navigate = useNavigate();
@@ -32,7 +39,6 @@ const GlobCard = ({ nft }: TNft) => {
 
   const handleAddClick = () => {
     if (!checkItemIsInArray(cart, nft.id)) {
-      console.log(1);
       dispatch(addToCart(nft));
     } else {
       dispatch(deleteFromCart(nft.id));
@@ -50,9 +56,11 @@ const GlobCard = ({ nft }: TNft) => {
         borderRadius='8px'
         overflow='hidden'
         // boxShadow='0 0 24px 4px white'
-        boxShadow={colorMode === 'dark'
-          ? '0 0 24px 4px white'
-          : '0 0 24px 4px rgba(0, 0, 0, 0.15)'}
+        boxShadow={
+          colorMode === "dark"
+            ? "0 0 24px 4px white"
+            : "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+        }
         bg='white'
       >
         <Image
@@ -65,23 +73,16 @@ const GlobCard = ({ nft }: TNft) => {
           _hover={{ transform: "scale(1.1)" }}
         />
 
-        <Stack p='3' bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}>
+        <Stack p='3' bg={colorMode === "dark" ? "#071b38" : "gray.200"}>
           <Text onClick={toNftPage} fontSize='2xl' noOfLines={1}>
             {nft.name}
           </Text>
           <Text>price: {nft.currentPrice}</Text>
-          <Button
-            onClick={() => dispatch(addToCart(nft))}
-            bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
-            color='white'
-          >
-            Add To Cart
-          </Button>
 
           {isOwner ? (
             <Button
-              bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
-            color='white'
+              bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+              color='white'
               onClick={() => navigate("/list/" + nft.id)}
             >
               List NFT
@@ -89,9 +90,9 @@ const GlobCard = ({ nft }: TNft) => {
           ) : (
             <Button
               onClick={handleAddClick}
-              bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
+              bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
               color='white'
-               colorScheme={
+              colorScheme={
                 checkItemIsInArray(cart, nft.id) ? "red" : "messenger"
               }
             >
