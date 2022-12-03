@@ -1,12 +1,34 @@
-import { Slide, useColorMode } from "@chakra-ui/react";
-import React from "react";
-import { Image, Flex, Center, Heading } from "@chakra-ui/react";
+import "swiper/css";
+import { Image, Flex, Center } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
-import "swiper/css";
-import { FaAngleRight, FaAngleLeft } from "react-icons/fa";
+import { db } from "../../../firebase-config";
+import { getDocs, collection, query, limit } from "firebase/firestore";
 import { TypeAnimation } from "react-type-animation";
-const Caruselm = () => {
+import { useState, useEffect } from 'react'
+
+
+const Carusel = () => {
+
+  const [carouselImg, setCarouselImg] = useState([{ id: '', img: '' }])
+
+  const carousel = async () => {
+    const q = query(collection(db, 'collections'), limit(10))
+    const querySnapShot = await getDocs(q)
+    let result: any = []
+    querySnapShot.forEach((doc) => {
+      result.push({
+        id: doc.id,
+        img: doc.data().feature
+      })
+    })
+    setCarouselImg(result)
+  }
+
+  useEffect(() => {
+    carousel()
+  }, [])
+
   return (
     <>
       <Center mb='2rem'>
@@ -39,74 +61,19 @@ const Caruselm = () => {
             disableOnInteraction: false,
           }}
         >
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/aryamularama%20homecard%20squooshed.jpg?auto=format&w=828'
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/clay%20friends%20homecard.png?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/10KTF%20homecard.png?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/fragile%20animals%20homecard%20squooshed.jpg?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/drip%20ballers%20homecard.png?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/files/c6af7968009d1f4d88f82a02eea30cee.png?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/shabangrs%20homecard.png?auto=format&w=828'
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Image
-              cursor='pointer'
-              borderRadius='15px'
-              // h='300px'
-              src='https://i.seadn.io/gcs/static/promocards/oma%20oma%20homecard%20squooshed.jpg?auto=format&w=828'
-            />
-          </SwiperSlide>
+          {carouselImg.map((item) => (
+            <SwiperSlide>
+              <Image
+                cursor='pointer'
+                borderRadius='15px'
+                // h='300px'
+                src={item?.img}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Flex>
     </>
   );
 };
-export default Caruselm;
+export default Carusel;

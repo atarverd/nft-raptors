@@ -3,7 +3,7 @@ import CollectionHeader from "./collectionHeader";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase-config.js";
 import { useParams } from "react-router";
-import GlobCard from "../globCard";
+import GlobCard from "../cards/globCard";
 import Loader from "../loading";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 

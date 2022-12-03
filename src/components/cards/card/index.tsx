@@ -5,6 +5,7 @@ import {
   Text,
   useColorMode
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 type PropsType = {
   data: { name: string; imageUrl: string };
@@ -13,6 +14,11 @@ type PropsType = {
 const Card = ({ data }: PropsType) => {
 
   const { colorMode } = useColorMode()
+  const navigate = useNavigate()
+
+  const navigateCategory = () => {
+    navigate('/category/' + data.name.toLowerCase())
+  }
 
   return (
     <Flex
@@ -23,6 +29,7 @@ const Card = ({ data }: PropsType) => {
       flexDirection='column'
       transition='transform .2s;'
       _hover={{ transform: "scale(1.1)" }}
+      onClick={navigateCategory}
     >
       <Image
         w='100%'

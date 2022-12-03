@@ -16,7 +16,9 @@ type TProps = {
 export const buyNft = async (
   buyerId: string,
   cartArr: TProps[],
-  fn: () => void
+  fn: () => void,
+  toast: any,
+  navigate: any
 ) => {
   let buyerName = "";
   const buyerRef = doc(db, "users", buyerId);
@@ -59,8 +61,22 @@ export const buyNft = async (
           }),
         }).then(() => {
           fn();
-        });
+        })
+          .then(() => toast({
+            position: 'top-right',
+            duration: 3000,
+            status: 'success',
+            title: 'Successfully Purchased'
+          }))
+          .then(() => navigate('/' + buyerId));
       }
     }
+  } else {
+    toast({
+      position: 'top-right',
+      duration: 3000,
+      status: 'error',
+      title: 'No Enough Funds'
+    })
   }
 };

@@ -1,10 +1,10 @@
 import React from "react";
-import { Box, Image, Center, Flex, Text } from "@chakra-ui/react";
+import { Image, Flex } from "@chakra-ui/react";
 
 type TProp = {
-  img:string
+  img: string
 }
-const NftItemPage = ({img}:TProp) => {
+const NftItemPage = ({ img }: TProp) => {
   return (
     <Flex
       id='image-wrapper'
@@ -14,13 +14,14 @@ const NftItemPage = ({img}:TProp) => {
       borderRadius='10px'
       align='center'
       justify='center'
-      
+
       flexDirection='column'
     >
       <Image
-      w='90%'
-      h='90%'
-      borderRadius='10px'
+        bg='gray.300'
+        w='80%'
+        h='80%'
+        borderRadius='10px'
         src={img}
       />
     </Flex>

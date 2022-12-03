@@ -1,16 +1,14 @@
+import Loader from "../components/loading";
+import { db } from "../firebase-config.js";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-
+import { Box, Center, Flex } from "@chakra-ui/react";
+import NftTable from "../components/nftPage/NftTable";
+import NftChart from "../components/nftPage/NftChart";
 import NftItemPage from "../components/nftPage/NftItemPage";
 import NftBasicInfo from "../components/nftPage/NftBasicInfo";
 import NftAccordion from "../components/nftPage/NftAccordian";
-import NftTable from "../components/nftPage/NftTable";
-
-import { Box, Center, Flex, Text } from "@chakra-ui/react";
-import NftChart from "../components/nftPage/NftChart";
-import Loader from "../components/loading";
-import { db } from "../firebase-config.js";
-import { doc, getDoc } from "firebase/firestore";
-import { Routes, Route, useParams } from "react-router-dom";
 
 type THistory = {
   date: string;
@@ -70,7 +68,7 @@ const NftPage = () => {
   if (isLoading) return <Loader></Loader>;
 
   return (
-    <Box ml='20%' mr='20%' mt='2%' bg='white'>
+    <Box ml='20%' mr='20%' mt='2%'>
       <Center>
         <Flex id='nft-conainer'>
           <NftItemPage img={nftInfo.img} />
