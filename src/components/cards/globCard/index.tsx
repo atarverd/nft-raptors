@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, deleteFromCart } from "../../features/cartSlice";
-import { AppDispatch } from "../../store/store";
+import { addToCart, deleteFromCart } from "../../../features/cartSlice";
+import { AppDispatch } from "../../../store/store";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
-import { RootState } from "../../store/store";
-import { checkItemIsInArray } from "../../utils/checkItemInArray";
+import { RootState } from "../../../store/store";
+import { checkItemIsInArray } from "../../../utils/checkItemInArray";
 
 type TNft = {
   nft: {

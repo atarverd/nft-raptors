@@ -17,17 +17,17 @@ import {
 
 //@ts-ignore
 
-const Body = ({setName,setDescription,setCategory}) => {
+const Body = ({ setName, setDescription, setCategory }) => {
   return (
     <Box>
       <Box mt='30px'>
         <Text fontSize='2xl' mt='10px'>Name</Text>
-        <Input placeholder='Example: Raptor' mt='10px' onChange={(e)=>setName(e.target.value)}></Input>
+        <Input placeholder='Example: Raptor' mt='10px' onChange={(e) => setName(e.target.value)}></Input>
       </Box>
 
       <Box mt='30px'>
         <Text fontSize='2xl' mt='10px'>Description</Text>
-        <Textarea mt='10px'  onChange={(e)=>setDescription(e.target.value)}/>
+        <Textarea mt='10px' onChange={(e) => setDescription(e.target.value)} />
       </Box>
 
       <Box mt='30px'>
@@ -43,11 +43,14 @@ const Body = ({setName,setDescription,setCategory}) => {
             </AccordionButton>
             <AccordionPanel pb={4}>
               <Flex display='flex' flexDirection='column' justifyContent='center'>
-                <RadioGroup defaultValue='1' onChange={(e)=>setCategory(e)}>
+                <RadioGroup defaultValue='1' onChange={(e) => setCategory(e)}>
                   <Stack spacing='15px'>
-                    <Radio value='music' size='lg' colorScheme='messenger'>Music</Radio>
                     <Radio value='art' size='lg' colorScheme='messenger'>Art</Radio>
-                    <Radio value='sport' size='lg' colorScheme='messenger'>Sport</Radio>
+                    <Radio value='trendingcars' size='lg' colorScheme='messenger'>Trending Cars</Radio>
+                    <Radio value='collectibles' size='lg' colorScheme='messenger'>Collectibles</Radio>
+                    <Radio value='photography' size='lg' colorScheme='messenger'>Photography</Radio>
+                    <Radio value='sports' size='lg' colorScheme='messenger'>Sports</Radio>
+                    <Radio value='virtualworlds' size='lg' colorScheme='messenger'>Virtual Worlds</Radio>
                   </Stack>
                 </RadioGroup>
               </Flex>
@@ -56,7 +59,7 @@ const Body = ({setName,setDescription,setCategory}) => {
         </Accordion>
       </Box>
 
-      
+
 
     </Box>
   )

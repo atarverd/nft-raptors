@@ -33,8 +33,8 @@ export const App = () => (
         <Route path='/nft/:id' element={<NftPage />} />
         <Route path='/list/:id' element={<ListNftpage />} />
         <Route path='/settings' element={<SettingsPage />} />
-        <Route path='/category' element={<CategoryPage />} />
         <Route path='/create-nft' element={<CreateNftPage />} />
+        <Route path='/category/:id' element={<CategoryPage />} />
         <Route path='/search/:querys' element={<SearchPage />} />
         <Route path='/collection/:id' element={<CollectionPage />} />
         <Route path='/create-collection' element={<CreateCollectionPage />} />

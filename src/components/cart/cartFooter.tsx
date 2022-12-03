@@ -1,9 +1,10 @@
 import React from "react";
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, useToast } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
 import { clearAllFromCart } from "../../features/cartSlice";
 import { buyNft } from "../../utils/buyNft";
+import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
 
 type TProps = {
@@ -13,15 +14,37 @@ type TProps = {
 };
 
 const CartFooter = () => {
+
+  const user = getAuth();
+  const toast = useToast();
+  const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
+  const { cart } = useSelector((state: RootState) => state.cart);
+
 
   const clearCartAfterPurchase = () => {
     dispatch(clearAllFromCart());
   };
 
-  const { cart } = useSelector((state: RootState) => state.cart);
+  const handleBuy = () => {
+    if (user?.currentUser?.uid) {
+      buyNft(
+        user?.currentUser?.uid as string,
+        cartNfts,
+        clearCartAfterPurchase,
+        toast,
+        navigate
+      )
+    } else {
+      toast({
+        position: 'top-right',
+        duration: 3000,
+        status: 'error',
+        title: 'You Need To Sign In'
+      })
+    }
+  }
 
-  const user = getAuth();
 
   const cartNfts = cart.reduce<TProps[]>((prev, cur) => {
     prev.push({
@@ -49,13 +72,7 @@ const CartFooter = () => {
       <Box mt='20px'>
         <Flex display='flex' justifyContent='space-around'>
           <Button
-            onClick={() =>
-              buyNft(
-                user?.currentUser?.uid as string,
-                cartNfts,
-                clearCartAfterPurchase
-              )
-            }
+            onClick={handleBuy}
             colorScheme='blue'
             w='250px'
           >

@@ -4,27 +4,26 @@ import {
   Tabs,
   Flex,
   Input,
-  Button,
   TabList,
   TabPanel,
   TabPanels,
   InputGroup,
   SimpleGrid,
-  InputRightElement,
 } from "@chakra-ui/react";
-import GlobCard from "../globCard";
-import { FaSearch } from "react-icons/fa";
+import GlobCard from "../cards/globCard";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase-config";
+import CollectionCard from "../cards/collectionCard";
 
 const UserTabs = () => {
   const { id } = useParams();
   const [ownedNfts, setOwnedNfts] = useState([]);
+  const [ownedCollections, setOwnedCollections] = useState([]);
   const [search, setSearch] = useState("");
 
-  const asyncronus = async () => {
+  const asyncronusNft = async () => {
     const q = query(
       collection(db, "nfts"),
       where("ownerId", "==", id as string)
@@ -33,7 +32,6 @@ const UserTabs = () => {
     const querySnapshot = await getDocs(q);
     let result: any = [];
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
       console.log(doc.id, " => ", doc.data());
       const nft = doc.data();
       result.push({
@@ -47,8 +45,29 @@ const UserTabs = () => {
     setOwnedNfts(result);
   };
 
+  const asyncronusCollections = async () => {
+    const q = query(
+      collection(db, 'collections'),
+      where('creatorId', '==', id as string)
+    )
+
+    const querySnapShot = await getDocs(q)
+    let result: any = []
+    querySnapShot.forEach((col) => {
+      const collection = col.data()
+      result.push({
+        id: col.id,
+        ownerId: collection.creatorId,
+        name: collection.collectionName,
+        imageUrl: collection.feature,
+      })
+    })
+    setOwnedCollections(result)
+  }
+
   useEffect(() => {
-    asyncronus();
+    asyncronusNft();
+    asyncronusCollections();
   }, []);
 
   const handleChange = (e: any) => {
@@ -60,7 +79,7 @@ const UserTabs = () => {
       <Tabs size='md' variant='enclosed-colored' mt='20px' ml='40px'>
         <TabList>
           <Tab>Owned</Tab>
-          <Tab>Favorited</Tab>
+          <Tab>My Collections</Tab>
         </TabList>
 
         <InputGroup mt='30px' w='70%'>
@@ -88,15 +107,14 @@ const UserTabs = () => {
 
           <TabPanel>
             <Flex display='flex' justifyContent='space-around'>
-              <SimpleGrid spacing='40px' columns={5} m='20px'>
-                {/* <GlobCard
-                  nft={{
-                    id: "asdfasd",
-                    img: "asd",
-                    name: "sad",
-                    currentPrice: 555,
-                  }} */}
-                {/* /> */}
+              <SimpleGrid spacing='40px' columns={[1, 3, 5]} m='20px'>
+                {ownedCollections
+                  ?.filter((el: any) => el.name.includes(search))
+                  .map((col) => (
+                    <CollectionCard
+                      collection={col}
+                      asyncronusCollection={asyncronusCollections} />
+                  ))}
               </SimpleGrid>
             </Flex>
           </TabPanel>

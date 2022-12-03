@@ -1,14 +1,15 @@
 import {
   Box,
   Text,
-  Image,
   Menu,
   Flex,
-  MenuButton,
+  Image,
+  Badge,
+  Button,
   MenuList,
   MenuItem,
-  Button,
   Collapse,
+  MenuButton,
   SkeletonText,
 } from "@chakra-ui/react";
 import UserTabs from "./userTabs";
@@ -109,6 +110,7 @@ const UserHeader = () => {
           <Text fontSize='4xl' mt='30px'>
             {userData?.username}
           </Text>
+
           <Box mt='35px' mr='40px'>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
@@ -122,6 +124,15 @@ const UserHeader = () => {
           </Box>
 
         </Flex>
+
+        <Box mt='20px'>
+          <Badge
+            fontSize='1xl'
+            variant='solid'
+            colorScheme={userData?.balance ? 'green' : 'red'}>
+            Balance: {userData?.balance}
+          </Badge>
+        </Box>
 
         <Box maxW='30%' mt='10px'>
           <Collapse startingHeight={20} in={show}>
