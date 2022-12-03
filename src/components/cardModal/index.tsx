@@ -29,6 +29,7 @@ import walletDark from "../../assets/walletWhite.png";
 import { updateDoc, doc, getDoc, increment } from 'firebase/firestore';
 
 
+
 const CardModal = () => {
 
   const user = getAuth();
@@ -36,12 +37,12 @@ const CardModal = () => {
   const navigate = useNavigate();
   const id = user?.currentUser?.uid;
   const { colorMode } = useColorMode();
-
   const [ammount, setAmmount] = useState('')
   const [cardNumber, setCardNumber] = useState('')
+  const [isConnected,setIsConnected]=useState(false)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [isConnected, setIsConnected] = useState(false)
+  // const [isConnected, setIsConnected] = useState(false)
 
   const initialRef = useRef(null)
   const finalRef = useRef(null)
@@ -84,14 +85,17 @@ const CardModal = () => {
   const isAttachedCard = async () => {
     const userRef = doc(db, 'users', id as string)
     const userSnap = await getDoc(userRef)
-    console.log('testtesttest')
+    console.log('asdf')
 
     if (userSnap.exists()) {
       setIsConnected(userSnap.data().isPaymentConnected)
+      
     }
   }
 
+
   useEffect(() => {
+
     isAttachedCard()
     console.log('aaaaaaaaa')
 

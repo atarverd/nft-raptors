@@ -40,7 +40,8 @@ const HeaderIcons = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
+        // https://firebase.google.com/docs/reference/js/firebase.Userc
+        console.log(user)
         setUser(true);
         // ...
       } else {
@@ -76,9 +77,9 @@ const HeaderIcons = () => {
           onClick={handleUserPage}
         />
       </Box>
-      <Box ml='15px' cursor='pointer'>
+     {user &&  <Box ml='15px' cursor='pointer'>
         <CardModal />
-      </Box>
+      </Box>}
       <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
