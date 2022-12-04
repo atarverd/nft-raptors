@@ -1,12 +1,12 @@
 import Category from "../components/category";
 
 const CategoryPage = () => {
-  return (
-    <div>
-      <Category />
-    </div>
+	return (
+		<div>
+			<Category />
+		</div>
 
-  )
-}
+	);
+};
 
-export default CategoryPage
+export default CategoryPage;

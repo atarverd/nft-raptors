@@ -1,24 +1,21 @@
 import {
-  Box,
-  Text,
-  Menu,
-  Flex,
-  Image,
-  Badge,
-  Button,
-  MenuList,
-  MenuItem,
-  Collapse,
-  MenuButton,
-  SkeletonText,
+	Box,
+	Text,
+	Menu,
+	Flex,
+	Image,
+	Badge,
+	Button,
+	MenuList,
+	MenuItem,
+	Collapse,
+	MenuButton,
 } from "@chakra-ui/react";
 import UserTabs from "./userTabs";
 import { db } from "../../firebase-config";
-import login from "../../assets/login.jpg";
 import { useEffect, useState } from "react";
-import signup from "../../assets/signup.jpg";
 import { doc, getDoc } from "firebase/firestore";
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useParams, useNavigate } from "react-router";
 
 type TUserData = {
@@ -36,118 +33,103 @@ type TUserData = {
 
 const UserHeader = () => {
 
-  const [show, setShow] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false)
+	const [show, setShow] = useState(false);
 
-  const [userData, setUserData] = useState<TUserData>({
-    "paymentMethod": '',
-    "favorites": [],
-    "isPaymentConnected": false,
-    "email": "11@mail.com",
-    "balance": 0,
-    "username": "user1",
-    "gender": "Male",
-    bio: 'asdfasd',
-    userLogo: '',
-    userBackground: ''
-  })
+	const [userData, setUserData] = useState<TUserData>();
 
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const handleToggle = () => setShow(!show);
+	const { id } = useParams();
+	const navigate = useNavigate();
+	const handleToggle = () => setShow(!show);
 
-  const asynch = async () => {
-    const docRef = doc(db, "users", id as string);
-    const docSnap = await getDoc(docRef);
+	const asynch = async () => {
+		const docRef = doc(db, "users", id as string);
+		const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-      const data = docSnap.data()
-      //@ts-ignore
-      setUserData(data)
-      setIsLoaded(true)
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  }
+		if (docSnap.exists()) {
+			console.log("Document data:", docSnap.data());
+			const data = docSnap.data();
+			//@ts-ignore
+			setUserData(data);
+		} else {
+			console.log("No such document!");
+		}
+	};
 
-  useEffect(() => { asynch() }, [])
+	useEffect(() => { asynch(); }, []);
 
-  const navigateSettings = () => {
-    navigate('/settings')
-  }
+	const navigateSettings = () => {
+		navigate("/settings");
+	};
 
-  const navigateCreateCollection = () => {
-    navigate('/create-collection')
-  }
+	const navigateCreateCollection = () => {
+		navigate("/create-collection");
+	};
 
-  return (
-    <Box>
+	return (
+		<Box>
 
-      <Box h='300px' bgImage={`url(${userData?.userBackground})`} bgPosition="center"
-        bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
-        {/* <Image src={signup} h='300px' w='full' position='absolute' /> */}
-        <Box
-          ml='40px'
-          border='4px'
-          borderColor='#EDF2F7'
-          borderRadius='10px'
-          width='max-content'
-        >
-          <Image
-            src={userData?.userLogo}
-            w='200px'
-            h='200px'
-            borderRadius='5px'
-            zIndex='1'
-          />
-        </Box>
-      </Box>
+			<Box h='300px' bgImage={`url(${userData?.userBackground})`} bgPosition="center"
+				bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
+				<Box
+					ml='40px'
+					border='4px'
+					borderColor='#EDF2F7'
+					borderRadius='10px'
+					width='max-content'
+				>
+					<Image
+						src={userData?.userLogo}
+						w='200px'
+						h='200px'
+						borderRadius='5px'
+						zIndex='1'
+					/>
+				</Box>
+			</Box>
 
-      <Box ml='40px' my='20px' mt='50px'>
-        <Flex justifyContent='space-between' alignItems='center'>
-          <Text fontSize='4xl' mt='30px'>
-            {userData?.username}
-          </Text>
+			<Box ml='40px' my='20px' mt='50px'>
+				<Flex justifyContent='space-between' alignItems='center'>
+					<Text fontSize='4xl' mt='30px'>
+						{userData?.username}
+					</Text>
 
-          <Box mt='35px' mr='40px'>
-            <Menu>
-              <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+					<Box mt='35px' mr='40px'>
+						<Menu>
+							<MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                 Actions
-              </MenuButton>
-              <MenuList>
-                <MenuItem onClick={navigateSettings}>Settings</MenuItem>
-                <MenuItem onClick={navigateCreateCollection}>Create a Collection</MenuItem>
-              </MenuList>
-            </Menu>
-          </Box>
+							</MenuButton>
+							<MenuList>
+								<MenuItem onClick={navigateSettings}>Settings</MenuItem>
+								<MenuItem onClick={navigateCreateCollection}>Create a Collection</MenuItem>
+							</MenuList>
+						</Menu>
+					</Box>
 
-        </Flex>
+				</Flex>
 
-        <Box mt='20px'>
-          <Badge
-            fontSize='1xl'
-            variant='solid'
-            colorScheme={userData?.balance ? 'green' : 'red'}>
+				<Box mt='20px'>
+					<Badge
+						fontSize='1xl'
+						variant='solid'
+						colorScheme={userData?.balance ? "green" : "red"}>
             Balance: {userData?.balance}
-          </Badge>
-        </Box>
+					</Badge>
+				</Box>
 
-        <Box maxW='30%' mt='10px'>
-          <Collapse startingHeight={20} in={show}>
-            {userData?.bio}
-          </Collapse>
-          <Button size='xs' onClick={handleToggle} mt='1rem'>
+				<Box maxW='30%' mt='10px'>
+					<Collapse startingHeight={20} in={show}>
+						{userData?.bio}
+					</Collapse>
+					<Button size='xs' onClick={handleToggle} mt='1rem'>
             Show {show ? "Less" : "More"}
-          </Button>
-        </Box>
-      </Box>
-      <UserTabs />
+					</Button>
+				</Box>
+			</Box>
+			<UserTabs />
 
-    </Box>
+		</Box>
 
-  );
+	);
 };
 
 export default UserHeader;

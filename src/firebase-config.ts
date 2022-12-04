@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB_57x9dHlVzrsuU2UcmHvM541gmdfUEcE",
-  authDomain: "nft-raptors.firebaseapp.com",
-  projectId: "nft-raptors",
-  storageBucket: "nft-raptors.appspot.com",
-  messagingSenderId: "1077461821090",
-  appId: "1:1077461821090:web:5ea8a3042e0612ccbe99fb",
+	apiKey: "AIzaSyB_57x9dHlVzrsuU2UcmHvM541gmdfUEcE",
+	authDomain: "nft-raptors.firebaseapp.com",
+	projectId: "nft-raptors",
+	storageBucket: "nft-raptors.appspot.com",
+	messagingSenderId: "1077461821090",
+	appId: "1:1077461821090:web:5ea8a3042e0612ccbe99fb",
 };
 
 // Initialize Firebase

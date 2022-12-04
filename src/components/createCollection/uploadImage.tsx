@@ -1,67 +1,68 @@
 import { useState } from "react";
 import {
-  Box,
-  Flex,
-  Input,
-  Image,
-  VStack,
-  Button,
-  Avatar,
-  HStack,
-  AvatarBadge,
+	Box,
+	Input,
+	Image,
+	VStack,
+	Button,
+	Avatar,
+	HStack,
 } from "@chakra-ui/react";
 
-//@ts-ignore
-const UploadImage = ({ size, h, w,handleLogoImage}) => {
+type TProps={
+	size:string;
+	h:string;
+	w:string;
+	handleLogoImage:(set:any)=>void;
+}
+const UploadImage = ({ size, h, w,handleLogoImage}:TProps) => {
 
-  const [selectedFile, setSelectedFile] = useState();
+	const [selectedFile, setSelectedFile] = useState<File | null>();
 
 
-  const onChange = (e: any) => {
-    if (e.target.files && e.target.files.length > 0){
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (e.target.files && e.target.files.length > 0){
       
-      setSelectedFile(e.target.files[0]);
-      handleLogoImage(e.target.files[0])
-    }
-    console.log(e.target.files[0])
-  };
+			setSelectedFile(e.target.files[0]);
+			handleLogoImage(e.target.files[0]);
+		}
+	};
 
 
-  const removeSelectedFile = () => {
-    //@ts-ignore
-    setSelectedFile();
-  };
+	const removeSelectedFile = () => {
+		setSelectedFile(null);
+	};
 
-  return (
+	return (
 
-    <Box >
-      <VStack spacing="2rem">
+		<Box >
+			<VStack spacing="2rem">
 
-        {!size ?
-          selectedFile &&
+				{!size ?
+					selectedFile &&
           <Image
-            w={w}
-            h={h}
-            src={URL.createObjectURL(selectedFile)} />
-          : selectedFile && (
-            <Avatar
-              src={URL.createObjectURL(selectedFile)}
-              size={size}
-            >
-            </Avatar>
-          )}
+          	w={w}
+          	h={h}
+          	src={URL.createObjectURL(selectedFile)} />
+					: selectedFile && (
+						<Avatar
+							src={URL.createObjectURL(selectedFile)}
+							size={size}
+						>
+						</Avatar>
+					)}
 
-        <Input type="file" onChange={onChange} accept="image/*" />
-        {selectedFile &&
+				<Input type="file" onChange={onChange} accept="image/*" />
+				{selectedFile &&
           <HStack spacing="2rem">
-            <Button colorScheme='messenger' onClick={removeSelectedFile}>
+          	<Button colorScheme='messenger' onClick={removeSelectedFile}>
               Remove Image
-            </Button>
+          	</Button>
           </HStack>}
 
-      </VStack>
-    </Box>
-  );
+			</VStack>
+		</Box>
+	);
 };
 
 export default UploadImage;

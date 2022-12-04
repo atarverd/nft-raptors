@@ -9,9 +9,9 @@ type TNft = {
 type TCart = TNft[];
 
 export const checkItemIsInArray = (cart: TCart, id: string): boolean => {
-  if (cart.find((item) => item.id === id)) {
-    return true;
-  } else {
-    return false;
-  }
+	if (cart.find((item) => item.id === id)) {
+		return true;
+	} else {
+		return false;
+	}
 };

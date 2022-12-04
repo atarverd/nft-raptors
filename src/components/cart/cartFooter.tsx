@@ -15,73 +15,73 @@ type TProps = {
 
 const CartFooter = () => {
 
-  const user = getAuth();
-  const toast = useToast();
-  const navigate = useNavigate();
-  const dispatch: AppDispatch = useDispatch();
-  const { cart } = useSelector((state: RootState) => state.cart);
+	const user = getAuth();
+	const toast = useToast();
+	const navigate = useNavigate();
+	const dispatch: AppDispatch = useDispatch();
+	const { cart } = useSelector((state: RootState) => state.cart);
 
 
-  const clearCartAfterPurchase = () => {
-    dispatch(clearAllFromCart());
-  };
+	const clearCartAfterPurchase = () => {
+		dispatch(clearAllFromCart());
+	};
 
-  const handleBuy = () => {
-    if (user?.currentUser?.uid) {
-      buyNft(
+	const handleBuy = () => {
+		if (user?.currentUser?.uid) {
+			buyNft(
         user?.currentUser?.uid as string,
         cartNfts,
         clearCartAfterPurchase,
         toast,
         navigate
-      )
-    } else {
-      toast({
-        position: 'top-right',
-        duration: 3000,
-        status: 'error',
-        title: 'You Need To Sign In'
-      })
-    }
-  }
+			);
+		} else {
+			toast({
+				position: "top-right",
+				duration: 3000,
+				status: "error",
+				title: "You Need To Sign In"
+			});
+		}
+	};
 
 
-  const cartNfts = cart.reduce<TProps[]>((prev, cur) => {
-    prev.push({
-      sellerId: cur.ownerId,
-      itemId: cur.id,
-      price: cur.currentPrice,
-    });
+	const cartNfts = cart.reduce<TProps[]>((prev, cur) => {
+		prev.push({
+			sellerId: cur.ownerId,
+			itemId: cur.id,
+			price: cur.currentPrice,
+		});
 
-    return prev;
-  }, []);
+		return prev;
+	}, []);
 
-  return (
-    <Box position='absolute' bottom='20px' left='40px'>
-      <Box mt='30px'>
-        <Flex display='flex' justifyContent='space-around'>
-          <Text fontSize='2xl'>Total Price</Text>
-          <Text fontSize='2xl'>
-            {cart.reduce((acc, curr) => {
-              return acc + Number(curr.currentPrice);
-            }, 0)}
-          </Text>
-        </Flex>
-      </Box>
+	return (
+		<Box position='absolute' bottom='20px' left='40px'>
+			<Box mt='30px'>
+				<Flex display='flex' justifyContent='space-around'>
+					<Text fontSize='2xl'>Total Price</Text>
+					<Text fontSize='2xl'>
+						{cart.reduce((acc, curr) => {
+							return acc + Number(curr.currentPrice);
+						}, 0)}
+					</Text>
+				</Flex>
+			</Box>
 
-      <Box mt='20px'>
-        <Flex display='flex' justifyContent='space-around'>
-          <Button
-            onClick={handleBuy}
-            colorScheme='blue'
-            w='250px'
-          >
+			<Box mt='20px'>
+				<Flex display='flex' justifyContent='space-around'>
+					<Button
+						onClick={handleBuy}
+						colorScheme='blue'
+						w='250px'
+					>
             Buy
-          </Button>
-        </Flex>
-      </Box>
-    </Box>
-  );
+					</Button>
+				</Flex>
+			</Box>
+		</Box>
+	);
 };
 
 export default CartFooter;

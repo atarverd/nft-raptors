@@ -1,4 +1,4 @@
-import { Action, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TNft = {
   id: string;
@@ -13,26 +13,26 @@ type TInitialState = {
 };
 
 const initialState: TInitialState = {
-  cart: [],
+	cart: [],
 };
 
 const cartSlice = createSlice({
-  name: "cart",
-  initialState,
-  reducers: {
-    addToCart: (state, action: PayloadAction<TNft>) => {
-      let validator=state.cart.find(item=>item.id===action.payload.id)
-      if(!validator)
-        state.cart.push(action.payload);
-    },
-    deleteFromCart: (state, action: PayloadAction<string>) => {
-      state.cart = state.cart.filter((item) => item.id !== action.payload);
-    },
+	name: "cart",
+	initialState,
+	reducers: {
+		addToCart: (state, action: PayloadAction<TNft>) => {
+			const validator=state.cart.find(item=>item.id===action.payload.id);
+			if(!validator)
+				state.cart.push(action.payload);
+		},
+		deleteFromCart: (state, action: PayloadAction<string>) => {
+			state.cart = state.cart.filter((item) => item.id !== action.payload);
+		},
 
-    clearAllFromCart: (state) => {
-      state.cart = [];
-    },
-  },
+		clearAllFromCart: (state) => {
+			state.cart = [];
+		},
+	},
 });
 
 export const { addToCart, deleteFromCart, clearAllFromCart } =

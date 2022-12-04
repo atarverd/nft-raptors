@@ -1,11 +1,11 @@
-import Collection from "../components/collection"
+import Collection from "../components/collection";
 
 const CollectionPage = () => {
-  return (
-    <div>
-      <Collection />
-    </div>
-  )
-}
+	return (
+		<div>
+			<Collection />
+		</div>
+	);
+};
 
-export default CollectionPage
+export default CollectionPage;
