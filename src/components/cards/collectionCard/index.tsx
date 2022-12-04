@@ -44,7 +44,7 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 	return (
 		<Box>
 			<Box
-				w='350px'
+				// w='350px'
 				borderRadius='8px'
 				overflow='hidden'
 				boxShadow={
@@ -53,11 +53,12 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 						: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
 				}
 				bg='white'
+				w={[200,null,300, 350]}
 			>
 				<Image
 					onClick={toCollectionPage}
 					src={collection.imageUrl}
-					w={[100, 150, 200, 350]}
+					w={[200,null,300, 350]}
 					h='220px'
 					borderRadius='5px'
 					transition='transform .2s;'

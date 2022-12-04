@@ -1,5 +1,5 @@
 import "swiper/css";
-import { Image, Flex, Center } from "@chakra-ui/react";
+import { Image, Flex, Center, Box } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 import { db } from "../../../firebase-config";
@@ -66,12 +66,24 @@ const Carusel = () => {
 				>
 					{carouselImg.map((item) => (
 						<SwiperSlide key={item.id}>
-							<Image
+							<Box backgroundImage={`url(${item.img})`} 
+								cursor="pointer"
+								borderRadius="15px"
+								w={["70px","130px","170px","230px","330px"]} 
+								h={["70px","130px","170px","230px","330px"]}
+								bgPosition="center"
+								bgRepeat="no-repeat" 
+								objectFit='fill' 
+								
+								backgroundSize='cover'
+							></Box>
+							{/* <Image
 								cursor='pointer'
 								borderRadius='15px'
-								// h='300px'
+								w={["100px","200px","300px"]}
+								w={["100px","200px","300px"]}
 								src={item?.img}
-							/>
+							/> */}
 						</SwiperSlide>
 					))}
 				</Swiper>

@@ -18,6 +18,7 @@ import Header from "./layout/header";
 import store from "./store/store";
 import Main from "./pages/main";
 import theme from "./theme";
+import Footer from "./layout/footer";
 
 
 export const App = () => (
@@ -39,7 +40,7 @@ export const App = () => (
 				<Route path='/collection/:id' element={<CollectionPage />} />
 				<Route path='/create-collection' element={<CreateCollectionPage />} />
 			</Routes>
-			<LiveList />
+			<Footer/>
 		</ChakraProvider>
 	</Provider>
 );

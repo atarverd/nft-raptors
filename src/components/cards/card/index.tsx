@@ -17,7 +17,7 @@ const Card = ({ data }: PropsType) => {
 	const navigate = useNavigate();
 
 	const navigateCategory = () => {
-		navigate("/category/" + data.name.toLowerCase());
+		navigate("/category/" + data.name.toLowerCase().replaceAll(" ",""));
 	};
 
 	return (
