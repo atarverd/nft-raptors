@@ -108,7 +108,7 @@ const UserTabs = () => {
 				<TabPanels mt='20px'>
 					<TabPanel>
 						<Flex display='flex' justifyContent='space-around'>
-							<SimpleGrid spacing='40px' columns={[1, 3, 5]} m='20px'>
+							<SimpleGrid spacing='40px' columns={[1, null, 3]} m='20px'>
 								{ownedNfts
 									?.filter((el: TNftSnap) => el.name.includes(search))
 									.map((nft, i) => (
@@ -120,7 +120,9 @@ const UserTabs = () => {
 
 					<TabPanel>
 						<Flex display='flex' justifyContent='space-around'>
-							<SimpleGrid spacing='40px' columns={[1, 2, null, null, 4]} m='20px'>
+
+							<SimpleGrid spacing='40px' columns={[1, 2,null,null, 3]} m='20px'>
+
 								{ownedCollections
 									?.filter((el: TColSnap) => el.name.includes(search))
 									.map((col) => (

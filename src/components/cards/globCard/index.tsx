@@ -62,7 +62,7 @@ const GlobCard = ({ nft }: TNft) => {
 				<Image
 					onClick={toNftPage}
 					src={nft.img}
-					w={[100, 150, 200]}
+					w={200}
 					h='220px'
 					borderRadius='5px'
 					transition='transform .2s;'

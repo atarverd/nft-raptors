@@ -20,7 +20,7 @@ type TProps = {
 
 const TopFiveColumn = ({ data, from }: TProps) => {
 	return (
-		<TableContainer w={["", "70%", "45%"]}>
+		<TableContainer w={["", "70%", "45%"]} sx={{"::-webkit-scrollbar": {display: "none"}}}>
 			<Table variant='simple'>
 				<Thead>
 					<Tr>
