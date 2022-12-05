@@ -1,16 +1,16 @@
-import React from "react";
-import { Box, Flex, Text, Button, useToast } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../../store/store";
-import { clearAllFromCart } from "../../features/cartSlice";
-import { buyNft } from "../../utils/buyNft";
-import { useNavigate } from "react-router";
-import { getAuth } from "firebase/auth";
+import React from 'react';
+import { Box, Flex, Text, Button, useToast, useColorMode } from '@chakra-ui/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { clearAllFromCart } from '../../features/cartSlice';
+import { buyNft } from '../../utils/buyNft';
+import { useNavigate } from 'react-router';
+import { getAuth } from 'firebase/auth';
 
 type TProps = {
-  sellerId: string;
-  itemId: string;
-  price: number;
+	sellerId: string;
+	itemId: string;
+	price: number;
 };
 
 const CartFooter = () => {
@@ -18,6 +18,7 @@ const CartFooter = () => {
 	const user = getAuth();
 	const toast = useToast();
 	const navigate = useNavigate();
+	const { colorMode } = useColorMode();
 	const dispatch: AppDispatch = useDispatch();
 	const { cart } = useSelector((state: RootState) => state.cart);
 
@@ -29,18 +30,18 @@ const CartFooter = () => {
 	const handleBuy = () => {
 		if (user?.currentUser?.uid) {
 			buyNft(
-        user?.currentUser?.uid as string,
-        cartNfts,
-        clearCartAfterPurchase,
-        toast,
-        navigate
+				user?.currentUser?.uid as string,
+				cartNfts,
+				clearCartAfterPurchase,
+				toast,
+				navigate
 			);
 		} else {
 			toast({
-				position: "top-right",
+				position: 'top-right',
 				duration: 3000,
-				status: "error",
-				title: "You Need To Sign In"
+				status: 'error',
+				title: 'You Need To Sign In'
 			});
 		}
 	};
@@ -73,10 +74,12 @@ const CartFooter = () => {
 				<Flex display='flex' justifyContent='space-around'>
 					<Button
 						onClick={handleBuy}
-						colorScheme='blue'
+						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						color='white'
+						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 						w='250px'
 					>
-            Buy
+						Buy
 					</Button>
 				</Flex>
 			</Box>

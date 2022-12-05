@@ -8,6 +8,7 @@ import {
 	Button,
 	Checkbox,
 	Accordion,
+	useColorMode,
 	AccordionItem,
 	AccordionIcon,
 	AccordionPanel,
@@ -15,13 +16,16 @@ import {
 } from "@chakra-ui/react";
 
 type TProp = {
-  filterPrice: () => void;
-  handleMin: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleMax: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  priceSort: (sortType:string) => void;
+	filterPrice: () => void;
+	handleMin: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleMax: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	priceSort: (sortType: string) => void;
 }
 
 const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => {
+
+	const { colorMode } = useColorMode();
+
 	return (
 		<Box>
 			<Accordion allowToggle defaultIndex={[0]} allowMultiple>
@@ -37,6 +41,7 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 							<Input
 								w='90px'
 								h='40px'
+								type='number'
 								placeholder='Min'
 								onChange={handleMin}
 							></Input>
@@ -44,6 +49,7 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 							<Input
 								w='90px'
 								h='40px'
+								type='number'
 								placeholder='Max'
 								onChange={handleMax}
 							></Input>
@@ -53,10 +59,12 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 								<Button
 									w='270px'
 									h='40px'
-									colorScheme='messenger'
 									onClick={filterPrice}
+									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									color='white'
+									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 								>
-                  Apply
+									Apply
 								</Button>
 							</Box>
 						</Flex>
@@ -76,20 +84,24 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 						<Flex display='flex' flexDirection='column' justifyContent='center'>
 							<VStack spacing={4}>
 								<Button
+									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									color='white'
+									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 									onClick={() => priceSort("lowToHigh")}
 									w='270px'
 									h='40px'
-									colorScheme='messenger'
 								>
-                  Price Low To High
+									Price Low To High
 								</Button>
 								<Button
+									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									color='white'
+									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 									onClick={() => priceSort("highToLow")}
 									w='270px'
 									h='40px'
-									colorScheme='messenger'
 								>
-                  Price High To Low
+									Price High To Low
 								</Button>
 							</VStack>
 						</Flex>
@@ -108,14 +120,14 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 					<AccordionPanel pb={4}>
 						<Flex display='flex' flexDirection='column'>
 							<Stack spacing='10px'>
-								<Checkbox size='lg' colorScheme='blue' pl='40px'>
-                  Surrealism
+								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
+									Surrealism
 								</Checkbox>
-								<Checkbox size='lg' colorScheme='blue' pl='40px'>
-                  Fantasy
+								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
+									Fantasy
 								</Checkbox>
-								<Checkbox size='lg' colorScheme='blue' pl='40px'>
-                  Stranger
+								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
+									Stranger
 								</Checkbox>
 							</Stack>
 						</Flex>

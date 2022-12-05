@@ -1,6 +1,7 @@
 import { mode, StyleFunctionProps } from "@chakra-ui/theme-tools";
 import { extendTheme } from "@chakra-ui/react";
 
+
 const styles = {
 	global: (props: Record<string, any>) => ({
 		body: {
@@ -8,7 +9,7 @@ const styles = {
 			bg: mode("gray.100", "#010914")(props),
 		},
 		input: {
-			color: mode("black", "black")(props),
+			color: mode("black", "white")(props),
 			bg: mode("red", "red")(props),
 		},
 	}),
@@ -25,9 +26,10 @@ const components = {
 	},
 };
 
+
 const theme = extendTheme({
 	components,
-	styles,
+	styles
 });
 
 export default theme;

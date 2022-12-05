@@ -11,15 +11,14 @@ import {
 	TableContainer,
 	HStack,
 } from "@chakra-ui/react";
-import {formatter} from "../../../utils/formatValue";
+import { formatter } from "../../../utils/formatValue";
 
 type TProps = {
-  data: TCollection[];
-  from:number
+	data: TCollection[];
+	from: number
 };
 
-const TopFiveColumn = ({ data,from }: TProps) => {
-	console.log(data);
+const TopFiveColumn = ({ data, from }: TProps) => {
 	return (
 		<TableContainer w={["", "70%", "45%"]} sx={{"::-webkit-scrollbar": {display: "none"}}}>
 			<Table variant='simple'>
@@ -36,7 +35,7 @@ const TopFiveColumn = ({ data,from }: TProps) => {
 							<Tr cursor='pointer' key={i}>
 								<Td>
 									<HStack spacing='2rem'>
-										<Text>{from+i}</Text>
+										<Text>{from + i}</Text>
 										<Avatar src={collection.logo} />
 										<Text ml='2.2rem'>{collection.collectionName}</Text>
 									</HStack>

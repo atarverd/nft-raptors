@@ -1,9 +1,9 @@
-import { Box, Text, Flex, Button, useToast } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, useToast, useColorMode } from "@chakra-ui/react";
 import { useState } from "react";
 import Body from "./body";
 import UploadImage from "./uploadImage";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc,getDoc,doc} from "firebase/firestore";
+import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,8 @@ const CreateCollection = () => {
 	const storage = getStorage();
 	const user = getAuth();
 	const navigate = useNavigate();
-	const userRef=doc(db, "users", user?.currentUser?.uid as string);
+	const { colorMode } = useColorMode();
+	const userRef = doc(db, "users", user?.currentUser?.uid as string);
 
 
 	const toast = useToast();
@@ -47,18 +48,17 @@ const CreateCollection = () => {
 
 		const a = async () => {
 			for await (const img of images) {
-				if(img){
+				if (img) {
 					const imageRef = ref(storage, img.name);
 					await uploadBytes(imageRef, img);
 					await getDownloadURL(imageRef).then((url) => {
-						console.log(url);
 						urls.push(url);
 					});
 				}
 			}
 		};
 		await a();
-		const docSnap=await getDoc(userRef);
+		const docSnap = await getDoc(userRef);
 		addDoc(collection(db, "collections"), {
 			collectionName: name,
 			description,
@@ -102,8 +102,8 @@ const CreateCollection = () => {
 				<Box mt='30px'>
 					<Text fontSize='2xl'>Featured image</Text>
 					<Text>
-            This image will be used for featuring your collection on the
-            homepage, category pages, or other promotional areas of NFT Raptors
+						This image will be used for featuring your collection on the
+						homepage, category pages, or other promotional areas of NFT Raptors
 					</Text>
 					<Box mt='10px'>
 						<UploadImage
@@ -118,9 +118,9 @@ const CreateCollection = () => {
 				<Box mt='30px'>
 					<Text fontSize='2xl'>Banner image</Text>
 					<Text>
-            This image appearat the top of your collection page, Avoid including
-            too much text in this banner image, as the dimensions change on
-            different devices
+						This image appearat the top of your collection page, Avoid including
+						too much text in this banner image, as the dimensions change on
+						different devices
 					</Text>
 					<Box mt='10px'>
 						<UploadImage
@@ -140,11 +140,13 @@ const CreateCollection = () => {
 				<Box mt='30px'>
 					<Flex justifyContent='center'>
 						<Button
-							colorScheme='messenger'
+							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							color='white'
+							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 							w='300px'
 							onClick={collectionValidator}
 						>
-              Create Collection
+							Create Collection
 						</Button>
 					</Flex>
 				</Box>

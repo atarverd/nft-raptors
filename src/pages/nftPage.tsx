@@ -11,23 +11,23 @@ import NftBasicInfo from "../components/nftPage/NftBasicInfo";
 import NftAccordion from "../components/nftPage/NftAccordian";
 
 type THistory = {
-  date: string;
-  price: number;
-  prevOwner: string;
+	date: string;
+	price: number;
+	prevOwner: string;
 };
 
 type TNft = {
-  collectionId: string;
-  collectionName: string;
-  currentPrice: number;
-  id: string;
-  isForSold: boolean;
-  name: string;
-  owner: string;
-  img: string;
-  favorite: number;
-  priceHistory: THistory[];
-  ownerId: string;
+	collectionId: string;
+	collectionName: string;
+	currentPrice: number;
+	id: string;
+	isForSold: boolean;
+	name: string;
+	owner: string;
+	img: string;
+	favorite: number;
+	priceHistory: THistory[];
+	ownerId: string;
 };
 
 const NftPage = () => {
@@ -52,7 +52,6 @@ const NftPage = () => {
 			const snap = await getDoc(doc(db, "nfts", id as string));
 
 			if (snap.exists()) {
-				console.log(snap.data());
 				//@ts-ignore
 				setNftInfo(snap.data());
 				setIsloading(false);
@@ -63,7 +62,6 @@ const NftPage = () => {
 		a();
 	}, []);
 
-	console.log(nftInfo);
 
 	if (isLoading) return <Loader></Loader>;
 

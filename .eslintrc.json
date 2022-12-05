@@ -25,18 +25,9 @@
         "@typescript-eslint/ban-types":"off",
         "react/react-in-jsx-scope": "off",
         "no-mixed-spaces-and-tabs": "off",
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
+        "indent": "off",
+        "linebreak-style": 0,
+        "quotes": "off",
         "semi": [
             "error",
             "always"

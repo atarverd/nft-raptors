@@ -15,13 +15,13 @@ import { RootState } from "../../../store/store";
 import { checkItemIsInArray } from "../../../utils/checkItemInArray";
 
 type TNft = {
-  nft: {
-    id: string;
-    img: string;
-    name: string;
-    currentPrice: number;
-    ownerId: string;
-  };
+	nft: {
+		id: string;
+		img: string;
+		name: string;
+		currentPrice: number;
+		ownerId: string;
+	};
 };
 
 const GlobCard = ({ nft }: TNft) => {
@@ -80,14 +80,16 @@ const GlobCard = ({ nft }: TNft) => {
 							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
 							color='white'
 							onClick={() => navigate("/list/" + nft.id)}
+							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 						>
-              List NFT
+							List NFT
 						</Button>
 					) : (
 						<Button
 							onClick={handleAddClick}
 							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
 							color='white'
+							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 							colorScheme={
 								checkItemIsInArray(cart, nft.id) ? "red" : "messenger"
 							}

@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Flex, Box, Image, useToast, useColorMode } from "@chakra-ui/react";
 import Cart from "../../components/cart/cart";
 import userDark from "../../assets/userWhite.png";
@@ -48,11 +48,8 @@ const HeaderIcons = () => {
 					position: "top-right",
 					variant: "subtle",
 				});
-			})
-			.catch((error) => {
-				console.log(error.message);
 			});
-	};  
+	};
 	return (
 		<Flex mr='4.5rem'>
 			<Box ml='10px' cursor='pointer'>
@@ -63,7 +60,7 @@ const HeaderIcons = () => {
 					onClick={handleUserPage}
 				/>
 			</Box>
-			{user &&  <Box ml='15px' cursor='pointer'>
+			{user && <Box ml='15px' cursor='pointer'>
 				<CardModal />
 			</Box>}
 			<Box ml='15px' cursor='pointer'>

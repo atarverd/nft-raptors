@@ -6,6 +6,7 @@ import {
 	Button,
 	Divider,
 	DrawerHeader,
+	useColorMode,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -16,6 +17,7 @@ import { AppDispatch } from "../../store/store";
 const CartHeader = () => {
 	const { cart } = useSelector((state: RootState) => state.cart);
 
+	const { colorMode } = useColorMode();
 	const dispatch: AppDispatch = useDispatch();
 
 	return (
@@ -33,9 +35,10 @@ const CartHeader = () => {
 						h='30px'
 						mr='10px'
 						mt='10px'
-						colorScheme='messenger'
-					>
-            Clear All
+						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						color='white'
+						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}					>
+						Clear All
 					</Button>
 				</Flex>
 			</Box>

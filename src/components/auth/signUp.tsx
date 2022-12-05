@@ -17,6 +17,7 @@ import {
 	FormControl,
 	InputRightElement,
 	useToast,
+	useColorMode
 } from "@chakra-ui/react";
 import signup from "../../assets/signup.jpg";
 import hiddenEye from "../../assets/hiddenEye.png";
@@ -53,6 +54,7 @@ const SignUp = () => {
 	const auth = getAuth();
 	const toast = useToast();
 	const navigate = useNavigate();
+	const { colorMode } = useColorMode();
 
 	const validateRegistration = () => {
 		if (nameInput && passwordInput && emailInput) {
@@ -110,8 +112,12 @@ const SignUp = () => {
 			my='50px'
 			ml='20%'
 			mr='20%'
-			boxShadow='dark-lg'
-			bg='white'
+			boxShadow={
+				colorMode === "dark"
+					? "0 0 24px 4px white"
+					: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+			}
+			bg={colorMode === "dark" ? "#071b38" : "gray.200"}
 			borderRadius='15px'
 		>
 			<Flex display='flex' align-items='flex-start'>
@@ -178,11 +184,13 @@ const SignUp = () => {
 
 							<RadioGroup onChange={handleGender} defaultValue='2'>
 								<Stack spacing={5} direction='row'>
+
 									<Radio colorScheme='blue' value='male'>
                     Male
 									</Radio>
 									<Radio colorScheme='pink' value='female'>
                     Female
+
 									</Radio>
 								</Stack>
 							</RadioGroup>
@@ -191,11 +199,11 @@ const SignUp = () => {
 								onClick={validateRegistration}
 								h='2.50rem'
 								size='md'
-								bg='#2081e2'
+								bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
 								color='white'
-								colorScheme='messenger'
+								_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 							>
-                Sign Up
+								Sign Up
 							</Button>
 						</Stack>
 					</Flex>

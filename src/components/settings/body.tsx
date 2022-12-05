@@ -5,6 +5,7 @@ import {
 	Button,
 	Textarea,
 	useToast,
+	useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { getAuth } from "firebase/auth";
@@ -22,6 +23,7 @@ const SettingsBody = () => {
 	const user = getAuth();
 	const toast = useToast();
 	const navigate = useNavigate();
+	const { colorMode } = useColorMode();
 
 	const handleUpdate = () => {
 		updateUser(user?.currentUser?.uid as string, logoImage, backgroundImage, bio)
@@ -64,7 +66,7 @@ const SettingsBody = () => {
 
 			<Box mt='30px'>
 				<Text fontSize='2xl' mt='10px'>
-          Bio
+					Bio
 				</Text>
 				<Textarea
 					mt='10px'
@@ -76,8 +78,13 @@ const SettingsBody = () => {
 
 			<Box mt='30px'>
 				<Flex justifyContent='center'>
-					<Button colorScheme='messenger' w='200px' onClick={handleUpdate}>
-            Update
+					<Button
+						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						color='white'
+						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+						w='200px'
+						onClick={handleUpdate}>
+						Update
 					</Button>
 				</Flex>
 			</Box>
