@@ -4,6 +4,7 @@ import {
 	Text,
 	Avatar,
 	HStack,
+	Center,
 } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
@@ -24,8 +25,8 @@ const LiveList = () => {
 		getData();
 	}, []);
 
-	return (
-		<HStack w='90%' h='50px' spacing='3%' my='1%' px='2%'  mx='10%'>
+	return (<Center>
+		<HStack w='90%' h='50px' spacing='3%' my='1%' px='2%'>
 			<Swiper
 				style={{
 					width: "100%",
@@ -43,7 +44,7 @@ const LiveList = () => {
 					(<SwiperSlide key={item.id}>
 						<Box >
 							<HStack>
-								<Text>
+								<Text fontSize={["12px","14px","16px"]}>
 									{item?.symbol}
 								</Text>
 								<Avatar 
@@ -52,7 +53,7 @@ const LiveList = () => {
 									src={item?.image}
 								/>
 							</HStack>
-							<Text>
+							<Text fontSize={["10px","12px","14px"]}>
 								${item?.current_price}
 							</Text>
 						</Box>
@@ -60,6 +61,7 @@ const LiveList = () => {
 					))}
 			</Swiper>
 		</HStack>
+	</Center>
 	);
 
 };

@@ -34,23 +34,23 @@ const Carusel = () => {
 
 	return (
 		<>
-			<Center mb='2rem'>
+			{/*<Center mb='2rem'>
 				<TypeAnimation
 					sequence={[
-						"Small things make perfection, but", // Types 'One'
+						"Let's make your art into your digital asset", // Types 'One'
 						1500, // Waits 1s
 
-						"Small things make perfection, but perfection is no small thing.",
+						"",
 						1500,
 					]}
 					wrapper='div'
 					speed={20}
 					cursor={true}
 					repeat={Infinity}
-					style={{ fontSize: "1.5em", fontStyle: "bold" }}
+					style={{ fontSize: "1.1em", fontStyle: "bold" }}
 				/>
-			</Center>
-			<Flex align='center' justify='center' m='2rem'>
+			</Center>*/}
+			<Flex align='center' justify='center' m='2rem' h={["100px","150px","200px","250px","300px"]}>
 				<Swiper
 					style={{
 						width: "100%",
@@ -69,8 +69,8 @@ const Carusel = () => {
 							<Box backgroundImage={`url(${item.img})`} 
 								cursor="pointer"
 								borderRadius="15px"
-								w={["70px","130px","170px","230px","330px"]} 
-								h={["70px","130px","170px","230px","330px"]}
+								w={["70px","130px","170px","230px","300px"]} 
+								h={["70px","130px","170px","230px","300px"]}
 								bgPosition="center"
 								bgRepeat="no-repeat" 
 								objectFit='fill' 

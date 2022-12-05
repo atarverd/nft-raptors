@@ -54,7 +54,7 @@ const Search = () => {
 	};
 
 	const asyncronus = async () => {
-		const question = query(collection(db, "nfts"), where("name", ">=", querys));
+		const question = query(collection(db, "nfts"), where("name", ">=", querys?.toUpperCase()));
 
 		const querySnapshot = await getDocs(question);
 		const result:TNft[] = [];
@@ -90,11 +90,11 @@ const Search = () => {
 	};
 
 	return (
-		<Box m='15px'>
+		<Box m='15px' minH="100vh">
 			{isLoading ? (
 				<Loader />
 			) : (
-				<Box display={["block", "flex"]} justifyContent='space-between'>
+				<Box display={["block","block","block", "flex"]} justifyContent='space-between'>
 					<Flex display='flex'>
 						<Accordions
 							priceSort={priceSort}
