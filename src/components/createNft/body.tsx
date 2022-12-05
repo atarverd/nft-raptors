@@ -21,7 +21,7 @@ import { db } from "../../firebase-config";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UploadImage from "../createCollection/uploadImage";
-import { collection,doc,getDoc, query, where, getDocs, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, query, where, getDocs, addDoc } from "firebase/firestore";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 type TCollection = {
@@ -90,15 +90,15 @@ const Body = () => {
 	const handleCreate = async () => {
 
 
-		if(image){
-			const userRef=doc(db,"users",user?.currentUser?.uid as string);
+		if (image) {
+			const userRef = doc(db, "users", user?.currentUser?.uid as string);
 			const userSnap = await getDoc(userRef);
 
 			const imageRef = ref(storage, image.name);
 			let addedImageRef = "";
 			await uploadBytes(imageRef, image);
 			await getDownloadURL(imageRef).then((url) => (addedImageRef = url));
-			
+
 			addDoc(collection(db, "nfts"), {
 				name,
 				currentPrice: 0,
@@ -109,8 +109,8 @@ const Body = () => {
 				priceHistory: [],
 				isForSold: false,
 				owner: userSnap?.data()?.username,
-			})
-				
+			});
+
 		}
 	};
 
