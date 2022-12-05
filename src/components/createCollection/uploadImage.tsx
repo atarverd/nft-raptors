@@ -7,22 +7,24 @@ import {
 	Button,
 	Avatar,
 	HStack,
+	useColorMode,
 } from "@chakra-ui/react";
 
-type TProps={
-	size:string;
-	h:string;
-	w:string;
-	handleLogoImage:(set:any)=>void;
+type TProps = {
+	size: string;
+	h: string;
+	w: string;
+	handleLogoImage: (set: any) => void;
 }
-const UploadImage = ({ size, h, w,handleLogoImage}:TProps) => {
+const UploadImage = ({ size, h, w, handleLogoImage }: TProps) => {
 
 	const [selectedFile, setSelectedFile] = useState<File | null>();
+	const { colorMode } = useColorMode();
 
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files.length > 0){
-      
+		if (e.target.files && e.target.files.length > 0) {
+
 			setSelectedFile(e.target.files[0]);
 			handleLogoImage(e.target.files[0]);
 		}
@@ -40,10 +42,10 @@ const UploadImage = ({ size, h, w,handleLogoImage}:TProps) => {
 
 				{!size ?
 					selectedFile &&
-          <Image
-          	w={w}
-          	h={h}
-          	src={URL.createObjectURL(selectedFile)} />
+					<Image
+						w={w}
+						h={h}
+						src={URL.createObjectURL(selectedFile)} />
 					: selectedFile && (
 						<Avatar
 							src={URL.createObjectURL(selectedFile)}
@@ -54,11 +56,15 @@ const UploadImage = ({ size, h, w,handleLogoImage}:TProps) => {
 
 				<Input type="file" onChange={onChange} accept="image/*" />
 				{selectedFile &&
-          <HStack spacing="2rem">
-          	<Button colorScheme='messenger' onClick={removeSelectedFile}>
-              Remove Image
-          	</Button>
-          </HStack>}
+					<HStack spacing="2rem">
+						<Button
+							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							color='white'
+							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+							onClick={removeSelectedFile}>
+							Remove Image
+						</Button>
+					</HStack>}
 
 			</VStack>
 		</Box>

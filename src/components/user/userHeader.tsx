@@ -10,25 +10,25 @@ import {
 	MenuItem,
 	Collapse,
 	MenuButton,
-} from "@chakra-ui/react";
-import UserTabs from "./userTabs";
-import { db } from "../../firebase-config";
-import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { useParams, useNavigate } from "react-router";
+} from '@chakra-ui/react';
+import UserTabs from './userTabs';
+import { db } from '../../firebase-config';
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { ChevronDownIcon } from '@chakra-ui/icons';
+import { useParams, useNavigate } from 'react-router';
 
 type TUserData = {
-  balance: number;
-  email: string;
-  favorites: string[];
-  gender: string;
-  isPaymentConnected: boolean;
-  paymentMethod: string;
-  username: string;
-  bio: string;
-  userLogo: string;
-  userBackground: string;
+	balance: number;
+	email: string;
+	favorites: string[];
+	gender: string;
+	isPaymentConnected: boolean;
+	paymentMethod: string;
+	username: string;
+	bio: string;
+	userLogo: string;
+	userBackground: string;
 }
 
 const UserHeader = () => {
@@ -42,34 +42,33 @@ const UserHeader = () => {
 	const handleToggle = () => setShow(!show);
 
 	const asynch = async () => {
-		const docRef = doc(db, "users", id as string);
+		const docRef = doc(db, 'users', id as string);
 		const docSnap = await getDoc(docRef);
 
 		if (docSnap.exists()) {
-			console.log("Document data:", docSnap.data());
 			const data = docSnap.data();
 			//@ts-ignore
 			setUserData(data);
 		} else {
-			console.log("No such document!");
+			console.log('No such document!');
 		}
 	};
 
 	useEffect(() => { asynch(); }, []);
 
 	const navigateSettings = () => {
-		navigate("/settings");
+		navigate('/settings');
 	};
 
 	const navigateCreateCollection = () => {
-		navigate("/create-collection");
+		navigate('/create-collection');
 	};
 
 	return (
 		<Box>
 
-			<Box h='300px' bgImage={`url(${userData?.userBackground})`} bgPosition="center"
-				bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
+			<Box h='300px' bgImage={`url(${userData?.userBackground})`} bgPosition='center'
+				bgRepeat='no-repeat' objectFit='fill' pt='150px' backgroundSize='cover'>
 				<Box
 					ml='40px'
 					border='4px'
@@ -96,7 +95,7 @@ const UserHeader = () => {
 					<Box mt='35px' mr='40px'>
 						<Menu>
 							<MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                Actions
+								Actions
 							</MenuButton>
 							<MenuList>
 								<MenuItem onClick={navigateSettings}>Settings</MenuItem>
@@ -111,8 +110,8 @@ const UserHeader = () => {
 					<Badge
 						fontSize='1xl'
 						variant='solid'
-						colorScheme={userData?.balance ? "green" : "red"}>
-            Balance: {userData?.balance}
+						colorScheme={userData?.balance ? 'green' : 'red'}>
+						Balance: {userData?.balance}
 					</Badge>
 				</Box>
 
@@ -121,7 +120,7 @@ const UserHeader = () => {
 						{userData?.bio}
 					</Collapse>
 					<Button size='xs' onClick={handleToggle} mt='1rem'>
-            Show {show ? "Less" : "More"}
+						Show {show ? 'Less' : 'More'}
 					</Button>
 				</Box>
 			</Box>

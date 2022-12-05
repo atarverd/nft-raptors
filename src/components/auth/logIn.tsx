@@ -12,6 +12,7 @@ import {
 	FormControl,
 	InputRightElement,
 	useToast,
+	useColorMode
 } from "@chakra-ui/react";
 import login from "../../assets/login.jpg";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -35,6 +36,7 @@ const LogIn = () => {
 	const isPasswordError = passwordInput === "";
 
 	const auth = getAuth();
+	const { colorMode } = useColorMode();
 
 	const handleLogin = () => {
 		signInWithEmailAndPassword(auth, emailInput, passwordInput)
@@ -68,8 +70,12 @@ const LogIn = () => {
 			my='50px'
 			ml='20%'
 			mr='20%'
-			boxShadow='dark-lg'
-			bg='white'
+			boxShadow={
+				colorMode === "dark"
+					? "0 0 24px 4px white"
+					: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+			}
+			bg={colorMode === "dark" ? "#071b38" : "gray.200"}
 			borderRadius='15px'
 		>
 			<Flex display='flex' align-items='flex-start'>
@@ -128,20 +134,24 @@ const LogIn = () => {
 								onClick={handleLogin}
 								h='2.50rem'
 								size='md'
-								bg='#2081e2'
+								bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
 								color='white'
-								colorScheme='messenger'
+								_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 							>
-                Sign In
+								Sign In
 							</Button>
-							<Button onClick={navigateRagistration} colorScheme='green'>
-                Sign Up
+							<Button
+								onClick={navigateRagistration}
+								bg='#38A169'
+								color='white'
+								_hover={{ background: '#2F855A' }}>
+								Sign Up
 							</Button>
 						</Stack>
 					</Flex>
 				</HStack>
 			</Flex>
-		</Box>
+		</Box >
 	);
 };
 

@@ -10,16 +10,16 @@ import { addToCart, deleteFromCart } from "../../features/cartSlice";
 import { checkItemIsInArray } from "../../utils/checkItemInArray";
 
 type TInfo = {
-  collectionId: string;
-  collectionName: string;
-  name: string;
-  favorite: number;
-  currentPrice: number;
-  owner: string;
-  ownerId: string;
-  isForSold: boolean;
-  id: string;
-  img: string;
+	collectionId: string;
+	collectionName: string;
+	name: string;
+	favorite: number;
+	currentPrice: number;
+	owner: string;
+	ownerId: string;
+	isForSold: boolean;
+	id: string;
+	img: string;
 };
 
 const NftBasicInfo = ({
@@ -53,7 +53,6 @@ const NftBasicInfo = ({
 
 	const handleAddClick = () => {
 		if (!checkItemIsInArray(cart, id as string)) {
-			console.log(1);
 			dispatch(
 				addToCart({
 					id: id as string,
@@ -84,7 +83,7 @@ const NftBasicInfo = ({
 						{name}
 					</Text>
 					<Text>
-            Owned by &nbsp;
+						Owned by &nbsp;
 						<Link
 							onClick={navigateToUser}
 							_hover={{ textDecoration: "none" }}
@@ -113,7 +112,7 @@ const NftBasicInfo = ({
 						bg='#2081e2'
 						onClick={navigateToListNft}
 					>
-            List Nft
+						List Nft
 					</Button>
 				) : (
 					isForSold && (

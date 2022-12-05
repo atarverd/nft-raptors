@@ -9,6 +9,7 @@ import {
 	Textarea,
 	Accordion,
 	RadioGroup,
+	useColorMode,
 	AccordionIcon,
 	AccordionItem,
 	AccordionPanel,
@@ -24,30 +25,30 @@ import { collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
 
 type TCollection = {
-  collectionName: string;
-  collectionId: string;
+	collectionName: string;
+	collectionId: string;
 };
 
 
 const Body = () => {
-	const [choosedCollection, setChoosedCollections] = useState<TCollection>({ collectionName: "",collectionId: ""});
+	const [choosedCollection, setChoosedCollections] = useState<TCollection>({ collectionName: "", collectionId: "" });
 	const [collections, setCollections] = useState<TCollection[]>([]);
 	const [description, setDescription] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const [name, setName] = useState<string>();
-	
+
 	const user = getAuth();
 	const toast = useToast();
 	const storage = getStorage();
 	const navigate = useNavigate();
+	const { colorMode } = useColorMode();
 
 
-	const handleChoosedCollection = (e:  string) => {
+	const handleChoosedCollection = (e: string) => {
 		const id = collections?.find((el) => el.collectionName === e)?.collectionId;
 		setChoosedCollections({ collectionName: e, collectionId: id as string });
 	};
 	const handleDescription = (e: any) => {
-		console.log(e);
 		setDescription(e.target.value);
 	};
 
@@ -88,9 +89,9 @@ const Body = () => {
 
 	const handleCreate = async () => {
 
-		if(image){
+		if (image) {
 			const imageRef = ref(storage, image.name);
-			let addedImageRef="";
+			let addedImageRef = "";
 			await uploadBytes(imageRef, image);
 			await getDownloadURL(imageRef).then((url) => (addedImageRef = url));
 
@@ -104,9 +105,7 @@ const Body = () => {
 				priceHistory: [],
 				isForSold: false,
 				owner: "for example",
-			})
-				.then(() => console.log("true"))
-				.catch((err) => console.log(err.messege));
+			});
 		}
 	};
 
@@ -148,14 +147,14 @@ const Body = () => {
 			</Box>
 			<Box mt='30px'>
 				<Text fontSize='2xl' mt='10px'>
-          Name
+					Name
 				</Text>
 				<Input placeholder='Item Name' mt='10px' onChange={handleName}></Input>
 			</Box>
 
 			<Box mt='30px'>
 				<Text fontSize='2xl' mt='10px'>
-          Description
+					Description
 				</Text>
 				<Textarea
 					mt='10px'
@@ -166,7 +165,7 @@ const Body = () => {
 
 			<Box mt='30px'>
 				<Text fontSize='2xl' mt='10px'>
-          Collection
+					Collection
 				</Text>
 				<Text mt='10px'>This is the collection where your item will apear</Text>
 				<Accordion allowToggle defaultIndex={[0]} allowMultiple mt='10px'>
@@ -184,8 +183,8 @@ const Body = () => {
 								justifyContent='center'
 							>
 								<RadioGroup defaultValue='1' onChange={handleChoosedCollection}>
-									<Stack spacing='15px'>
-										{collections?.map((col,i) => (
+									<Stack spacing='15px' overflowY='scroll' h='250px'>
+										{collections?.map((col, i) => (
 											<Radio
 												value={col.collectionName}
 												size='lg'
@@ -206,8 +205,13 @@ const Body = () => {
 
 			<Box mt='30px'>
 				<Flex justifyContent='center'>
-					<Button onClick={validateNft} colorScheme='messenger' w='200px'>
-            Create
+					<Button
+						onClick={validateNft}
+						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						color='white'
+						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+						w='200px'>
+						Create
 					</Button>
 				</Flex>
 			</Box>

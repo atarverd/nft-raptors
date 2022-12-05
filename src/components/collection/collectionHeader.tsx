@@ -7,6 +7,7 @@ import {
 	Button,
 	Collapse,
 	Skeleton,
+	useColorMode,
 } from "@chakra-ui/react";
 import { TCollection } from "../../types/collection.types";
 import { doc, getDoc } from "firebase/firestore";
@@ -16,7 +17,7 @@ import { db } from "../../firebase-config";
 import { getAuth } from "firebase/auth";
 
 type TProp = {
-  nftCount?: number;
+	nftCount?: number;
 };
 
 
@@ -27,6 +28,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 	const handleToggle = () => setShow(!show);
 	const navigate = useNavigate();
+	const { colorMode } = useColorMode();
 
 
 	const navigaetToCreateNft = () => {
@@ -36,13 +38,12 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 	const { id } = useParams();
 	const user = getAuth();
-	const isCreator=user?.currentUser?.uid===collection?.creatorId;
+	const isCreator = user?.currentUser?.uid === collection?.creatorId;
 	useEffect(() => {
 		const a = async () => {
 			const snap = await getDoc(doc(db, "collections", id as string));
 
 			if (snap.exists()) {
-				console.log(snap.data().creatorId);
 				//@ts-ignore
 				setCollection(snap.data());
 				setIsLoaded(true);
@@ -56,7 +57,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 	return (
 		<Box>
 			<Skeleton isLoaded={isLoaded}>
-				<Box h='300px' bgImage={`url(${collection?.background})`}bgPosition="center"
+				<Box h='300px' bgImage={`url(${collection?.background})`} bgPosition="center"
 					bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
 					<Box
 						ml='40px'
@@ -81,18 +82,20 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 						{collection?.collectionName}
 					</Text>
 					{isCreator &&
-            <Button
-            	colorScheme='messenger'
-            	onClick={navigaetToCreateNft}
-            	w='200px'
-            	mt='35px'>
-              Create Nft
-            </Button>
+						<Button
+							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							color='white'
+							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+							onClick={navigaetToCreateNft}
+							w='200px'
+							mt='35px'>
+							Create Nft
+						</Button>
 					}
 
 				</Flex>
 				<Text fontSize='2xl' mt='10px'>
-          by {collection?.creator}
+					by {collection?.creator}
 				</Text>
 
 				<HStack spacing={5} mt='10px'>
@@ -104,7 +107,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 						{collection?.description}
 					</Collapse>
 					<Button size='xs' onClick={handleToggle} mt='1rem'>
-            Show {show ? "Less" : "More"}
+						Show {show ? "Less" : "More"}
 					</Button>
 				</Box>
 			</Box>

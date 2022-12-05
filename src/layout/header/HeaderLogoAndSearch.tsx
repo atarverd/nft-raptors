@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
 	Flex,
 	Image,
@@ -66,6 +66,7 @@ const HeaderLogoAndSearch = () => {
 					h='3.8rem'
 					bg='#fff'
 					borderRadius='15px'
+					color='black'
 				/>
 				<InputRightElement h='50px' w='110px' m='5px'>
 					<Button

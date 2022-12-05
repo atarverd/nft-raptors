@@ -8,11 +8,11 @@ import Loader from "../loading";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 
 type TNft = {
-  id: string;
-  img: string;
-  name: string;
-  currentPrice: number;
-  ownerId: string;
+	id: string;
+	img: string;
+	name: string;
+	currentPrice: number;
+	ownerId: string;
 };
 
 const Collection = () => {
@@ -33,12 +33,11 @@ const Collection = () => {
 					img: nft.img,
 					name: nft.name,
 					currentPrice: nft.currentPrice,
-					ownerId:nft.ownerId
+					ownerId: nft.ownerId
 				});
 			});
 			setNfts(result);
 			setLoading(true);
-			console.log(result);
 		};
 		a();
 	}, []);
@@ -51,7 +50,7 @@ const Collection = () => {
 				<Flex display='flex' justifyContent='space-around'>
 					<SimpleGrid spacing='40px' columns={[1, 3, 5]} m='20px'>
 						{nfts?.map((item) => (
-							<GlobCard nft={item} key={item.id}/>
+							<GlobCard nft={item} key={item.id} />
 						))}
 					</SimpleGrid>
 				</Flex>

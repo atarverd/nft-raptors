@@ -29,10 +29,10 @@ const Cart = () => {
 				boxSize='35px'
 				cursor='pointer'
 			/>
-			<Container position='relative'>
+			<Container position='relative' >
 				<Drawer isOpen={isOpen} placement='right' onClose={onClose}>
 					<DrawerOverlay />
-					<DrawerContent bg='#EBF8FF' margin='20px' borderRadius='15px'>
+					<DrawerContent bg={colorMode === 'dark' ? "#010914" : "gray.100"} margin='20px' borderRadius='15px'>
 						<DrawerCloseButton />
 						<CartHeader />
 						<CartDrawer />

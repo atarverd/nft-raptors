@@ -12,13 +12,13 @@ import { useNavigate } from "react-router-dom";
 import { deleteDoc, doc } from "firebase/firestore";
 
 type TNft = {
-  collection: {
-    id: string;
-    imageUrl: string;
-    name: string;
-    ownerId: string;
-  },
-  asyncronusCollection?: () => void;
+	collection: {
+		id: string;
+		imageUrl: string;
+		name: string;
+		ownerId: string;
+	},
+	asyncronusCollection?: () => void;
 };
 
 const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
@@ -27,8 +27,6 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 	const user = getAuth();
 
 	const isOwner = collection.ownerId === user?.currentUser?.uid;
-	console.log(collection.ownerId, user?.currentUser?.uid);
-	const checkHover = colorMode === "dark" ? "red" : "green";
 
 	const toCollectionPage = () => {
 		navigate("/collection/" + collection.id);
@@ -53,12 +51,12 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 						: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
 				}
 				bg='white'
-				w={[200,null,300, 350]}
+				w={[200, null, 300, 350]}
 			>
 				<Image
 					onClick={toCollectionPage}
 					src={collection.imageUrl}
-					w={[200,null,300, 350]}
+					w={[200, null, 300, 350]}
 					h='220px'
 					borderRadius='5px'
 					transition='transform .2s;'
@@ -71,14 +69,14 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 					</Text>
 
 					{isOwner && asyncronusCollection &&
-            <Button
-            	bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
-            	color='white'
-            	onClick={() => deleteCollecton()}
-            	_hover={{ background: checkHover }}
-            >
-              Delete Collection
-            </Button>}
+						<Button
+							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							color='white'
+							onClick={() => deleteCollecton()}
+							_hover={{ background: 'red' }}
+						>
+							Delete Collection
+						</Button>}
 				</Stack>
 
 			</Box>
