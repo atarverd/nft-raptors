@@ -17,27 +17,27 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import { getAuth } from "firebase/auth";
-import { db } from "../../firebase-config";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UploadImage from "../createCollection/uploadImage";
-import { collection, doc, getDoc, query, where, getDocs, addDoc } from "firebase/firestore";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
+import useCollectionRequest from "../../hooks/useCollectionRequest";
+import { TCollection } from '../../types/collection.types';
+import { getStorage } from "firebase/storage";
+import { addNft } from '../../utils/addNft';
 
-type TCollection = {
-	collectionName: string;
-	collectionId: string;
-};
-
+type TChoosed = {
+	collectionName: string,
+	collectionId: string
+}
 
 const Body = () => {
-	const [choosedCollection, setChoosedCollections] = useState<TCollection>({ collectionName: "", collectionId: "" });
-	const [collections, setCollections] = useState<TCollection[]>([]);
+	const [choosedCollection, setChoosedCollections] = useState<TChoosed>({ collectionName: "", collectionId: "" });
 	const [description, setDescription] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const [name, setName] = useState<string>();
 
 	const user = getAuth();
+	const id = user?.currentUser?.uid;
 	const toast = useToast();
 	const storage = getStorage();
 	const navigate = useNavigate();
@@ -45,7 +45,7 @@ const Body = () => {
 
 
 	const handleChoosedCollection = (e: string) => {
-		const id = collections?.find((el) => el.collectionName === e)?.collectionId;
+		const id = collections?.find((el) => el.collectionName === e)?.id;
 		setChoosedCollections({ collectionName: e, collectionId: id as string });
 	};
 	const handleDescription = (e: any) => {
@@ -65,7 +65,7 @@ const Body = () => {
 			(el) => el !== undefined
 		);
 		if (collIsVallid && description && image && name) {
-			handleCreate()
+			addNft(name, image, description, choosedCollection, id as string)
 				.then(() =>
 					toast({
 						title: "Nft Created Successfully",
@@ -87,52 +87,8 @@ const Body = () => {
 		}
 	};
 
-	const handleCreate = async () => {
+	const collections = useCollectionRequest('user', id);
 
-
-		if (image) {
-			const userRef = doc(db, "users", user?.currentUser?.uid as string);
-			const userSnap = await getDoc(userRef);
-
-			const imageRef = ref(storage, image.name);
-			let addedImageRef = "";
-			await uploadBytes(imageRef, image);
-			await getDownloadURL(imageRef).then((url) => (addedImageRef = url));
-
-			addDoc(collection(db, "nfts"), {
-				name,
-				currentPrice: 0,
-				favourite: 0,
-				img: addedImageRef,
-				...choosedCollection,
-				ownerId: user?.currentUser?.uid,
-				priceHistory: [],
-				isForSold: false,
-				owner: userSnap?.data()?.username,
-			});
-
-		}
-	};
-
-	const asynchronus = async () => {
-		const q = query(
-			collection(db, "collections"),
-			where("creatorId", "==", user.currentUser?.uid)
-		);
-
-		const ColSnapshot = await getDocs(q);
-		const result: TCollection[] = [];
-		ColSnapshot.forEach((doc) => {
-			const col = doc.data();
-			result.push({ collectionName: col.collectionName, collectionId: doc.id });
-		});
-		setCollections(result);
-	};
-
-
-	useEffect(() => {
-		asynchronus();
-	}, []);
 	return (
 		<Box>
 			<Text fontSize='4xl'>Create New Nft</Text>
@@ -189,7 +145,7 @@ const Body = () => {
 							>
 								<RadioGroup defaultValue='1' onChange={handleChoosedCollection}>
 									<Stack spacing='15px' overflowY='scroll' h='250px'>
-										{collections?.map((col, i) => (
+										{collections?.map((col: TCollection, i) => (
 											<Radio
 												value={col.collectionName}
 												size='lg'

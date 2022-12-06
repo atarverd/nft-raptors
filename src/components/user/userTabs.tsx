@@ -2,7 +2,6 @@ import {
 	Tab,
 	Box,
 	Tabs,
-	Flex,
 	Input,
 	TabList,
 	TabPanel,
@@ -10,78 +9,23 @@ import {
 	InputGroup,
 	SimpleGrid,
 } from '@chakra-ui/react';
+import { useState } from 'react';
 import GlobCard from '../cards/globCard';
-import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useParams } from 'react-router';
-import { useEffect, useState } from 'react';
-import { db } from '../../firebase-config';
+import useGetNfts from '../../hooks/useGetNfts';
 import CollectionCard from '../cards/collectionCard';
+import { TCollection } from '../../types/collection.types';
+import useCollectionRequest from '../../hooks/useCollectionRequest';
 
-type TNftSnap = {
-	id: string;
-	img: string;
-	name: string;
-	currentPrice: number;
-	ownerId: string;
-}
-type TColSnap = {
-	id: string;
-	ownerId: string;
-	name: string;
-	imageUrl: string;
-}
 
 const UserTabs = () => {
+
 	const { id } = useParams();
-	const [ownedNfts, setOwnedNfts] = useState<TNftSnap[]>([]);
-	const [ownedCollections, setOwnedCollections] = useState<TColSnap[]>([]);
 	const [search, setSearch] = useState('');
 
-	const asyncronusNft = async () => {
-		const q = query(
-			collection(db, 'nfts'),
-			where('ownerId', '==', id as string)
-		);
+	const ownedCollections = useCollectionRequest('user', id as string);
+	const { nfts, isLoaded } = useGetNfts('ownerId', id as string);
 
-		const querySnapshot = await getDocs(q);
-		const result: TNftSnap[] = [];
-		querySnapshot.forEach((doc) => {
-			const nft = doc.data();
-			result.push({
-				id: doc.id,
-				img: nft.img,
-				name: nft.name,
-				currentPrice: nft.currentPrice,
-				ownerId: nft.ownerId,
-			});
-		});
-		setOwnedNfts(result);
-	};
-
-	const asyncronusCollections = async () => {
-		const q = query(
-			collection(db, 'collections'),
-			where('creatorId', '==', id as string)
-		);
-
-		const querySnapShot = await getDocs(q);
-		const result: TColSnap[] = [];
-		querySnapShot.forEach((col) => {
-			const collection = col.data();
-			result.push({
-				id: col.id,
-				ownerId: collection.creatorId,
-				name: collection.collectionName,
-				imageUrl: collection.feature,
-			});
-		});
-		setOwnedCollections(result);
-	};
-
-	useEffect(() => {
-		asyncronusNft();
-		asyncronusCollections();
-	}, []);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
@@ -108,8 +52,8 @@ const UserTabs = () => {
 				<TabPanels mt='20px'>
 					<TabPanel>
 						<SimpleGrid spacing='40px' columns={[1, null, 3, 5]} m='20px'>
-							{ownedNfts
-								?.filter((el: TNftSnap) => el.name.includes(search))
+							{nfts
+								?.filter((el) => el.name.includes(search))
 								.map((nft, i) => (
 									<GlobCard nft={nft} key={i} />
 								))}
@@ -121,11 +65,11 @@ const UserTabs = () => {
 						<SimpleGrid spacing='40px' columns={[1, 2, null, null, 3]} m='20px'>
 
 							{ownedCollections
-								?.filter((el: TColSnap) => el.name.includes(search))
+								?.filter((el: TCollection) => el.collectionName.includes(search))
 								.map((col) => (
 									<CollectionCard
 										collection={col}
-										asyncronusCollection={asyncronusCollections} key={col.id} />
+										key={col.id} />
 								))}
 						</SimpleGrid>
 					</TabPanel>

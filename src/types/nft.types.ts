@@ -4,4 +4,15 @@ export type TNft = {
   name: string;
   currentPrice: number;
   ownerId: string;
+  collectionId: string;
+  collectionName: string;
+  isForSold: boolean;
+  owner: string;
+  priceHistory: TPriceHistory[];
 };
+
+export type TPriceHistory = {
+  data: {seconds: number; nanoseconds: number;};
+  prevOwner: string;
+  price: number;
+}

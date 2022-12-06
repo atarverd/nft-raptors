@@ -8,13 +8,12 @@ import {
 	Collapse,
 	Skeleton,
 	useColorMode,
-} from "@chakra-ui/react";
-import { TCollection } from "../../types/collection.types";
-import { doc, getDoc } from "firebase/firestore";
-import { useNavigate, useParams } from "react-router";
-import { useEffect, useState } from "react";
-import { db } from "../../firebase-config";
-import { getAuth } from "firebase/auth";
+} from '@chakra-ui/react';
+import { useNavigate, useParams } from 'react-router';
+import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import useDocRequest from '../../hooks/useDocRequest';
+import { TCollection } from '../../types/collection.types';
 
 type TProp = {
 	nftCount?: number;
@@ -22,9 +21,14 @@ type TProp = {
 
 
 const CollectionHeader = ({ nftCount }: TProp) => {
-	const [isLoaded, setIsLoaded] = useState(false);
+
+	const [data, setData] = useState<TCollection>();
+	const { id } = useParams();
+
+
 	const [show, setShow] = useState(false);
-	const [collection, setCollection] = useState<TCollection>();
+	const isLoaded = useDocRequest('collections', id as string, setData);
+
 
 	const handleToggle = () => setShow(!show);
 	const navigate = useNavigate();
@@ -32,33 +36,19 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 
 	const navigaetToCreateNft = () => {
-		navigate("/create-nft");
+		navigate('/create-nft');
 	};
 
 
-	const { id } = useParams();
 	const user = getAuth();
-	const isCreator = user?.currentUser?.uid === collection?.creatorId;
-	useEffect(() => {
-		const a = async () => {
-			const snap = await getDoc(doc(db, "collections", id as string));
+	const isCreator = user?.currentUser?.uid === data?.creatorId;
 
-			if (snap.exists()) {
-				//@ts-ignore
-				setCollection(snap.data());
-				setIsLoaded(true);
-			} else {
-				console.log("No such document");
-			}
-		};
-		a();
-	}, []);
 
 	return (
 		<Box>
 			<Skeleton isLoaded={isLoaded}>
-				<Box h='300px' bgImage={`url(${collection?.background})`} bgPosition="center"
-					bgRepeat="no-repeat" objectFit='fill' pt='150px' backgroundSize='cover'>
+				<Box h='300px' bgImage={`url(${data?.background})`} bgPosition='center'
+					bgRepeat='no-repeat' objectFit='fill' pt='150px' backgroundSize='cover'>
 					<Box
 						ml='40px'
 						border='4px'
@@ -67,7 +57,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 						width='max-content'
 					>
 						<Image
-							src={collection?.logo}
+							src={data?.logo}
 							w='200px'
 							h='200px'
 							borderRadius='5px'
@@ -79,13 +69,13 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 			<Box mx='40px' my='20px' mt='50px'>
 				<Flex justifyContent='space-between' alignItems='center'>
 					<Text fontSize='4xl' mt='30px'>
-						{collection?.collectionName}
+						{data?.collectionName}
 					</Text>
 					{isCreator &&
 						<Button
-							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 							color='white'
-							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+							_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							onClick={navigaetToCreateNft}
 							w='200px'
 							mt='35px'>
@@ -95,7 +85,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 				</Flex>
 				<Text fontSize='2xl' mt='10px'>
-					by {collection?.creator}
+					by {data?.creator}
 				</Text>
 
 				<HStack spacing={5} mt='10px'>
@@ -104,10 +94,10 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 				</HStack>
 				<Box maxW='30%' mt='10px'>
 					<Collapse startingHeight={20} in={show}>
-						{collection?.description}
+						{data?.description}
 					</Collapse>
 					<Button size='xs' onClick={handleToggle} mt='1rem'>
-						Show {show ? "Less" : "More"}
+						Show {show ? 'Less' : 'More'}
 					</Button>
 				</Box>
 			</Box>

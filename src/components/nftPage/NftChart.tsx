@@ -8,18 +8,13 @@ import {
 	Tooltip,
 	ResponsiveContainer,
 } from "recharts";
-
-type THistory = {
-  date: string;
-  price: number;
-  prevOwner: string;
-};
+import { TPriceHistory } from "../../types/nft.types";
 type TProp = {
-  priceHistory: THistory[];
+	priceHistory: TPriceHistory[];
 };
 
 const NftChart = ({ priceHistory }: TProp) => {
-	priceHistory=priceHistory.map((item)=>{item.price=Number(item.price);return item;});
+	priceHistory = priceHistory.map((item) => { item.price = Number(item.price); return item; });
 	return (
 
 		<div style={{ width: "100%", height: 300 }}>
@@ -34,10 +29,10 @@ const NftChart = ({ priceHistory }: TProp) => {
 					}}
 				>
 					<CartesianGrid strokeDasharray="3 3" />
-					<XAxis  />
+					<XAxis />
 					<YAxis />
 					<Tooltip />
-					<Area type="monotone" dataKey='price'  stroke="#8884d8" fill="#8884d8" />
+					<Area type="monotone" dataKey='price' stroke="#8884d8" fill="#8884d8" />
 				</AreaChart>
 			</ResponsiveContainer>
 		</div>

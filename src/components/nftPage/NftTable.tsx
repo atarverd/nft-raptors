@@ -9,14 +9,10 @@ import {
 	TableContainer,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { TPriceHistory } from "../../types/nft.types";
 
-type THistory = {
-  date: string;
-  price: number;
-  prevOwner: string;
-};
 type TProp = {
-  priceHistory: THistory[];
+	priceHistory: TPriceHistory[];
 };
 
 const NftTable = ({ priceHistory }: TProp) => {
@@ -36,7 +32,7 @@ const NftTable = ({ priceHistory }: TProp) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{priceHistoryCopy?.reverse().map((item,i) => (
+					{priceHistoryCopy?.reverse().map((item, i) => (
 						<Tr key={i}>
 							<Td>
 								<Link

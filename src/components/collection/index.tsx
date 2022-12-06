@@ -1,50 +1,20 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
-import CollectionHeader from "./collectionHeader";
-import { useEffect, useState } from "react";
-import { db } from "../../firebase-config";
+import Loader from "../loading";
 import { useParams } from "react-router";
 import GlobCard from "../cards/globCard";
-import Loader from "../loading";
+import useGetNfts from "../../hooks/useGetNfts";
+import CollectionHeader from "./collectionHeader";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 
-type TNft = {
-	id: string;
-	img: string;
-	name: string;
-	currentPrice: number;
-	ownerId: string;
-};
 
 const Collection = () => {
 	const { id } = useParams();
-	const [nfts, setNfts] = useState<TNft[]>();
-	const [loading, setLoading] = useState<boolean>(false);
 
-	useEffect(() => {
-		const a = async () => {
-			const q = query(collection(db, "nfts"), where("collectionId", "==", id));
+	const { nfts, isLoaded } = useGetNfts('collectionId', id as string);
 
-			const NftsSnapshot = await getDocs(q);
-			const result: TNft[] = [];
-			NftsSnapshot.forEach((doc) => {
-				const nft = doc.data();
-				result.push({
-					id: doc.id,
-					img: nft.img,
-					name: nft.name,
-					currentPrice: nft.currentPrice,
-					ownerId: nft.ownerId
-				});
-			});
-			setNfts(result);
-			setLoading(true);
-		};
-		a();
-	}, []);
 	return (
 		<Box>
 			<CollectionHeader nftCount={nfts?.length} />
-			{!loading ? (
+			{!isLoaded ? (
 				<Loader />
 			) : (
 				<Flex display='flex' justifyContent='space-around'>

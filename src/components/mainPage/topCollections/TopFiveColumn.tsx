@@ -1,4 +1,4 @@
-import { TCollection } from "../../../types/collection.types";
+import { TCollection } from '../../../types/collection.types';
 import {
 	Text,
 	Avatar,
@@ -10,8 +10,8 @@ import {
 	Td,
 	TableContainer,
 	HStack,
-} from "@chakra-ui/react";
-import { formatter } from "../../../utils/formatValue";
+} from '@chakra-ui/react';
+import { formatter } from '../../../utils/formatValue';
 
 type TProps = {
 	data: TCollection[];
@@ -20,7 +20,7 @@ type TProps = {
 
 const TopFiveColumn = ({ data, from }: TProps) => {
 	return (
-		<TableContainer w={["", "70%", "45%"]} sx={{"::-webkit-scrollbar": {display: "none"}}}>
+		<TableContainer w={['', '70%', '45%']} sx={{ '::-webkit-scrollbar': { display: 'none' } }}>
 			<Table variant='simple'>
 				<Thead>
 					<Tr>

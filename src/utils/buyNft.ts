@@ -1,11 +1,11 @@
-import { db } from "../firebase-config";
+import { db } from '../firebase-config';
 import {
 	doc,
 	updateDoc,
 	getDoc,
 	arrayUnion,
 	increment,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 type TProps = {
   sellerId: string;
@@ -20,8 +20,8 @@ export const buyNft = async (
 	toast: any,
 	navigate: any
 ) => {
-	let buyerName = "";
-	const buyerRef = doc(db, "users", buyerId);
+	let buyerName = '';
+	const buyerRef = doc(db, 'users', buyerId);
 	const buyerSnap = await getDoc(buyerRef);
 
 	const total = cartArr.reduce((prev, cur) => {
@@ -35,8 +35,8 @@ export const buyNft = async (
 		buyerName = buyerSnap.data().username;
 
 		for await (const nft of cartArr) {
-			const sellerRef = doc(db, "users", nft.sellerId);
-			const nftRef = doc(db, "nfts", nft.itemId);
+			const sellerRef = doc(db, 'users', nft.sellerId);
+			const nftRef = doc(db, 'nfts', nft.itemId);
 
 			const sellerSnap = await getDoc(sellerRef);
 			const nftSnap = await getDoc(nftRef);
@@ -45,10 +45,10 @@ export const buyNft = async (
 				await updateDoc(sellerRef, {
 					balance: increment(nft.price - (nft.price * 2.5) / 100),
 				});
-				await updateDoc(doc(db, "collections", nftSnap.data().collectionId), {
+				await updateDoc(doc(db, 'collections', nftSnap.data().collectionId), {
 					volume: increment(nft.price),
 				});
-				await updateDoc(doc(db, "nfts", nft.itemId as string), {
+				await updateDoc(doc(db, 'nfts', nft.itemId as string), {
 					isForSold: false,
 					currentPrice: nft.price,
 					ownerId: buyerId,
@@ -62,20 +62,20 @@ export const buyNft = async (
 					fn();
 				})
 					.then(() => toast({
-						position: "top-right",
+						position: 'top-right',
 						duration: 3000,
-						status: "success",
-						title: "Successfully Purchased"
+						status: 'success',
+						title: 'Successfully Purchased'
 					}))
-					.then(() => navigate("/" + buyerId));
+					.then(() => navigate('/' + buyerId));
 			}
 		}
 	} else {
 		toast({
-			position: "top-right",
+			position: 'top-right',
 			duration: 3000,
-			status: "error",
-			title: "No Enough Funds"
+			status: 'error',
+			title: 'No Enough Funds'
 		});
 	}
 };
