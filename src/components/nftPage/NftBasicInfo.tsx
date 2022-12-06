@@ -13,7 +13,6 @@ type TInfo = {
 	collectionId: string;
 	collectionName: string;
 	name: string;
-	favorite: number;
 	currentPrice: number;
 	owner: string;
 	ownerId: string;
@@ -26,7 +25,6 @@ const NftBasicInfo = ({
 	collectionId,
 	collectionName,
 	name,
-	favorite,
 	currentPrice,
 	owner,
 	ownerId,
@@ -95,7 +93,7 @@ const NftBasicInfo = ({
 					<Text>
 						<Flex alignItems='center'>
 							<FaRegHeart size='25px' />
-							<Text ml='5px'>{favorite}</Text>
+							<Text ml='5px'>1</Text>
 						</Flex>
 					</Text>
 				</Flex>

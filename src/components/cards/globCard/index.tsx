@@ -30,7 +30,7 @@ const GlobCard = ({ nft }: TNft) => {
 	const dispatch: AppDispatch = useDispatch();
 	const user = getAuth();
 	const { cart } = useSelector((state: RootState) => state.cart);
-
+	console.log(nft);
 	const isOwner = nft.ownerId === user?.currentUser?.uid;
 
 	const handleAddClick = () => {

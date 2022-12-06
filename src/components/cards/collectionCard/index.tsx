@@ -5,19 +5,15 @@ import {
 	Image,
 	Button,
 	useColorMode,
-} from "@chakra-ui/react";
-import { getAuth } from "firebase/auth";
-import { db } from "../../../firebase-config";
-import { useNavigate } from "react-router-dom";
-import { deleteDoc, doc } from "firebase/firestore";
+} from '@chakra-ui/react';
+import { getAuth } from 'firebase/auth';
+import { db } from '../../../firebase-config';
+import { useNavigate } from 'react-router-dom';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { TCollection } from '../../../types/collection.types';
 
 type TNft = {
-	collection: {
-		id: string;
-		imageUrl: string;
-		name: string;
-		ownerId: string;
-	},
+	collection: TCollection,
 	asyncronusCollection?: () => void;
 };
 
@@ -26,15 +22,15 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 	const navigate = useNavigate();
 	const user = getAuth();
 
-	const isOwner = collection.ownerId === user?.currentUser?.uid;
+	const isOwner = collection.creatorId === user?.currentUser?.uid;
 
 	const toCollectionPage = () => {
-		navigate("/collection/" + collection.id);
+		navigate('/collection/' + collection.id);
 	};
 
 	const deleteCollecton = async () => {
 		if (asyncronusCollection) {
-			await deleteDoc(doc(db, "collections", collection.id))
+			await deleteDoc(doc(db, 'collections', collection.id))
 				.then(() => asyncronusCollection());
 		}
 	};
@@ -46,31 +42,31 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 				borderRadius='8px'
 				overflow='hidden'
 				boxShadow={
-					colorMode === "dark"
-						? "0 0 24px 4px white"
-						: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+					colorMode === 'dark'
+						? '0 0 24px 4px white'
+						: '0 0 24px 4px rgba(0, 0, 0, 0.15)'
 				}
 				bg='white'
 				w={[200, null, 300, 350]}
 			>
 				<Image
 					onClick={toCollectionPage}
-					src={collection.imageUrl}
+					src={collection.feature}
 					w={[200, null, 300, 350]}
 					h='220px'
 					borderRadius='5px'
 					transition='transform .2s;'
-					_hover={{ transform: "scale(1.1)" }}
+					_hover={{ transform: 'scale(1.1)' }}
 				/>
 
-				<Stack p='3' bg={colorMode === "dark" ? "#071b38" : "gray.200"}>
+				<Stack p='3' bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}>
 					<Text onClick={toCollectionPage} fontSize='2xl' noOfLines={1}>
-						{collection.name}
+						{collection.collectionName}
 					</Text>
 
 					{isOwner && asyncronusCollection &&
 						<Button
-							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 							color='white'
 							onClick={() => deleteCollecton()}
 							_hover={{ background: 'red' }}

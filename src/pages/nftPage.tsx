@@ -1,14 +1,16 @@
-import Loader from "../components/loading";
-import { db } from "../firebase-config";
-import { useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
-import { Box, Center, Flex } from "@chakra-ui/react";
-import NftTable from "../components/nftPage/NftTable";
-import NftChart from "../components/nftPage/NftChart";
-import NftItemPage from "../components/nftPage/NftItemPage";
-import NftBasicInfo from "../components/nftPage/NftBasicInfo";
-import NftAccordion from "../components/nftPage/NftAccordian";
+import Loader from '../components/loading';
+import { db } from '../firebase-config';
+import { useParams } from 'react-router-dom';
+import { doc, getDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { Box, Center, Flex } from '@chakra-ui/react';
+import NftTable from '../components/nftPage/NftTable';
+import NftChart from '../components/nftPage/NftChart';
+import NftItemPage from '../components/nftPage/NftItemPage';
+import NftBasicInfo from '../components/nftPage/NftBasicInfo';
+import NftAccordion from '../components/nftPage/NftAccordian';
+import useDocRequest from '../hooks/useDocRequest';
+import { TNft } from '../types/nft.types';
 
 type THistory = {
 	date: string;
@@ -16,81 +18,50 @@ type THistory = {
 	prevOwner: string;
 };
 
-type TNft = {
-	collectionId: string;
-	collectionName: string;
-	currentPrice: number;
-	id: string;
-	isForSold: boolean;
-	name: string;
-	owner: string;
-	img: string;
-	favorite: number;
-	priceHistory: THistory[];
-	ownerId: string;
-};
-
 const NftPage = () => {
-	const [nftInfo, setNftInfo] = useState<TNft>({
-		collectionId: "string",
-		collectionName: "string",
-		currentPrice: 1,
-		id: "string",
-		isForSold: true,
-		name: "asdf",
-		owner: "asdf",
-		img: "asdf",
-		favorite: 1,
-		priceHistory: [{ price: 1, date: "", prevOwner: "" }],
-		ownerId: "string",
-	});
-	const [isLoading, setIsloading] = useState(true);
+
 	const { id } = useParams();
+	const [data, setData] = useState<TNft>({
+		id: '',
+		img: '',
+		name: '',
+		currentPrice: 0,
+		ownerId: '',
+		collectionId: '',
+		collectionName: '',
+		isForSold: false,
+		owner: '',
+		priceHistory: [],
+	});
+	const isLoaded = useDocRequest('nfts', id as string, setData);
 
-	useEffect(() => {
-		const a = async () => {
-			const snap = await getDoc(doc(db, "nfts", id as string));
-
-			if (snap.exists()) {
-				//@ts-ignore
-				setNftInfo(snap.data());
-				setIsloading(false);
-			} else {
-				console.log("No such document");
-			}
-		};
-		a();
-	}, []);
-
-
-	if (isLoading) return <Loader></Loader>;
+	if (!isLoaded) return <Loader></Loader>;
 
 	return (
 		<Box ml='20%' mr='20%' mt='2%'>
 			<Center>
 				<Flex id='nft-conainer'>
-					<NftItemPage img={nftInfo.img} />
+					<NftItemPage img={data?.img} />
 
 					<Flex id='nft-info' flexDirection='column' gap={6} mt='2' ml='5%'>
 						<NftBasicInfo
-							collectionId={nftInfo.collectionId}
-							collectionName={nftInfo.collectionName}
-							name={nftInfo.name}
-							favorite={nftInfo.favorite}
-							currentPrice={nftInfo.currentPrice}
-							owner={nftInfo.owner}
-							ownerId={nftInfo.ownerId}
-							isForSold={nftInfo.isForSold}
-							id={nftInfo.id}
-							img={nftInfo.img}
+							collectionId={data?.collectionId}
+							collectionName={data?.collectionName}
+							name={data?.name}
+							currentPrice={data?.currentPrice}
+							owner={data?.owner}
+							ownerId={data?.ownerId}
+							isForSold={data?.isForSold}
+							id={data?.id}
+							img={data?.img}
 						/>
 
 						<NftAccordion accordionName='Price Graph'>
-							<NftChart priceHistory={nftInfo.priceHistory} />
+							<NftChart priceHistory={data?.priceHistory} />
 						</NftAccordion>
 
 						<NftAccordion accordionName='History'>
-							<NftTable priceHistory={nftInfo.priceHistory} />
+							<NftTable priceHistory={data.priceHistory} />
 						</NftAccordion>
 					</Flex>
 				</Flex>

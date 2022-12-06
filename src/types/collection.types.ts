@@ -4,6 +4,7 @@ export type TCollection = {
     creator: string;
     creatorId: string;
     category:string;
+    id: string;    
     date: {
       seconds: number;
       nanoseconds: number;

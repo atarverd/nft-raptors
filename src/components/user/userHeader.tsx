@@ -12,24 +12,12 @@ import {
 	MenuButton,
 } from '@chakra-ui/react';
 import UserTabs from './userTabs';
-import { db } from '../../firebase-config';
-import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
+import { useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useParams, useNavigate } from 'react-router';
+import useDocRequest from '../../hooks/useDocRequest';
+import { TUserData } from '../../types/user.types';
 
-type TUserData = {
-	balance: number;
-	email: string;
-	favorites: string[];
-	gender: string;
-	isPaymentConnected: boolean;
-	paymentMethod: string;
-	username: string;
-	bio: string;
-	userLogo: string;
-	userBackground: string;
-}
 
 const UserHeader = () => {
 
@@ -41,20 +29,7 @@ const UserHeader = () => {
 	const navigate = useNavigate();
 	const handleToggle = () => setShow(!show);
 
-	const asynch = async () => {
-		const docRef = doc(db, 'users', id as string);
-		const docSnap = await getDoc(docRef);
-
-		if (docSnap.exists()) {
-			const data = docSnap.data();
-			//@ts-ignore
-			setUserData(data);
-		} else {
-			console.log('No such document!');
-		}
-	};
-
-	useEffect(() => { asynch(); }, []);
+	const isLoaded = useDocRequest('users', id as string, setUserData);
 
 	const navigateSettings = () => {
 		navigate('/settings');
