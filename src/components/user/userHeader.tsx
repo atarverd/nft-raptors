@@ -30,7 +30,7 @@ const UserHeader = () => {
 	const navigate = useNavigate();
 	const handleToggle = () => setShow(!show);
 
-	const notFound = useDocRequest('users', id as string, setUserData);
+	const {notFound} = useDocRequest('users', id as string, setUserData);
 
 	const navigateSettings = () => {
 		navigate('/settings');

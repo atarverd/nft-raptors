@@ -14,6 +14,7 @@ type TNft = {
   name: string;
   currentPrice: number;
   ownerId: string;
+  isForSold:boolean;
 };
 
 const Search = () => {
@@ -66,6 +67,7 @@ const Search = () => {
 				name: nft.name,
 				currentPrice: nft.currentPrice,
 				ownerId: nft.ownerId,
+				isForSold:nft.isForSold,
 			});
 		});
 		setNfts(result);

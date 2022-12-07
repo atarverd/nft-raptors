@@ -33,7 +33,7 @@ const NftPage = () => {
 		owner: '',
 		priceHistory: [],
 	});
-	const isLoaded = useDocRequest('nfts', id as string, setData);
+	const {isLoaded} = useDocRequest('nfts', id as string, setData);
 
 	if (!isLoaded) return <Loader></Loader>;
 
@@ -66,10 +66,6 @@ const NftPage = () => {
 					</Flex>
 				</Flex>
 			</Center>
-
-			<NftAccordion accordionName='More From This Collection'>
-				<div>Her should be similar categories</div>
-			</NftAccordion>
 		</Box>
 	);
 };

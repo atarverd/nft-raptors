@@ -90,12 +90,6 @@ const NftBasicInfo = ({
 							{owner}
 						</Link>
 					</Text>
-					<Text>
-						<Flex alignItems='center'>
-							<FaRegHeart size='25px' />
-							<Text ml='5px'>1</Text>
-						</Flex>
-					</Text>
 				</Flex>
 			</Box>
 

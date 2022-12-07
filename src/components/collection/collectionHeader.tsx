@@ -27,7 +27,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 
 	const [show, setShow] = useState(false);
-	const isLoaded = useDocRequest('collections', id as string, setData);
+	const {isLoaded} = useDocRequest('collections', id as string, setData);
 
 
 	const handleToggle = () => setShow(!show);
