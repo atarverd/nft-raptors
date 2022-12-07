@@ -11,6 +11,7 @@ import {
 	Collapse,
 	MenuButton,
 } from '@chakra-ui/react';
+import NotFound from '../notFound';
 import UserTabs from './userTabs';
 import { useState } from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
@@ -29,7 +30,7 @@ const UserHeader = () => {
 	const navigate = useNavigate();
 	const handleToggle = () => setShow(!show);
 
-	const isLoaded = useDocRequest('users', id as string, setUserData);
+	const notFound = useDocRequest('users', id as string, setUserData);
 
 	const navigateSettings = () => {
 		navigate('/settings');
@@ -38,6 +39,8 @@ const UserHeader = () => {
 	const navigateCreateCollection = () => {
 		navigate('/create-collection');
 	};
+
+	if (notFound) return <NotFound />;
 
 	return (
 		<Box>

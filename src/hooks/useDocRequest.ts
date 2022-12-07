@@ -5,6 +5,7 @@ import { db } from "../firebase-config";
 const useDocRequest = (itemName: string, id: string, setData: (value: any) => void) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   const a = async () => {
     const snap = await getDoc(doc(db, itemName, id as string));
@@ -15,13 +16,13 @@ const useDocRequest = (itemName: string, id: string, setData: (value: any) => vo
       setData(data);
       setIsLoaded(true);
     } else {
-      console.log("No such document");
+      setNotFound(true);
     }
   };
   useEffect(() => {
 		a();
 	}, []);
-  return isLoaded;
+  return notFound;
 };
 
 export default useDocRequest;

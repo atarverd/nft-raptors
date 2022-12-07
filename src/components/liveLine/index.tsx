@@ -26,7 +26,7 @@ const LiveList = () => {
 	}, []);
 
 	return (<Center>
-		<HStack w='90%' h='50px' spacing='3%' my='1%' px='2%'>
+		<HStack w='90%' h='50px' spacing='3%' my='2%' ml='2%'>
 			<Swiper
 				style={{
 					width: "100%",
@@ -40,25 +40,25 @@ const LiveList = () => {
 					disableOnInteraction: false,
 				}}
 			>
-				{data.map((item: any,i) => 
-					(<SwiperSlide key={item.id}>
-						<Box >
-							<HStack>
-								<Text fontSize={["12px","14px","16px"]}>
-									{item?.symbol}
-								</Text>
-								<Avatar 
-									size='xs'
-									name='Kola Tioluwani'
-									src={item?.image}
-								/>
-							</HStack>
-							<Text fontSize={["10px","12px","14px"]}>
-								${item?.current_price}
+				{data.map((item: any, i) =>
+				(<SwiperSlide key={item.id}>
+					<Box >
+						<HStack>
+							<Text fontSize={["12px", "14px", "16px"]}>
+								{item?.symbol}
 							</Text>
-						</Box>
-					</SwiperSlide>
-					))}
+							<Avatar
+								size='xs'
+								name='Kola Tioluwani'
+								src={item?.image}
+							/>
+						</HStack>
+						<Text fontSize={["10px", "12px", "14px"]}>
+							${item?.current_price}
+						</Text>
+					</Box>
+				</SwiperSlide>
+				))}
 			</Swiper>
 		</HStack>
 	</Center>
