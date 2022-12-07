@@ -96,7 +96,8 @@ const SignUp = () => {
 					navigate("/");
 				});
 			})
-			.catch(() => {
+			.catch((e) => {
+				console.log(e.message);
 				toast({
 					title: "Something Went Wrong",
 					duration: 3000,

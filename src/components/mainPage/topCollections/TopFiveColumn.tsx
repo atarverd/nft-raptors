@@ -12,6 +12,7 @@ import {
 	HStack,
 } from '@chakra-ui/react';
 import { formatter } from '../../../utils/formatValue';
+import {useNavigate} from 'react-router-dom';
 
 type TProps = {
 	data: TCollection[];
@@ -19,6 +20,7 @@ type TProps = {
 };
 
 const TopFiveColumn = ({ data, from }: TProps) => {
+	const navigate = useNavigate();
 	return (
 		<TableContainer w={['', '70%', '45%']} sx={{ '::-webkit-scrollbar': { display: 'none' } }}>
 			<Table variant='simple'>
@@ -33,14 +35,14 @@ const TopFiveColumn = ({ data, from }: TProps) => {
 					{data.map((collection: TCollection, i) => {
 						return (
 							<Tr cursor='pointer' key={i}>
-								<Td>
+								<Td onClick={()=>navigate('/collection/'+collection.id)}>
 									<HStack spacing='2rem'>
 										<Text>{from + i}</Text>
 										<Avatar src={collection.logo} />
 										<Text ml='2.2rem'>{collection.collectionName}</Text>
 									</HStack>
 								</Td>
-								<Td>by {collection.creator}</Td>
+								<Td onClick={()=>navigate('/'+collection.creatorId)}>by {collection.creator}</Td>
 								<Td isNumeric>{formatter.format(collection.volume)}</Td>
 							</Tr>
 						);

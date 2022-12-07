@@ -108,32 +108,6 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 					</AccordionPanel>
 				</AccordionItem>
 			</Accordion>
-
-			<Accordion allowToggle defaultIndex={[0]} allowMultiple>
-				<AccordionItem>
-					<AccordionButton>
-						<Box flex='1' textAlign='left'>
-							<Text fontSize='2xl'>Category</Text>
-						</Box>
-						<AccordionIcon />
-					</AccordionButton>
-					<AccordionPanel pb={4}>
-						<Flex display='flex' flexDirection='column'>
-							<Stack spacing='10px'>
-								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
-									Surrealism
-								</Checkbox>
-								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
-									Fantasy
-								</Checkbox>
-								<Checkbox size='lg' colorScheme='messenger' pl='40px'>
-									Stranger
-								</Checkbox>
-							</Stack>
-						</Flex>
-					</AccordionPanel>
-				</AccordionItem>
-			</Accordion>
 		</Box>
 	);
 };

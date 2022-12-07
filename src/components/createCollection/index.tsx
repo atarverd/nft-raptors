@@ -2,83 +2,38 @@ import { Box, Text, Flex, Button, useToast, useColorMode } from "@chakra-ui/reac
 import { useState } from "react";
 import Body from "./body";
 import UploadImage from "./uploadImage";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { addCollection } from "../../utils/addCollection";
 
 
-
-let images: any = [];
 
 const CreateCollection = () => {
-	const [logoImage, setLogoImage] = useState<string>();
-	const [featureImage, setFeatureImage] = useState<string>();
-	const [bgImage, setBgImage] = useState<string>();
-	const [name, setName] = useState<string>();
-	const [description, setDescription] = useState<string>();
-	const [category, setCategory] = useState<string>();
-	const storage = getStorage();
+	const [logoImage, setLogoImage] = useState<File>();
+	const [featureImage, setFeatureImage] = useState<File>();
+	const [bgImage, setBgImage] = useState<File>();
+	const [name, setName] = useState<string>('');
+	const [description, setDescription] = useState<string>('');
+	const [category, setCategory] = useState<string>('');
 	const user = getAuth();
+	const id=user?.currentUser?.uid;
 	const navigate = useNavigate();
 	const { colorMode } = useColorMode();
-	const userRef = doc(db, "users", user?.currentUser?.uid as string);
 
 
 	const toast = useToast();
-	const collectionValidator = () => {
-		images = [logoImage, featureImage, bgImage];
-		const imgIsValid = images.every((el: string | undefined) => el !== undefined);
-		if (imgIsValid && name && description && category) {
-			handleSubmit();
-		} else {
-			toast({
-				title: "Some Fields Are Empty",
-				duration: 3000,
-				position: "top-right",
-				variant: "subtle",
-				status: "error",
-			});
-		}
-	};
-
-	const handleSubmit = async () => {
-		const urls: string[] = [];
-
-		const a = async () => {
-			for await (const img of images) {
-				if (img) {
-					const imageRef = ref(storage, img.name);
-					await uploadBytes(imageRef, img);
-					await getDownloadURL(imageRef).then((url) => {
-						urls.push(url);
-					});
-				}
-			}
-		};
-		await a();
-		const docSnap = await getDoc(userRef);
-		addDoc(collection(db, "collections"), {
-			collectionName: name,
-			description,
-			category,
-			logo: urls[0],
-			feature: urls[1],
-			background: urls[2],
-			creator: docSnap?.data()?.username,
-			creatorId: user?.currentUser?.uid,
-			date: new Date(),
-			volume: 0,
-		}).then(docRef => navigate("/collection/" + docRef.id))
-			.then(() =>
-				toast({
-					title: "Successfully Created",
-					duration: 3000,
-					position: "top-right",
-					status: "success",
-				})
-			);
+	const createCollection=()=>{
+		addCollection(id as string
+			,logoImage as File
+			,featureImage as File
+			,bgImage as File
+			,name
+			,description
+			,category
+			,toast
+			,navigate
+		);
 	};
 
 	return (
@@ -144,7 +99,7 @@ const CreateCollection = () => {
 							color='white'
 							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 							w='300px'
-							onClick={collectionValidator}
+							onClick={createCollection}
 						>
 							Create Collection
 						</Button>
