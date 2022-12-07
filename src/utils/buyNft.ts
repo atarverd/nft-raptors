@@ -28,7 +28,6 @@ export const buyNft = async (
 		prev = prev + Number(cur.price);
 		return prev;
 	}, 0);
-	//@ts-ignore
 
 	if (buyerSnap.exists() && buyerSnap.data().balance >= total) {
 		updateDoc(buyerRef, { balance: increment(-total) });
