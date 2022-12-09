@@ -9,6 +9,7 @@ export type TNft = {
   isForSold: boolean;
   owner: string;
   priceHistory: TPriceHistory[];
+  description:string;
 };
 
 export type TPriceHistory = {

@@ -1,5 +1,4 @@
 import { Box, Flex, Text, Link, Button } from "@chakra-ui/react";
-import { FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { getAuth } from "firebase/auth";
 import { useParams } from "react-router-dom";
@@ -19,6 +18,7 @@ type TInfo = {
 	isForSold: boolean;
 	id: string;
 	img: string;
+	description:string;
 };
 
 const NftBasicInfo = ({
@@ -30,6 +30,7 @@ const NftBasicInfo = ({
 	ownerId,
 	isForSold,
 	img,
+	description,
 }: TInfo) => {
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -90,6 +91,7 @@ const NftBasicInfo = ({
 							{owner}
 						</Link>
 					</Text>
+					<Text>Description: {description}</Text>
 				</Flex>
 			</Box>
 

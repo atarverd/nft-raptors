@@ -19,8 +19,6 @@ const NftItemPage = ({ img }: TProp) => {
 		>
 			<Image
 				bg='gray.300'
-				w='80%'
-				h='80%'
 				borderRadius='10px'
 				src={img}
 			/>
