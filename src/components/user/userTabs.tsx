@@ -45,6 +45,7 @@ const UserTabs = () => {
 						placeholder='Search by name'
 						h='40px'
 						bg='#fff'
+						color='black'
 						borderRadius='10px'
 					/>
 				</InputGroup>
@@ -53,7 +54,7 @@ const UserTabs = () => {
 					<TabPanel>
 						<SimpleGrid spacing='40px' columns={[1, null, 3, 5]} m='20px'>
 							{nfts
-								?.filter((el) => el.name.includes(search))
+								?.filter((el) => el.name.toLowerCase().includes(search.toLowerCase()))
 								.map((nft, i) => (
 									<GlobCard nft={nft} key={i} />
 								))}
@@ -65,7 +66,7 @@ const UserTabs = () => {
 						<SimpleGrid spacing='40px' columns={[1, 2, null, null, 3]} m='20px'>
 
 							{ownedCollections
-								?.filter((el: TCollection) => el.collectionName.includes(search))
+								?.filter((el: TCollection) => el.collectionName.toLowerCase().includes(search.toLowerCase()))
 								.map((col) => (
 									<CollectionCard
 										collection={col}

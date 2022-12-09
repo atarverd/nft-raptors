@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Flex, Text, Button, useToast, useColorMode } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Box, Flex, Text, Button, useToast, useColorMode,Spinner } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
 import { clearAllFromCart } from '../../features/cartSlice';
@@ -15,6 +15,7 @@ type TProps = {
 
 const CartFooter = () => {
 
+	const [isClicked,setIsClicked]=useState(false)
 	const user = getAuth();
 	const toast = useToast();
 	const navigate = useNavigate();
@@ -29,13 +30,15 @@ const CartFooter = () => {
 
 	const handleBuy = () => {
 		if (user?.currentUser?.uid) {
+			setIsClicked(true)
 			buyNft(
 				user?.currentUser?.uid as string,
 				cartNfts,
 				clearCartAfterPurchase,
 				toast,
 				navigate
-			);
+			).then(()=>setIsClicked(false))
+			
 		} else {
 			toast({
 				position: 'top-right',
@@ -78,8 +81,9 @@ const CartFooter = () => {
 						color='white'
 						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
 						w='250px'
+						disabled={isClicked}
 					>
-						Buy
+						{isClicked?<Spinner/>:'Buy'}
 					</Button>
 				</Flex>
 			</Box>
