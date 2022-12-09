@@ -15,7 +15,7 @@ type TProps = {
 
 const CartFooter = () => {
 
-	const [isClicked,setIsClicked]=useState(false)
+	const [isClicked,setIsClicked]=useState(false);
 	const user = getAuth();
 	const toast = useToast();
 	const navigate = useNavigate();
@@ -30,14 +30,14 @@ const CartFooter = () => {
 
 	const handleBuy = () => {
 		if (user?.currentUser?.uid) {
-			setIsClicked(true)
+			setIsClicked(true);
 			buyNft(
 				user?.currentUser?.uid as string,
 				cartNfts,
 				clearCartAfterPurchase,
 				toast,
 				navigate
-			).then(()=>setIsClicked(false))
+			).then(()=>setIsClicked(false));
 			
 		} else {
 			toast({
