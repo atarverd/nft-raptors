@@ -6,6 +6,7 @@ import {
   Button,
   HStack,
   PinInput,
+  Spinner,
   FormLabel,
   ModalBody,
   InputGroup,
@@ -33,6 +34,7 @@ const CardModal = () => {
   const { colorMode } = useColorMode();
   const [ammount, setAmmount] = useState('');
   const [cardNumber, setCardNumber] = useState('');
+  const [isClicked,setIsClicked] = useState(false);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -43,6 +45,12 @@ const CardModal = () => {
   const mapped = [...Array(16).keys()];
 
   const {isConnected,handleSave} = useIsAttached(id as string,ammount,onClose,cardNumber);
+
+  const handleAddBalance=()=>{
+    setIsClicked(true);
+    setAmmount('');
+    handleSave().then(()=>setIsClicked(false));
+  };
 
   return (
     <>
@@ -94,8 +102,11 @@ const CardModal = () => {
               color='white'
               _hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
               mr={3}
-              onClick={handleSave}>
-              Save
+              onClick={handleAddBalance}
+              disabled={isConnected && isClicked}
+              >
+                {isConnected && isClicked?<Spinner/>:'Save' }
+              
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>

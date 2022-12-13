@@ -21,6 +21,7 @@ type TNft = {
 		name: string;
 		currentPrice: number;
 		ownerId: string;
+		isForSold:boolean;
 	};
 };
 
@@ -73,7 +74,7 @@ const GlobCard = ({ nft }: TNft) => {
 					<Text onClick={toNftPage} fontSize='2xl' noOfLines={1}>
 						{nft.name}
 					</Text>
-					<Text>price: {nft.currentPrice}</Text>
+					<Text>price: {nft.currentPrice?nft.currentPrice:'Not For Sold'}</Text>
 
 					{isOwner ? (
 						<Button
@@ -86,6 +87,7 @@ const GlobCard = ({ nft }: TNft) => {
 						</Button>
 					) : (
 						<Button
+							disabled={!nft.isForSold}
 							onClick={handleAddClick}
 							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
 							color='white'

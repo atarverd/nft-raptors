@@ -8,6 +8,7 @@ type TNfts = {
     name: string;
     currentPrice: number;
     ownerId: string;
+    isForSold:boolean;
   }[];
 };
 
