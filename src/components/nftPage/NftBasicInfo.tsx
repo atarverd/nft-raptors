@@ -18,6 +18,7 @@ type TInfo = {
 	isForSold: boolean;
 	id: string;
 	img: string;
+	description:string;
 };
 
 const NftBasicInfo = ({
@@ -29,6 +30,7 @@ const NftBasicInfo = ({
 	ownerId,
 	isForSold,
 	img,
+	description,
 }: TInfo) => {
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -90,12 +92,7 @@ const NftBasicInfo = ({
 							{owner}
 						</Link>
 					</Text>
-					<Text>
-						<Flex alignItems='center'>
-							<FaRegHeart size='25px' />
-							<Text ml='5px'>1</Text>
-						</Flex>
-					</Text>
+					<Text>Description: {description}</Text>
 				</Flex>
 			</Box>
 

@@ -27,7 +27,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 
 
 	const [show, setShow] = useState(false);
-	const isLoaded = useDocRequest('collections', id as string, setData);
+	const {isLoaded} = useDocRequest('collections', id as string, setData);
 
 
 	const handleToggle = () => setShow(!show);
@@ -92,11 +92,11 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 					<Text>Items {nftCount}</Text>
 					<Text>Created </Text>
 				</HStack>
-				<Box maxW='30%' mt='10px'>
+				<Box maxW='500px' mt='10px'>
 					<Collapse startingHeight={20} in={show}>
 						{data?.description}
 					</Collapse>
-					<Button size='xs' onClick={handleToggle} mt='1rem'>
+					<Button size='xs' display={data?.description && data?.description?.length>55?'':'none'} onClick={handleToggle} mt='1rem'>
 						Show {show ? 'Less' : 'More'}
 					</Button>
 				</Box>

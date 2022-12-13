@@ -39,7 +39,9 @@ const SignUp = () => {
 	const [nameInput, setNameInput] = useState('');
 	const [passwordInput, setPasswordInput] = useState('');
 	const [show, setShow] = useState(false);
-	const [gender, setGender] = useState('Male');
+
+	const [gender, setGender] = useState("Male");
+	const [isClicked,setIsClicked] = useState(false);
 	const handleClick = () => setShow(!show);
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmailInput(e.target.value);
@@ -71,6 +73,7 @@ const SignUp = () => {
 	};
 
 	const handleRegistration = () => {
+		setIsClicked(true);
 		createUserWithEmailAndPassword(auth, emailInput, passwordInput)
 			.then((userCredential) => {
 				const user = userCredential.user;
@@ -202,9 +205,12 @@ const SignUp = () => {
 								size='md'
 								bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 								color='white'
-								_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
+
+								_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+								disabled={isClicked}
+
 							>
-								Sign Up
+								{isClicked?<Spinner/>:'Sign up'}
 							</Button>
 						</Stack>
 					</Flex>

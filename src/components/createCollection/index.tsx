@@ -7,6 +7,7 @@ import { addCollection } from '../../utils/addCollection';
 import { Box, Text, Flex, Button, useToast, useColorMode } from '@chakra-ui/react';
 
 
+
 const CreateCollection = () => {
 
 	const [logoImage, setLogoImage] = useState<File>();
@@ -16,13 +17,17 @@ const CreateCollection = () => {
 	const [description, setDescription] = useState<string>('');
 	const [category, setCategory] = useState<string>('');
 
+	const [isClicked,setIsClicked]=useState(false);
 	const user = getAuth();
 	const id = user?.currentUser?.uid;
 	const navigate = useNavigate();
 	const { colorMode } = useColorMode();
 
 	const toast = useToast();
-	const createCollection = () => {
+
+	const createCollection=()=>{
+		setIsClicked(true);
+
 		addCollection(id as string
 			, logoImage as File
 			, featureImage as File
@@ -99,8 +104,9 @@ const CreateCollection = () => {
 							_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							w='300px'
 							onClick={createCollection}
+							disabled={isClicked}
 						>
-							Create Collection
+							{isClicked?<Spinner/>:'Create Collection'}
 						</Button>
 					</Flex>
 				</Box>

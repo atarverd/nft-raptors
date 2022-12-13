@@ -22,7 +22,7 @@ const useDocRequest = (itemName: string, id: string, setData: (value: any) => vo
   useEffect(() => {
 		a();
 	}, []);
-  return notFound;
+  return {notFound,isLoaded};
 };
 
 export default useDocRequest;

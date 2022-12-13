@@ -4,6 +4,7 @@ import {
 	Text,
 	Radio,
 	Stack,
+  Spinner,
 	Input,
 	Button,
 	useToast,
@@ -15,6 +16,7 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	AccordionButton,
+
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
@@ -34,6 +36,7 @@ const Body = () => {
 	const [description, setDescription] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const [name, setName] = useState<string>();
+	const [isClicked,setIsClicked] = useState(false);
 
 	const user = getAuth();
 	const id = user?.currentUser?.uid;
@@ -63,6 +66,7 @@ const Body = () => {
 			(el) => el !== undefined
 		);
 		if (collIsVallid && description && image && name) {
+			setIsClicked(true);
 			addNft(name, image, description, choosedCollection, id as string)
 				.then(() =>
 					toast({
@@ -169,8 +173,11 @@ const Body = () => {
 						bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 						color='white'
 						_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
-						w='200px'>
-						Create
+
+						w='200px'
+						disabled={isClicked}
+					>
+						{isClicked?<Spinner/>:'Create'}
 					</Button>
 				</Flex>
 			</Box>

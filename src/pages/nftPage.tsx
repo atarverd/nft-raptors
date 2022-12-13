@@ -10,12 +10,6 @@ import NftItemPage from '../components/nftPage/NftItemPage';
 import NftBasicInfo from '../components/nftPage/NftBasicInfo';
 import NftAccordion from '../components/nftPage/NftAccordian';
 
-type THistory = {
-	date: string;
-	price: number;
-	prevOwner: string;
-};
-
 const NftPage = () => {
 
 	const { id } = useParams();
@@ -30,8 +24,9 @@ const NftPage = () => {
 		isForSold: false,
 		owner: '',
 		priceHistory: [],
+		description:'',
 	});
-	const isLoaded = useDocRequest('nfts', id as string, setData);
+	const {isLoaded} = useDocRequest('nfts', id as string, setData);
 
 	if (!isLoaded) return <Loader></Loader>;
 
@@ -52,6 +47,7 @@ const NftPage = () => {
 							isForSold={data?.isForSold}
 							id={data?.id}
 							img={data?.img}
+							description={data?.description}
 						/>
 
 						<NftAccordion accordionName='Price Graph'>
@@ -64,10 +60,6 @@ const NftPage = () => {
 					</Flex>
 				</Flex>
 			</Center>
-
-			<NftAccordion accordionName='More From This Collection'>
-				<div>Her should be similar categories</div>
-			</NftAccordion>
 		</Box>
 	);
 };
