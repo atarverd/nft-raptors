@@ -9,10 +9,10 @@ import {
 	Skeleton,
 	useColorMode,
 } from '@chakra-ui/react';
-import { useNavigate, useParams } from 'react-router';
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import useDocRequest from '../../hooks/useDocRequest';
+import { useNavigate, useParams } from 'react-router';
 import { TCollection } from '../../types/collection.types';
 
 type TProp = {
@@ -35,7 +35,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 	const { colorMode } = useColorMode();
 
 
-	const navigaetToCreateNft = () => {
+	const navigateToCreateNft = () => {
 		navigate('/create-nft');
 	};
 
@@ -76,7 +76,7 @@ const CollectionHeader = ({ nftCount }: TProp) => {
 							bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 							color='white'
 							_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
-							onClick={navigaetToCreateNft}
+							onClick={navigateToCreateNft}
 							w='200px'
 							mt='35px'>
 							Create Nft

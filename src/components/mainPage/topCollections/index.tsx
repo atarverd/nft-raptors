@@ -1,5 +1,5 @@
-import { Flex, Heading } from '@chakra-ui/react';
 import TopFiveColumn from './TopFiveColumn';
+import { Flex, Heading } from '@chakra-ui/react';
 import useCollectionRequest from '../../../hooks/useCollectionRequest';
 
 const TopCollections = () => {

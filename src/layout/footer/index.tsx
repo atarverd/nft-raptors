@@ -1,11 +1,13 @@
-import LiveList from "../../components/liveLine";
-import { Box } from "@chakra-ui/react";
+import { Box } from '@chakra-ui/react';
+import LiveList from '../../components/liveLine';
+
 const Footer = () => {
-  return (
-    <Box>
-      <LiveList />
-    </Box>
-  );
+
+	return (
+		<Box bottom='0'>
+			<LiveList />
+		</Box>
+	);
 };
 
 export default Footer;

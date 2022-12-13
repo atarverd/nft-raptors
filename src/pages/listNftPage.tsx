@@ -1,4 +1,4 @@
-import ListNft from "../components/listNft";
+import ListNft from '../components/listNft';
 
 const ListNftPage = () => {
 	return (

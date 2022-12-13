@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	Box,
 	Input,
@@ -8,7 +7,8 @@ import {
 	Avatar,
 	HStack,
 	useColorMode,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
+import { useState } from 'react';
 
 type TProps = {
 	size: string;
@@ -38,7 +38,7 @@ const UploadImage = ({ size, h, w, handleLogoImage }: TProps) => {
 	return (
 
 		<Box >
-			<VStack spacing="2rem">
+			<VStack spacing='2rem'>
 
 				{!size ?
 					selectedFile &&
@@ -54,13 +54,13 @@ const UploadImage = ({ size, h, w, handleLogoImage }: TProps) => {
 						</Avatar>
 					)}
 
-				<Input type="file" onChange={onChange} accept="image/*" />
+				<Input type='file' onChange={onChange} accept='image/*' />
 				{selectedFile &&
-					<HStack spacing="2rem">
+					<HStack spacing='2rem'>
 						<Button
-							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 							color='white'
-							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+							_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							onClick={removeSelectedFile}>
 							Remove Image
 						</Button>

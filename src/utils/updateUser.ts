@@ -1,6 +1,6 @@
-import { db } from "../firebase-config";
-import { doc, updateDoc } from "firebase/firestore";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from '../firebase-config';
+import { doc, updateDoc } from 'firebase/firestore';
+import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 
 type TUpdate = {
@@ -33,7 +33,7 @@ export const updateUser = async (
 
 	const addImage = async (img: File) => {
 		const imageRef = ref(storage, img?.name);
-		let addedImageRef = "";
+		let addedImageRef = '';
 		await uploadBytes(imageRef, img);
 		await getDownloadURL(imageRef)
 			.then(url => addedImageRef = url);
@@ -41,5 +41,5 @@ export const updateUser = async (
 	};
 
 	const updateObj = await updatedProps();
-	updateDoc(doc(db, "users", id as string), updateObj);
+	updateDoc(doc(db, 'users', id as string), updateObj);
 }; 

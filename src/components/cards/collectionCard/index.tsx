@@ -24,7 +24,7 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 
 	const isOwner = collection.creatorId === user?.currentUser?.uid;
 
-	const toCollectionPage = () => {
+	const NavigateCollectionPage = () => {
 		navigate('/collection/' + collection.id);
 	};
 
@@ -50,7 +50,7 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 				w={[200, null, 300, 350]}
 			>
 				<Image
-					onClick={toCollectionPage}
+					onClick={NavigateCollectionPage}
 					src={collection.feature}
 					w={[200, null, 300, 350]}
 					h='220px'
@@ -60,7 +60,7 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
 				/>
 
 				<Stack p='3' bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}>
-					<Text onClick={toCollectionPage} fontSize='2xl' noOfLines={1}>
+					<Text onClick={NavigateCollectionPage} fontSize='2xl' noOfLines={1}>
 						{collection.collectionName}
 					</Text>
 

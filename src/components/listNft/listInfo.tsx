@@ -7,13 +7,13 @@ import {
 	Divider,
 	useToast,
 	useColorMode,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { useParams } from "react-router";
-import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../../firebase-config";
-import { useNavigate } from "react-router-dom";
-import { formatter } from "../../utils/formatValue";
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { useParams } from 'react-router';
+import { db } from '../../firebase-config';
+import { useNavigate } from 'react-router-dom';
+import { formatter } from '../../utils/formatValue';
+import { doc, updateDoc } from 'firebase/firestore';
 
 
 const ListInfo = () => {
@@ -26,11 +26,11 @@ const ListInfo = () => {
 	const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPrice(Number(e.target.value));
 	};
-	const handleList = async () => {
-		updateDoc(doc(db, "nfts", id as string), {
+	const updateList = async () => {
+		updateDoc(doc(db, 'nfts', id as string), {
 			isForSold: true,
 			currentPrice: price
-		}).then(() => navigate("/nft/" + id)).then(() => toast({ title: "Nft listed successfully", position: "top-right", status: "success" }));
+		}).then(() => navigate('/nft/' + id)).then(() => toast({ title: 'Nft listed successfully', position: 'top-right', status: 'success' }));
 
 	};
 	return (
@@ -63,12 +63,12 @@ const ListInfo = () => {
 				<Text fontSize='2xl' pt='15px'>{formatter.format(price - price * 2.5 / 100)} $</Text>
 			</Flex>
 			<Button
-				bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+				bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 				color='white'
-				_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+				_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 				mt='15px'
 				w='300px'
-				onClick={handleList}>
+				onClick={updateList}>
 				Complete Listing
 			</Button>
 

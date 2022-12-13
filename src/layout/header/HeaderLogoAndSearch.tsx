@@ -1,20 +1,20 @@
-import { useState } from "react";
 import {
+	Box,
 	Flex,
 	Image,
 	Input,
 	Button,
 	InputGroup,
 	InputRightElement,
-	Box,
-} from "@chakra-ui/react";
-import logoImage from "../../assets/logo.png";
-import { useNavigate } from "react-router";
-import { TypeAnimation } from "react-type-animation";
-import searchIcon from "../../assets/search.svg";
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import logoImage from '../../assets/logo.png';
+import searchIcon from '../../assets/search.svg';
+import { TypeAnimation } from 'react-type-animation';
 
 const HeaderLogoAndSearch = () => {
-	const [search, setSearch] = useState("");
+	const [search, setSearch] = useState('');
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
 	};
@@ -22,12 +22,12 @@ const HeaderLogoAndSearch = () => {
 	const navigate = useNavigate();
 
 	const searchItem = () => {
-		if (search) navigate("/search/" + search);
-		setSearch("");
+		if (search) navigate('/search/' + search);
+		setSearch('');
 	};
 
 	const handleHomePage = () => {
-		navigate("/");
+		navigate('/');
 	};
 
 	return (
@@ -46,15 +46,15 @@ const HeaderLogoAndSearch = () => {
 			<Box w='300px'>
 				<TypeAnimation
 					sequence={[
-						"Raptors", // Types 'One'
+						'Raptors', // Types 'One'
 						3500, // Waits 1s
-						"",
+						'',
 					]}
 					wrapper='div'
 					speed={40}
 					cursor={true}
 					repeat={Infinity}
-					style={{ fontSize: "1.2em" }}
+					style={{ fontSize: '1.2em' }}
 				/>
 			</Box>
 

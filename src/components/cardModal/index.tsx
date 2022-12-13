@@ -1,4 +1,3 @@
-import { useRef, useState, useEffect } from 'react';
 import {
   Modal,
   Image,
@@ -22,6 +21,7 @@ import {
   InputLeftElement,
 } from '@chakra-ui/react';
 import { getAuth } from 'firebase/auth';
+import { useRef, useState } from 'react';
 import walletLight from '../../assets/wallet.png';
 import walletDark from '../../assets/walletWhite.png';
 import { useIsAttached } from '../../hooks/useIsAttached';
@@ -44,7 +44,7 @@ const CardModal = () => {
   //@ts-ignore
   const mapped = [...Array(16).keys()];
 
-  const {isConnected,handleSave} = useIsAttached(id as string,ammount,onClose,cardNumber);
+  const { isConnected, handleSave } = useIsAttached(id as string, ammount, onClose, cardNumber);
 
   const handleAddBalance=()=>{
     setIsClicked(true);
@@ -98,9 +98,9 @@ const CardModal = () => {
 
           <ModalFooter>
             <Button
-              bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+              bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
               color='white'
-              _hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+              _hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
               mr={3}
               onClick={handleAddBalance}
               disabled={isConnected && isClicked}

@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	Box,
 	Text,
@@ -7,12 +6,13 @@ import {
 	Divider,
 	DrawerHeader,
 	useColorMode,
-} from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { clearAllFromCart } from "../../features/cartSlice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store/store";
+} from '@chakra-ui/react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { RootState } from '../../store/store';
+import { AppDispatch } from '../../store/store';
+import { clearAllFromCart } from '../../features/cartSlice';
 
 const CartHeader = () => {
 	const { cart } = useSelector((state: RootState) => state.cart);
@@ -35,9 +35,9 @@ const CartHeader = () => {
 						h='30px'
 						mr='10px'
 						mt='10px'
-						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 						color='white'
-						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}					>
+						_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}					>
 						Clear All
 					</Button>
 				</Flex>

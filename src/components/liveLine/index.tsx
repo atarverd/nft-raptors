@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import {
 	Box,
 	Text,
@@ -6,8 +5,9 @@ import {
 	HStack,
 	Center,
 } from '@chakra-ui/react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState, useEffect } from 'react';
 import { Autoplay, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const LiveList = () => {
 
