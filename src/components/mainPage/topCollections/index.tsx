@@ -4,7 +4,7 @@ import useCollectionRequest from '../../../hooks/useCollectionRequest';
 
 const TopCollections = () => {
 
-	const data = useCollectionRequest('top', '');
+	const data = useCollectionRequest('top');
 
 	return (
 		<>

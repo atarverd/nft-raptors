@@ -4,7 +4,7 @@ import { getDocs, collection, query, limit, orderBy, where } from 'firebase/fire
 import { TCollection } from '../types/collection.types';
 
 
-	const useCollectionRequest = (type: string, id?: string) => {
+	const useCollectionRequest = (type: string, id = '') => {
 
     const queryType = {
       carousel: query(collection(db, 'collections'), limit(10)),
