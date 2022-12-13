@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { Flex, Box, Image, useToast, useColorMode } from "@chakra-ui/react";
-import Cart from "../../components/cart/cart";
-import userDark from "../../assets/userWhite.png";
-import userLight from "../../assets/user.png";
-import { useNavigate } from "react-router";
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import logOutDark from "../../assets/logOutWhite.png";
-import logOutLight from "../../assets/logOut.png";
-import CardModal from "../../components/cardModal";
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
+import Cart from '../../components/cart/cart';
+import userLight from '../../assets/user.png';
+import userDark from '../../assets/userWhite.png';
+import logOutLight from '../../assets/logOut.png';
+import CardModal from '../../components/cardModal';
+import logOutDark from '../../assets/logOutWhite.png';
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
+import { Flex, Box, Image, useToast, useColorMode } from '@chakra-ui/react';
 
 
 
@@ -21,8 +21,8 @@ const HeaderIcons = () => {
 	const { colorMode } = useColorMode();
 
 	const handleUserPage = () => {
-		if (loggedUser.currentUser) navigate("/" + loggedUser.currentUser?.uid);
-		else navigate("/login");
+		if (loggedUser.currentUser) navigate('/' + loggedUser.currentUser?.uid);
+		else navigate('/login');
 	};
 
 	const auth = getAuth();
@@ -41,12 +41,12 @@ const HeaderIcons = () => {
 		signOut(auth)
 			.then(() => {
 
-				navigate("/");
+				navigate('/');
 				toast({
-					title: "Logged Out",
+					title: 'Logged Out',
 					duration: 3000,
-					position: "top-right",
-					variant: "subtle",
+					position: 'top-right',
+					variant: 'subtle',
 				});
 			});
 	};
@@ -56,7 +56,7 @@ const HeaderIcons = () => {
 				{/* <FaRegUser size='30px' /> */}
 				<Image
 					boxSize='35px'
-					src={colorMode === "light" ? userLight : userDark}
+					src={colorMode === 'light' ? userLight : userDark}
 					onClick={handleUserPage}
 				/>
 			</Box>
@@ -69,7 +69,7 @@ const HeaderIcons = () => {
 			{user ? (
 				<Box ml='15px' cursor='pointer'>
 					<Image
-						src={colorMode === "light" ? logOutLight : logOutDark}
+						src={colorMode === 'light' ? logOutLight : logOutDark}
 						boxSize='30px'
 						onClick={logout}
 					/>

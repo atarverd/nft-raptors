@@ -1,8 +1,8 @@
 import {
 	Box,
 	Flex,
-} from "@chakra-ui/react";
-import Body from "./body";
+} from '@chakra-ui/react';
+import Body from './body';
 
 const Settings = () => {
 

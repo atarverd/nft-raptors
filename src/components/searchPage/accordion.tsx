@@ -2,18 +2,16 @@ import {
 	Box,
 	Flex,
 	Text,
-	Stack,
 	Input,
 	VStack,
 	Button,
-	Checkbox,
 	Accordion,
 	useColorMode,
 	AccordionItem,
 	AccordionIcon,
 	AccordionPanel,
 	AccordionButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 type TProp = {
 	filterPrice: () => void;
@@ -60,9 +58,9 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 									w='270px'
 									h='40px'
 									onClick={filterPrice}
-									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 									color='white'
-									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+									_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 								>
 									Apply
 								</Button>
@@ -84,20 +82,20 @@ const Accordions = ({ filterPrice, handleMin, handleMax, priceSort }: TProp) => 
 						<Flex display='flex' flexDirection='column' justifyContent='center'>
 							<VStack spacing={4}>
 								<Button
-									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 									color='white'
-									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
-									onClick={() => priceSort("lowToHigh")}
+									_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
+									onClick={() => priceSort('lowToHigh')}
 									w='270px'
 									h='40px'
 								>
 									Price Low To High
 								</Button>
 								<Button
-									bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+									bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 									color='white'
-									_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
-									onClick={() => priceSort("highToLow")}
+									_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
+									onClick={() => priceSort('highToLow')}
 									w='270px'
 									h='40px'
 								>

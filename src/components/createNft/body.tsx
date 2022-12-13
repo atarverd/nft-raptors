@@ -6,6 +6,7 @@ import {
 	Stack,
 	Input,
 	Button,
+	useToast,
 	Textarea,
 	Accordion,
 	RadioGroup,
@@ -14,16 +15,14 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	AccordionButton,
-	useToast,
-} from "@chakra-ui/react";
-import { getAuth } from "firebase/auth";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import UploadImage from "../createCollection/uploadImage";
-import useCollectionRequest from "../../hooks/useCollectionRequest";
-import { TCollection } from '../../types/collection.types';
-import { getStorage } from "firebase/storage";
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
 import { addNft } from '../../utils/addNft';
+import { useNavigate } from 'react-router-dom';
+import UploadImage from '../createCollection/uploadImage';
+import { TCollection } from '../../types/collection.types';
+import useCollectionRequest from '../../hooks/useCollectionRequest';
 
 type TChoosed = {
 	collectionName: string,
@@ -31,7 +30,7 @@ type TChoosed = {
 }
 
 const Body = () => {
-	const [choosedCollection, setChoosedCollections] = useState<TChoosed>({ collectionName: "", collectionId: "" });
+	const [choosedCollection, setChoosedCollections] = useState<TChoosed>({ collectionName: '', collectionId: '' });
 	const [description, setDescription] = useState<string>();
 	const [image, setImage] = useState<File>();
 	const [name, setName] = useState<string>();
@@ -39,7 +38,6 @@ const Body = () => {
 	const user = getAuth();
 	const id = user?.currentUser?.uid;
 	const toast = useToast();
-	const storage = getStorage();
 	const navigate = useNavigate();
 	const { colorMode } = useColorMode();
 
@@ -68,21 +66,21 @@ const Body = () => {
 			addNft(name, image, description, choosedCollection, id as string)
 				.then(() =>
 					toast({
-						title: "Nft Created Successfully",
+						title: 'Nft Created Successfully',
 						duration: 3000,
-						position: "top-right",
-						variant: "subtle",
-						status: "success",
+						position: 'top-right',
+						variant: 'subtle',
+						status: 'success',
 					})
 				)
-				.then(() => navigate("/collection/" + choosedCollection?.collectionId));
+				.then(() => navigate('/collection/' + choosedCollection?.collectionId));
 		} else {
 			toast({
-				title: "Some Fields Are Empty",
+				title: 'Some Fields Are Empty',
 				duration: 3000,
-				position: "top-right",
-				variant: "subtle",
-				status: "error",
+				position: 'top-right',
+				variant: 'subtle',
+				status: 'error',
 			});
 		}
 	};
@@ -168,9 +166,9 @@ const Body = () => {
 				<Flex justifyContent='center'>
 					<Button
 						onClick={validateNft}
-						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 						color='white'
-						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+						_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 						w='200px'>
 						Create
 					</Button>

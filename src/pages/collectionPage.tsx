@@ -1,4 +1,4 @@
-import Collection from "../components/collection";
+import Collection from '../components/collection';
 
 const CollectionPage = () => {
 	return (

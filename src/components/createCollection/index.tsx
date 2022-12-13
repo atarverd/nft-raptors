@@ -1,38 +1,37 @@
-import { Box, Text, Flex, Button, useToast, useColorMode } from "@chakra-ui/react";
-import { useState } from "react";
-import Body from "./body";
-import UploadImage from "./uploadImage";
-import { db } from "../../firebase-config";
-import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { addCollection } from "../../utils/addCollection";
-
+import Body from './body';
+import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import UploadImage from './uploadImage';
+import { useNavigate } from 'react-router-dom';
+import { addCollection } from '../../utils/addCollection';
+import { Box, Text, Flex, Button, useToast, useColorMode } from '@chakra-ui/react';
 
 
 const CreateCollection = () => {
+
 	const [logoImage, setLogoImage] = useState<File>();
 	const [featureImage, setFeatureImage] = useState<File>();
 	const [bgImage, setBgImage] = useState<File>();
 	const [name, setName] = useState<string>('');
 	const [description, setDescription] = useState<string>('');
 	const [category, setCategory] = useState<string>('');
+
 	const user = getAuth();
-	const id=user?.currentUser?.uid;
+	const id = user?.currentUser?.uid;
 	const navigate = useNavigate();
 	const { colorMode } = useColorMode();
 
-
 	const toast = useToast();
-	const createCollection=()=>{
+	const createCollection = () => {
 		addCollection(id as string
-			,logoImage as File
-			,featureImage as File
-			,bgImage as File
-			,name
-			,description
-			,category
-			,toast
-			,navigate
+			, logoImage as File
+			, featureImage as File
+			, bgImage as File
+			, name
+			, description
+			, category
+			, toast
+			, navigate
 		);
 	};
 
@@ -95,9 +94,9 @@ const CreateCollection = () => {
 				<Box mt='30px'>
 					<Flex justifyContent='center'>
 						<Button
-							bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+							bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 							color='white'
-							_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+							_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							w='300px'
 							onClick={createCollection}
 						>

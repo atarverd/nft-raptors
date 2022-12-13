@@ -1,13 +1,12 @@
-import { Box, Flex, Text, Link, Button } from "@chakra-ui/react";
-import { FaRegHeart } from "react-icons/fa";
-import { useNavigate } from "react-router";
-import { getAuth } from "firebase/auth";
-import { useParams } from "react-router-dom";
-
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store/store";
-import { addToCart, deleteFromCart } from "../../features/cartSlice";
-import { checkItemIsInArray } from "../../utils/checkItemInArray";
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router';
+import { FaRegHeart } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { Box, Flex, Text, Link, Button } from '@chakra-ui/react';
+import { checkItemIsInArray } from '../../utils/checkItemInArray';
+import { addToCart, deleteFromCart } from '../../features/cartSlice';
 
 type TInfo = {
 	collectionId: string;
@@ -40,16 +39,16 @@ const NftBasicInfo = ({
 	const { cart } = useSelector((state: RootState) => state.cart);
 
 	const navigateToUser = () => {
-		navigate("/" + ownerId);
+		navigate('/' + ownerId);
 	};
 	const navigateToListNft = () => {
-		navigate("/list/" + id);
+		navigate('/list/' + id);
 	};
 	const navigateToCollection = (collectionId: string) => {
-		navigate("/collection/" + collectionId);
+		navigate('/collection/' + collectionId);
 	};
 
-	const handleAddClick = () => {
+	const handleAddCart = () => {
 		if (!checkItemIsInArray(cart, id as string)) {
 			dispatch(
 				addToCart({
@@ -64,6 +63,7 @@ const NftBasicInfo = ({
 			dispatch(deleteFromCart(id as string));
 		}
 	};
+
 	return (
 		<>
 			<Box w='500px' h='120px'>
@@ -72,7 +72,7 @@ const NftBasicInfo = ({
 						onClick={() => {
 							navigateToCollection(collectionId);
 						}}
-						_hover={{ textDecoration: "none" }}
+						_hover={{ textDecoration: 'none' }}
 						color='#2081e2'
 					>
 						{collectionName}
@@ -84,7 +84,7 @@ const NftBasicInfo = ({
 						Owned by &nbsp;
 						<Link
 							onClick={navigateToUser}
-							_hover={{ textDecoration: "none" }}
+							_hover={{ textDecoration: 'none' }}
 							color='#2081e2'
 						>
 							{owner}
@@ -115,17 +115,17 @@ const NftBasicInfo = ({
 				) : (
 					isForSold && (
 						<Button
-							onClick={() => handleAddClick()}
+							onClick={() => handleAddCart()}
 							colorScheme={
-								checkItemIsInArray(cart, id as string) ? "red" : "messenger"
+								checkItemIsInArray(cart, id as string) ? 'red' : 'messenger'
 							}
 							w='200px'
 							color='#fff'
 							bg='#2081e2'
 						>
 							{checkItemIsInArray(cart, id as string)
-								? "Remove"
-								: "Add to Cart"}
+								? 'Remove'
+								: 'Add to Cart'}
 						</Button>
 					)
 				)}

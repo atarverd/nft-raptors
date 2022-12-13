@@ -11,13 +11,13 @@ import {
 	Collapse,
 	MenuButton,
 } from '@chakra-ui/react';
-import NotFound from '../notFound';
-import UserTabs from './userTabs';
 import { useState } from 'react';
+import UserTabs from './userTabs';
+import NotFound from '../notFound';
+import { TUserData } from '../../types/user.types';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { useParams, useNavigate } from 'react-router';
 import useDocRequest from '../../hooks/useDocRequest';
-import { TUserData } from '../../types/user.types';
 
 
 const UserHeader = () => {

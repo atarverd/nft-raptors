@@ -12,15 +12,15 @@ import {
 	AccordionItem,
 	AccordionPanel,
 	AccordionButton,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-type TProps={
-	setName:(e:string)=>void;
-	setDescription:(e:string)=>void;
-	setCategory:(e:string)=>void;
+type TProps = {
+	setName: (e: string) => void;
+	setDescription: (e: string) => void;
+	setCategory: (e: string) => void;
 }
 
-const Body = ({ setName, setDescription, setCategory }:TProps) => {
+const Body = ({ setName, setDescription, setCategory }: TProps) => {
 	return (
 		<Box>
 			<Box mt='30px'>

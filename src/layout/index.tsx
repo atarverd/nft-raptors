@@ -1,8 +1,8 @@
 import {
   Box
 } from '@chakra-ui/react';
-import Header from "./header";
-import Footer from "./footer";
+import Header from './header';
+import Footer from './footer';
 
 const Layout = ({ children }: any) => {
   return (

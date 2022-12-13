@@ -1,8 +1,4 @@
-import cartLight from "../../assets/cartt.png";
-import cartDark from "../../assets/cartWhite.png";
-
 import {
-
 	Image,
 	Drawer,
 	Divider,
@@ -12,10 +8,12 @@ import {
 	DrawerOverlay,
 	DrawerCloseButton,
 	useColorMode,
-} from "@chakra-ui/react";
-import CartFooter from "./cartFooter";
-import CartDrawer from "./cartDrawer";
-import CartHeader from "./cartHeader";
+} from '@chakra-ui/react';
+import CartFooter from './cartFooter';
+import CartDrawer from './cartDrawer';
+import CartHeader from './cartHeader';
+import cartLight from '../../assets/cartt.png';
+import cartDark from '../../assets/cartWhite.png';
 
 const Cart = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,7 +22,7 @@ const Cart = () => {
 	return (
 		<>
 			<Image
-				src={colorMode === "light" ? cartLight : cartDark}
+				src={colorMode === 'light' ? cartLight : cartDark}
 				onClick={onOpen}
 				boxSize='35px'
 				cursor='pointer'
@@ -32,7 +30,7 @@ const Cart = () => {
 			<Container position='relative' >
 				<Drawer isOpen={isOpen} placement='right' onClose={onClose}>
 					<DrawerOverlay />
-					<DrawerContent bg={colorMode === 'dark' ? "#010914" : "gray.100"} margin='20px' borderRadius='15px'>
+					<DrawerContent bg={colorMode === 'dark' ? '#010914' : 'gray.100'} margin='20px' borderRadius='15px'>
 						<DrawerCloseButton />
 						<CartHeader />
 						<CartDrawer />

@@ -1,7 +1,4 @@
-import { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { db } from "../../firebase-config";
-import { setDoc, doc } from "firebase/firestore";
+import { useState } from 'react';
 import {
 	Box,
 	Flex,
@@ -11,35 +8,38 @@ import {
 	Radio,
 	HStack,
 	Button,
+	useToast,
 	FormLabel,
 	InputGroup,
 	RadioGroup,
 	FormControl,
+	useColorMode,
 	InputRightElement,
-	useToast,
-	useColorMode
-} from "@chakra-ui/react";
-import signup from "../../assets/signup.jpg";
-import hiddenEye from "../../assets/hiddenEye.png";
-import eye from "../../assets/eye.png";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import eye from '../../assets/eye.png';
+import { db } from '../../firebase-config';
+import signup from '../../assets/signup.jpg';
+import { useNavigate } from 'react-router-dom';
+import { setDoc, doc } from 'firebase/firestore';
+import hiddenEye from '../../assets/hiddenEye.png';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const male="https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/male.jpg?alt=media&token=809545dd-69db-40d0-ad3a-25694836960d";
-const female="https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/female.jpg?alt=media&token=0cbb8501-6a32-46d7-9d00-c58bbf4fbf71";
-const bgArr:string[]=[
-	"https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283854.jpg?alt=media&token=28a932bc-cc6e-4f2f-acd0-b82492dce416",
-	"https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283835.png?alt=media&token=47787e91-40c4-4153-8de6-58587d332c4d",
-	"https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283823.jpg?alt=media&token=324b24fe-0e3f-443e-9bcd-c66256423508",
-	"https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283756.jpg?alt=media&token=1c563926-2394-4581-b6fc-558bd6ebfea9",
-	"https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283653.jpg?alt=media&token=3687f95e-f749-45f0-bdd3-8d39209cceee"
+const male = 'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/male.jpg?alt=media&token=809545dd-69db-40d0-ad3a-25694836960d';
+const female = 'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/female.jpg?alt=media&token=0cbb8501-6a32-46d7-9d00-c58bbf4fbf71';
+const bgArr: string[] = [
+	'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283854.jpg?alt=media&token=28a932bc-cc6e-4f2f-acd0-b82492dce416',
+	'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283835.png?alt=media&token=47787e91-40c4-4153-8de6-58587d332c4d',
+	'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283823.jpg?alt=media&token=324b24fe-0e3f-443e-9bcd-c66256423508',
+	'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283756.jpg?alt=media&token=1c563926-2394-4581-b6fc-558bd6ebfea9',
+	'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283653.jpg?alt=media&token=3687f95e-f749-45f0-bdd3-8d39209cceee'
 ];
 
 const SignUp = () => {
-	const [emailInput, setEmailInput] = useState("");
-	const [nameInput, setNameInput] = useState("");
-	const [passwordInput, setPasswordInput] = useState("");
+	const [emailInput, setEmailInput] = useState('');
+	const [nameInput, setNameInput] = useState('');
+	const [passwordInput, setPasswordInput] = useState('');
 	const [show, setShow] = useState(false);
-	const [gender, setGender] = useState("Male");
+	const [gender, setGender] = useState('Male');
 	const handleClick = () => setShow(!show);
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmailInput(e.target.value);
@@ -47,9 +47,9 @@ const SignUp = () => {
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPasswordInput(e.target.value);
 	const handleGender = (e: string) => setGender(e);
 
-	const isEmailError = emailInput === "";
-	const isNameError = nameInput === "";
-	const isPasswordError = passwordInput === "";
+	const isEmailError = emailInput === '';
+	const isNameError = nameInput === '';
+	const isPasswordError = passwordInput === '';
 
 	const auth = getAuth();
 	const toast = useToast();
@@ -61,11 +61,11 @@ const SignUp = () => {
 			handleRegistration();
 		} else {
 			toast({
-				title: "Some Fields Are Empty",
+				title: 'Some Fields Are Empty',
 				duration: 3000,
-				position: "top-right",
-				variant: "subtle",
-				status: "error",
+				position: 'top-right',
+				variant: 'subtle',
+				status: 'error',
 			});
 		}
 	};
@@ -74,7 +74,7 @@ const SignUp = () => {
 		createUserWithEmailAndPassword(auth, emailInput, passwordInput)
 			.then((userCredential) => {
 				const user = userCredential.user;
-				setDoc(doc(db, "users", user.uid), {
+				setDoc(doc(db, 'users', user.uid), {
 					username: nameInput,
 					email: emailInput,
 					gender,
@@ -82,28 +82,28 @@ const SignUp = () => {
 					paymentMethod: {},
 					balance: 0,
 					favorites: [],
-					bio: "",
-					userLogo: gender === "male" ? male : female ,
+					bio: '',
+					userLogo: gender === 'male' ? male : female,
 					userBackground: bgArr[Math.floor(Math.random() * 5) + 1]
 				}).then(() => {
 					toast({
-						title: "Account Created and Logged In",
+						title: 'Account Created and Logged In',
 						duration: 3000,
-						position: "top-right",
-						variant: "subtle",
-						status: "success",
+						position: 'top-right',
+						variant: 'subtle',
+						status: 'success',
 					});
-					navigate("/");
+					navigate('/');
 				});
 			})
 			.catch((e) => {
 				console.log(e.message);
 				toast({
-					title: "Something Went Wrong",
+					title: 'Something Went Wrong',
 					duration: 3000,
-					position: "top-right",
-					variant: "subtle",
-					status: "error",
+					position: 'top-right',
+					variant: 'subtle',
+					status: 'error',
 				});
 			});
 	};
@@ -114,11 +114,11 @@ const SignUp = () => {
 			ml='20%'
 			mr='20%'
 			boxShadow={
-				colorMode === "dark"
-					? "0 0 24px 4px white"
-					: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+				colorMode === 'dark'
+					? '0 0 24px 4px white'
+					: '0 0 24px 4px rgba(0, 0, 0, 0.15)'
 			}
-			bg={colorMode === "dark" ? "#071b38" : "gray.200"}
+			bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}
 			borderRadius='15px'
 		>
 			<Flex display='flex' align-items='flex-start'>
@@ -156,7 +156,7 @@ const SignUp = () => {
 									<Input
 										value={passwordInput}
 										onChange={handlePasswordChange}
-										type={show ? "text" : "password"}
+										type={show ? 'text' : 'password'}
 										placeholder='******'
 									/>
 									<InputRightElement>
@@ -187,10 +187,10 @@ const SignUp = () => {
 								<Stack spacing={5} direction='row'>
 
 									<Radio colorScheme='blue' value='male'>
-                    Male
+										Male
 									</Radio>
 									<Radio colorScheme='pink' value='female'>
-                    Female
+										Female
 
 									</Radio>
 								</Stack>
@@ -200,9 +200,9 @@ const SignUp = () => {
 								onClick={validateRegistration}
 								h='2.50rem'
 								size='md'
-								bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+								bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 								color='white'
-								_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+								_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							>
 								Sign Up
 							</Button>

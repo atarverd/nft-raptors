@@ -1,18 +1,18 @@
-import { TCollection } from '../../../types/collection.types';
 import {
-	Text,
-	Avatar,
-	Table,
-	Thead,
-	Tbody,
 	Tr,
 	Th,
 	Td,
-	TableContainer,
+	Text,
+	Table,
+	Thead,
+	Tbody,
+	Avatar,
 	HStack,
+	TableContainer,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { formatter } from '../../../utils/formatValue';
-import {useNavigate} from 'react-router-dom';
+import { TCollection } from '../../../types/collection.types';
 
 type TProps = {
 	data: TCollection[];
@@ -21,6 +21,7 @@ type TProps = {
 
 const TopFiveColumn = ({ data, from }: TProps) => {
 	const navigate = useNavigate();
+
 	return (
 		<TableContainer w={['', '70%', '45%']} sx={{ '::-webkit-scrollbar': { display: 'none' } }}>
 			<Table variant='simple'>
@@ -35,14 +36,14 @@ const TopFiveColumn = ({ data, from }: TProps) => {
 					{data.map((collection: TCollection, i) => {
 						return (
 							<Tr cursor='pointer' key={i}>
-								<Td onClick={()=>navigate('/collection/'+collection.id)}>
+								<Td onClick={() => navigate('/collection/' + collection.id)}>
 									<HStack spacing='2rem'>
 										<Text>{from + i}</Text>
 										<Avatar src={collection.logo} />
 										<Text ml='2.2rem'>{collection.collectionName}</Text>
 									</HStack>
 								</Td>
-								<Td onClick={()=>navigate('/'+collection.creatorId)}>by {collection.creator}</Td>
+								<Td onClick={() => navigate('/' + collection.creatorId)}>by {collection.creator}</Td>
 								<Td isNumeric>{formatter.format(collection.volume)}</Td>
 							</Tr>
 						);

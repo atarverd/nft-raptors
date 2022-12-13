@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
 	Box,
 	Flex,
@@ -7,33 +7,37 @@ import {
 	Input,
 	Button,
 	HStack,
+	useToast,
 	FormLabel,
 	InputGroup,
 	FormControl,
+	useColorMode,
 	InputRightElement,
-	useToast,
-	useColorMode
-} from "@chakra-ui/react";
-import login from "../../assets/login.jpg";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router";
-import hiddenEye from "../../assets/hiddenEye.png";
-import eye from "../../assets/eye.png";
+} from '@chakra-ui/react';
+import eye from '../../assets/eye.png';
+import login from '../../assets/login.jpg';
+import { useNavigate } from 'react-router';
+import hiddenEye from '../../assets/hiddenEye.png';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const LogIn = () => {
-	const [emailInput, setEmailInput] = useState("");
-	const [passwordInput, setPasswordInput] = useState("");
+
+	const [emailInput, setEmailInput] = useState('');
+	const [passwordInput, setPasswordInput] = useState('');
 	const [show, setShow] = useState(false);
 	const handleClick = () => setShow(!show);
+
 	const navigate = useNavigate();
 	const toast = useToast();
+
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setEmailInput(e.target.value);
+
 	const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setPasswordInput(e.target.value);
 
-	const isNameError = emailInput === "";
-	const isPasswordError = passwordInput === "";
+	const isNameError = emailInput === '';
+	const isPasswordError = passwordInput === '';
 
 	const auth = getAuth();
 	const { colorMode } = useColorMode();
@@ -42,27 +46,27 @@ const LogIn = () => {
 		signInWithEmailAndPassword(auth, emailInput, passwordInput)
 			.then(() => {
 				toast({
-					title: "Logged In",
+					title: 'Logged In',
 					duration: 3000,
-					position: "top-right",
-					variant: "subtle",
-					status: "success",
+					position: 'top-right',
+					variant: 'subtle',
+					status: 'success',
 				});
-				navigate("/");
+				navigate('/');
 			})
 			.catch(() => {
 				toast({
-					title: "Invalid Email or Password",
+					title: 'Invalid Email or Password',
 					duration: 3000,
-					position: "top-right",
-					variant: "subtle",
-					status: "error",
+					position: 'top-right',
+					variant: 'subtle',
+					status: 'error',
 				});
 			});
 	};
 
 	const navigateRagistration = () => {
-		navigate("/signup");
+		navigate('/signup');
 	};
 
 	return (
@@ -71,11 +75,11 @@ const LogIn = () => {
 			ml='20%'
 			mr='20%'
 			boxShadow={
-				colorMode === "dark"
-					? "0 0 24px 4px white"
-					: "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+				colorMode === 'dark'
+					? '0 0 24px 4px white'
+					: '0 0 24px 4px rgba(0, 0, 0, 0.15)'
 			}
-			bg={colorMode === "dark" ? "#071b38" : "gray.200"}
+			bg={colorMode === 'dark' ? '#071b38' : 'gray.200'}
 			borderRadius='15px'
 		>
 			<Flex display='flex' align-items='flex-start'>
@@ -113,7 +117,7 @@ const LogIn = () => {
 									<Input
 										value={passwordInput}
 										onChange={handlePasswordChange}
-										type={show ? "text" : "password"}
+										type={show ? 'text' : 'password'}
 										placeholder='******'
 									/>
 									<InputRightElement>
@@ -134,9 +138,9 @@ const LogIn = () => {
 								onClick={handleLogin}
 								h='2.50rem'
 								size='md'
-								bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+								bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 								color='white'
-								_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+								_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 							>
 								Sign In
 							</Button>
