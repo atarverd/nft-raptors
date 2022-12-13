@@ -15,6 +15,7 @@ import {
 	FormControl,
 	useColorMode,
 	InputRightElement,
+	Spinner,
 } from '@chakra-ui/react';
 import eye from '../../assets/eye.png';
 import { db } from '../../firebase-config';
@@ -41,7 +42,7 @@ const SignUp = () => {
 	const [show, setShow] = useState(false);
 
 	const [gender, setGender] = useState("Male");
-	const [isClicked,setIsClicked] = useState(false);
+	const [isClicked, setIsClicked] = useState(false);
 	const handleClick = () => setShow(!show);
 
 	const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmailInput(e.target.value);
@@ -210,7 +211,7 @@ const SignUp = () => {
 								disabled={isClicked}
 
 							>
-								{isClicked?<Spinner/>:'Sign up'}
+								{isClicked ? <Spinner /> : 'Sign up'}
 							</Button>
 						</Stack>
 					</Flex>

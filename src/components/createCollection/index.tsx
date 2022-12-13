@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import UploadImage from './uploadImage';
 import { useNavigate } from 'react-router-dom';
 import { addCollection } from '../../utils/addCollection';
-import { Box, Text, Flex, Button, useToast, useColorMode } from '@chakra-ui/react';
+import { Box, Text, Flex, Button, useToast, useColorMode, Spinner } from '@chakra-ui/react';
 
 
 
@@ -17,7 +17,7 @@ const CreateCollection = () => {
 	const [description, setDescription] = useState<string>('');
 	const [category, setCategory] = useState<string>('');
 
-	const [isClicked,setIsClicked]=useState(false);
+	const [isClicked, setIsClicked] = useState(false);
 	const user = getAuth();
 	const id = user?.currentUser?.uid;
 	const navigate = useNavigate();
@@ -25,7 +25,7 @@ const CreateCollection = () => {
 
 	const toast = useToast();
 
-	const createCollection=()=>{
+	const createCollection = () => {
 		setIsClicked(true);
 
 		addCollection(id as string
@@ -106,7 +106,7 @@ const CreateCollection = () => {
 							onClick={createCollection}
 							disabled={isClicked}
 						>
-							{isClicked?<Spinner/>:'Create Collection'}
+							{isClicked ? <Spinner /> : 'Create Collection'}
 						</Button>
 					</Flex>
 				</Box>

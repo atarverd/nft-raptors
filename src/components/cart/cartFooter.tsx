@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router';
 import { buyNft } from '../../utils/buyNft';
@@ -57,6 +57,7 @@ const CartFooter = () => {
     return prev;
   }, []);
 
+
   return (
     <Box position='absolute' bottom='20px' left='40px'>
       <Box mt='30px'>
@@ -70,44 +71,21 @@ const CartFooter = () => {
         </Flex>
       </Box>
 
-	const cartNfts = cart.reduce<TProps[]>((prev, cur) => {
-		prev.push({
-			sellerId: cur.ownerId,
-			itemId: cur.id,
-			price: cur.currentPrice,
-		});
-
-		return prev;
-	}, []);
-
-	return (
-		<Box position='absolute' bottom='20px' left='40px'>
-			<Box mt='30px'>
-				<Flex display='flex' justifyContent='space-around'>
-					<Text fontSize='2xl'>Total Price</Text>
-					<Text fontSize='2xl'>
-						{cart.reduce((acc, curr) => {
-							return acc + Number(curr.currentPrice);
-						}, 0)}
-					</Text>
-				</Flex>
-			</Box>
-
-			<Box mt='20px'>
-				<Flex display='flex' justifyContent='space-around'>
-					<Button
-						onClick={handleBuy}
-						bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
-						color='white'
-						_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
-						w='250px'
-					>
-						Buy
-					</Button>
-				</Flex>
-			</Box>
-		</Box>
-	);
+      <Box mt='20px'>
+        <Flex display='flex' justifyContent='space-around'>
+          <Button
+            onClick={handleBuy}
+            bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
+            color='white'
+            _hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
+            w='250px'
+          >
+            Buy
+          </Button>
+        </Flex>
+      </Box>
+    </Box>
+  );
 
 };
 

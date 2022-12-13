@@ -8,8 +8,9 @@ type TNfts = {
 		name: string;
 		currentPrice: number;
 		ownerId: string;
-    isForSold:boolean;
-	}[];
+		isForSold: boolean;
+	}[]
+};
 
 
 const ItemCard = ({ nfts }: TNfts) => {
