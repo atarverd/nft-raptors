@@ -25,11 +25,14 @@ const HeaderIcons = () => {
   const toast = useToast();
   const { colorMode } = useColorMode();
 
-  const handleUserPage = () => {
-    if (loggedUser.currentUser) navigate('/' + loggedUser.currentUser?.uid);
-    else navigate('/login');
+  const navigateUser = () => {
+    if (loggedUser.currentUser) navigate("/" + loggedUser.currentUser?.uid);
+    else navigate("/login");
   };
 
+  const navigateAboutUs = () => {
+    navigate("/about-us");
+  };
 
   const auth = getAuth();
 
@@ -57,7 +60,7 @@ const HeaderIcons = () => {
   return (
     <Flex mr='4.5rem' alignItems='center'>
       <Box ml='15px' cursor='pointer'>
-        <Text onClick={handleAboutUsPage} fontSize='1xl' mr='10px'>
+        <Text onClick={navigateAboutUs} fontSize='20px' mr='10px'>
           About Us
         </Text>
       </Box>
@@ -65,20 +68,22 @@ const HeaderIcons = () => {
         {/* <FaRegUser size='30px' /> */}
         <Image
           boxSize='35px'
-          src={colorMode === 'light' ? userLight : userDark}
-          onClick={handleUserPage}
+          src={colorMode === "light" ? userLight : userDark}
+          onClick={navigateUser}
         />
       </Box>
-      {user && <Box ml='15px' cursor='pointer'>
-        <CardModal />
-      </Box>}
+      {user && (
+        <Box ml='15px' cursor='pointer'>
+          <CardModal />
+        </Box>
+      )}
       <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
       {user ? (
         <Box ml='15px' cursor='pointer'>
           <Image
-            src={colorMode === 'light' ? logOutLight : logOutDark}
+            src={colorMode === "light" ? logOutLight : logOutDark}
             boxSize='30px'
             onClick={logout}
           />
@@ -86,7 +91,6 @@ const HeaderIcons = () => {
       ) : null}
     </Flex>
   );
-
 };
 
 export default HeaderIcons;

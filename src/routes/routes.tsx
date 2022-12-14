@@ -7,6 +7,7 @@ import SearchPage from "../pages/searchPage";
 import LogIn from "../components/auth/logIn";
 import SignUp from "../components/auth/signUp";
 import ListNftPage from "../pages/listNftPage";
+import AboutUsPage from "../pages/aboutUsPage";
 import SettingsPage from "../pages/settingsPage";
 import CreateNftPage from "../pages/createNftPage";
 import CollectionPage from "../pages/collectionPage";
@@ -21,6 +22,7 @@ const Routing = () => {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/nft/:id' element={<NftPage />} />
       <Route path='/list/:id' element={<ListNftPage />} />
+      <Route path='/about-us' element={<AboutUsPage />} />
       <Route path='/settings' element={<SettingsPage />} />
       <Route path='/create-nft' element={<CreateNftPage />} />
       <Route path='/category/:id' element={<CategoryPage />} />
