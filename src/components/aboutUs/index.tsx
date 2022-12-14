@@ -15,7 +15,7 @@ import { Link } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import linkedIn from "../../assets/linkedin.png";
 import github from "../../assets/github.png";
-import darkgit from "../../assets/darkgithub.png";
+import darkgit from "../../assets/githubdark.png";
 
 const AboutUs = () => {
   const { colorMode } = useColorMode();
@@ -25,18 +25,21 @@ const AboutUs = () => {
       <Box mt='30px'>
         <Flex display='flex' alignItems='center'>
           <Avatar
-            size='2xl'
+            boxSize='200px'
             src={signup}
-            m='20px'
+            m='30px'
             boxShadow={
               colorMode === "dark"
                 ? "0 0 24px 4px white"
-                : "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+                : "0 0 24px 4px rgba(0, 0, 0, 0.48)"
             }
+            transition='transform .2s;'
+            _hover={{ transform: "scale(1.1)" }}
           />
           <VStack>
             <Text fontSize='2xl'>Artur Tarverdyan</Text>
             <Text fontSize='1xl'>Lead Software Engineer</Text>
+
             <HStack>
               <Link href='https://github.com/atarverd' isExternal>
                 <Avatar
@@ -49,11 +52,38 @@ const AboutUs = () => {
               </Link>
             </HStack>
           </VStack>
+          <Box
+            ml='150px'
+            p='20px'
+            borderRadius='15px'
+            bg={colorMode === "dark" ? "#2d3748" : "#BEE3F8"}
+          >
+            <Text maxW='400px'>
+              Energetic and curiosity driven programmer with a diversified
+              portfolio of working with web development, software development.
+              Eager to acquire new technical skill-sets and contribute them to
+              the progress of the organization.
+            </Text>
+          </Box>
         </Flex>
       </Box>
 
       <Box mt='50px'>
         <Flex display='flex' justifyContent='flex-end' alignItems='center'>
+          <Box
+            mr='150px'
+            p='20px'
+            borderRadius='15px'
+            bg={colorMode === "dark" ? "#2d3748" : "#BEE3F8"}
+          >
+            <Text maxW='400px'>
+              Hardworking and reliable Software Developer focused on going above
+              and beyond to support team and serve customers. Motivated to
+              continue to learn and grow as a professional.Reliable team member
+              accustomed to taking on challenging tasks. Dedicated to business
+              success.
+            </Text>
+          </Box>
           <VStack>
             <Text fontSize='2xl'>Minas Malkhasyan</Text>
             <Text fontSize='1xl'>Full Stack Engineer</Text>
@@ -72,15 +102,18 @@ const AboutUs = () => {
               </Link>
             </HStack>
           </VStack>
+
           <Avatar
-            size='2xl'
+            boxSize='200px'
             src={signup}
-            m='20px'
+            m='30px'
             boxShadow={
               colorMode === "dark"
                 ? "0 0 24px 4px white"
-                : "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+                : "0 0 24px 4px rgba(0, 0, 0, 0.48)"
             }
+            transition='transform .2s;'
+            _hover={{ transform: "scale(1.1)" }}
           />
         </Flex>
       </Box>
@@ -88,14 +121,16 @@ const AboutUs = () => {
       <Box mt='50px'>
         <Flex display='flex' alignItems='center'>
           <Avatar
-            size='2xl'
+            boxSize='200px'
             src={signup}
-            m='20px'
+            m='30px'
             boxShadow={
               colorMode === "dark"
                 ? "0 0 24px 4px white"
-                : "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+                : "0 0 24px 4px rgba(0, 0, 0, 0.48)"
             }
+            transition='transform .2s;'
+            _hover={{ transform: "scale(1.1)" }}
           />
           <VStack>
             <Text fontSize='2xl'>Rafayel Ghazaryan</Text>
@@ -115,11 +150,34 @@ const AboutUs = () => {
               </Link>
             </HStack>
           </VStack>
+          <Box
+            ml='150px'
+            p='20px'
+            borderRadius='15px'
+            bg={colorMode === "dark" ? "#2d3748" : "#BEE3F8"}
+          >
+            <Text maxW='400px'>
+              Highly skilled Information technology professional with strong
+              experience and knowledge creating top quality, predictable and
+              high-performance website applications.
+            </Text>
+          </Box>
         </Flex>
       </Box>
 
       <Box mt='50px'>
         <Flex display='flex' justifyContent='flex-end' alignItems='center'>
+          <Box
+            mr='150px'
+            p='20px'
+            borderRadius='15px'
+            bg={colorMode === "dark" ? "#2d3748" : "#BEE3F8"}
+          >
+            <Text maxW='400px'>
+              Robert is passionate about all things JavaScript. he works hard
+              and cares about writing clean code and genuinely love to learn.
+            </Text>
+          </Box>
           <VStack>
             <Text fontSize='2xl'>Robert Baloyan </Text>
             <Text fontSize='1xl'>Project Manager</Text>
@@ -139,14 +197,16 @@ const AboutUs = () => {
             </HStack>
           </VStack>
           <Avatar
-            size='2xl'
+            boxSize='200px'
             src={signup}
-            m='20px'
+            m='30px'
             boxShadow={
               colorMode === "dark"
                 ? "0 0 24px 4px white"
-                : "0 0 24px 4px rgba(0, 0, 0, 0.15)"
+                : "0 0 24px 4px rgba(0, 0, 0, 0.48)"
             }
+            transition='transform .2s;'
+            _hover={{ transform: "scale(1.1)" }}
           />
         </Flex>
       </Box>

@@ -6,6 +6,7 @@ import {
   useToast,
   useColorMode,
   Button,
+  Text,
 } from "@chakra-ui/react";
 import Cart from "../../components/cart/cart";
 import userDark from "../../assets/userWhite.png";
@@ -57,19 +58,11 @@ const HeaderIcons = () => {
     });
   };
   return (
-    <Flex mr='4.5rem'>
+    <Flex mr='4.5rem' alignItems='center'>
       <Box ml='15px' cursor='pointer'>
-        <Button
-          onClick={handleAboutUsPage}
-          bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
-          color='white'
-          _hover={{
-            background:
-              colorMode === "dark" ? "messenger.800" : "messenger.600",
-          }}
-        >
+        <Text onClick={handleAboutUsPage} fontSize='1xl' mr='10px'>
           About Us
-        </Button>
+        </Text>
       </Box>
       <Box ml='10px' cursor='pointer'>
         {/* <FaRegUser size='30px' /> */}
