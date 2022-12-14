@@ -1,7 +1,7 @@
-import UserHeader from "./userHeader";
 import {
 	Box,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
+import UserHeader from './userHeader';
 
 
 const User = () => {

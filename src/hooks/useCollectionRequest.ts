@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
 import { db } from '../firebase-config';
-import { getDocs, collection, query, limit, orderBy, where } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
 import { TCollection } from '../types/collection.types';
+import { getDocs, collection, query, limit, orderBy, where } from 'firebase/firestore';
 
 
-	const useCollectionRequest = (type: string, id?: string) => {
+	const useCollectionRequest = (type: string, id = '') => {
 
     const queryType = {
       carousel: query(collection(db, 'collections'), limit(10)),

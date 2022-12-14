@@ -1,11 +1,11 @@
-import { collection, addDoc, getDoc, doc } from "firebase/firestore";
-import { ref, getStorage, uploadBytes, getDownloadURL } from "firebase/storage";
-import { db } from "../firebase-config";
+import { db } from '../firebase-config';
+import { collection, addDoc, getDoc, doc } from 'firebase/firestore';
+import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 export const addCollection=(id:string,logoImage:File, featureImage:File, bgImage:File,name:string,description:string,category:string,toast:(val:any)=>void,navigate:(val:string)=>void)=>{
     let images:any=[];
     const storage = getStorage();
-	const userRef = doc(db, "users", id as string);
+	const userRef = doc(db, 'users', id as string);
 
     const collectionValidator = () => {
 		images = [logoImage, featureImage, bgImage];
@@ -14,11 +14,11 @@ export const addCollection=(id:string,logoImage:File, featureImage:File, bgImage
 			handleSubmit();
 		} else {
 			toast({
-				title: "Some Fields Are Empty",
+				title: 'Some Fields Are Empty',
 				duration: 3000,
-				position: "top-right",
-				variant: "subtle",
-				status: "error",
+				position: 'top-right',
+				variant: 'subtle',
+				status: 'error',
 			});
 		}
 	};
@@ -39,7 +39,7 @@ export const addCollection=(id:string,logoImage:File, featureImage:File, bgImage
 		};
 		await a();
 		const docSnap = await getDoc(userRef);
-		addDoc(collection(db, "collections"), {
+		addDoc(collection(db, 'collections'), {
 			collectionName: name,
 			description,
 			category,
@@ -50,13 +50,13 @@ export const addCollection=(id:string,logoImage:File, featureImage:File, bgImage
 			creatorId: id,
 			date: new Date(),
 			volume: 0,
-		}).then(docRef => navigate("/collection/" + docRef.id))
+		}).then(docRef => navigate('/collection/' + docRef.id))
 			.then(() =>
 				toast({
-					title: "Successfully Created",
+					title: 'Successfully Created',
 					duration: 3000,
-					position: "top-right",
-					status: "success",
+					position: 'top-right',
+					status: 'success',
 				})
 			);
 	};

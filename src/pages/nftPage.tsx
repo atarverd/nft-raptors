@@ -1,14 +1,14 @@
+import { useState } from 'react';
+import { TNft } from '../types/nft.types';
 import Loader from '../components/loading';
 import { useParams } from 'react-router-dom';
-import {  useState } from 'react';
+import useDocRequest from '../hooks/useDocRequest';
 import { Box, Center, Flex } from '@chakra-ui/react';
 import NftTable from '../components/nftPage/NftTable';
 import NftChart from '../components/nftPage/NftChart';
 import NftItemPage from '../components/nftPage/NftItemPage';
 import NftBasicInfo from '../components/nftPage/NftBasicInfo';
 import NftAccordion from '../components/nftPage/NftAccordian';
-import useDocRequest from '../hooks/useDocRequest';
-import { TNft } from '../types/nft.types';
 
 const NftPage = () => {
 

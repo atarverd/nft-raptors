@@ -6,12 +6,12 @@ import {
 	Textarea,
 	useToast,
 	useColorMode,
-} from "@chakra-ui/react";
-import { useState } from "react";
-import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { updateUser } from "../../utils/updateUser";
-import UploadImage from "../createCollection/uploadImage";
+} from '@chakra-ui/react';
+import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import { updateUser } from '../../utils/updateUser';
+import UploadImage from '../createCollection/uploadImage';
 
 
 const SettingsBody = () => {
@@ -25,15 +25,15 @@ const SettingsBody = () => {
 	const navigate = useNavigate();
 	const { colorMode } = useColorMode();
 
-	const handleUpdate = () => {
+	const handleUpdateUser = () => {
 		updateUser(user?.currentUser?.uid as string, logoImage, backgroundImage, bio)
 			.then(() => toast({
-				title: "Successfully Updated",
-				status: "success",
+				title: 'Successfully Updated',
+				status: 'success',
 				duration: 3000,
-				position: "top-right"
+				position: 'top-right'
 			}))
-			.then(() => navigate("/" + user?.currentUser?.uid));
+			.then(() => navigate('/' + user?.currentUser?.uid));
 	};
 
 	return (
@@ -79,11 +79,11 @@ const SettingsBody = () => {
 			<Box mt='30px'>
 				<Flex justifyContent='center'>
 					<Button
-						bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+						bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
 						color='white'
-						_hover={{ background: colorMode === "dark" ? 'messenger.800' : 'messenger.600' }}
+						_hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
 						w='200px'
-						onClick={handleUpdate}>
+						onClick={handleUpdateUser}>
 						Update
 					</Button>
 				</Flex>

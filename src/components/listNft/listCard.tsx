@@ -4,23 +4,23 @@ import {
 	Stack,
 	Image,
 	Heading
-} from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+} from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 type TNft = {
-  nft: {
-    id: string;
-    img: string;
-    name: string;
-    price:number
-  };
+	nft: {
+		id: string;
+		img: string;
+		name: string;
+		price: number
+	};
 };
 
 const ListCard = ({ nft }: TNft) => {
 	const navigate = useNavigate();
 
-	const toNftPage = () => {
-		navigate("/nft/" + nft.id);
+	const navigateNftPage = () => {
+		navigate('/nft/' + nft.id);
 	};
 
 
@@ -33,17 +33,17 @@ const ListCard = ({ nft }: TNft) => {
 				boxShadow='0 0 24px 4px rgba(0, 0, 0, 0.15)'
 			>
 				<Image
-					onClick={toNftPage}
+					onClick={navigateNftPage}
 					src={nft.img}
 					w='300px'
 					h='250px'
 					borderRadius='5px'
 					transition='transform .2s;'
-					_hover={{ transform: "scale(1.1)" }}
+					_hover={{ transform: 'scale(1.1)' }}
 				/>
 
 				<Stack p='3' bg='#EBF8FF'>
-					<Heading onClick={toNftPage} fontSize='1xl'>
+					<Heading onClick={navigateNftPage} fontSize='1xl'>
 						{nft.name} Name: Raptors
 					</Heading>
 					<Text>price: {nft.price}</Text>

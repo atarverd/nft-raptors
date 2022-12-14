@@ -1,8 +1,8 @@
-import { useState,useEffect } from "react";
-import { updateDoc, doc, getDoc, increment } from 'firebase/firestore';
 import { db } from '../firebase-config';
-import { useToast } from "@chakra-ui/toast";
-import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from 'react';
+import { useToast } from '@chakra-ui/toast';
+import { useNavigate } from 'react-router-dom';
+import { updateDoc, doc, getDoc, increment } from 'firebase/firestore';
 
 export const useIsAttached = (id:string,ammount:string,onClose:()=>void,cardNumber:string)=>{
 
