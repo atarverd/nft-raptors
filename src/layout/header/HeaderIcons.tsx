@@ -26,13 +26,10 @@ const HeaderIcons = () => {
   const { colorMode } = useColorMode();
 
   const handleUserPage = () => {
-    if (loggedUser.currentUser) navigate("/" + loggedUser.currentUser?.uid);
-    else navigate("/login");
+    if (loggedUser.currentUser) navigate('/' + loggedUser.currentUser?.uid);
+    else navigate('/login');
   };
 
-  const handleAboutUsPage = () => {
-    navigate("/about-us");
-  };
 
   const auth = getAuth();
 
@@ -68,23 +65,20 @@ const HeaderIcons = () => {
         {/* <FaRegUser size='30px' /> */}
         <Image
           boxSize='35px'
-          src={colorMode === "light" ? userLight : userDark}
+          src={colorMode === 'light' ? userLight : userDark}
           onClick={handleUserPage}
         />
       </Box>
-      {user && (
-        <Box ml='15px' cursor='pointer'>
-          <CardModal />
-        </Box>
-      )}
+      {user && <Box ml='15px' cursor='pointer'>
+        <CardModal />
+      </Box>}
       <Box ml='15px' cursor='pointer'>
         <Cart />
       </Box>
-
       {user ? (
         <Box ml='15px' cursor='pointer'>
           <Image
-            src={colorMode === "light" ? logOutLight : logOutDark}
+            src={colorMode === 'light' ? logOutLight : logOutDark}
             boxSize='30px'
             onClick={logout}
           />
@@ -92,6 +86,7 @@ const HeaderIcons = () => {
       ) : null}
     </Flex>
   );
+
 };
 
 export default HeaderIcons;

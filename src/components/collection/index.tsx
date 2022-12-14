@@ -1,9 +1,9 @@
-import Loader from "../loading";
-import { useParams } from "react-router";
-import GlobCard from "../cards/globCard";
-import useGetNfts from "../../hooks/useGetNfts";
-import CollectionHeader from "./collectionHeader";
-import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
+import Loader from '../loading';
+import { useParams } from 'react-router';
+import GlobCard from '../cards/globCard';
+import useGetNfts from '../../hooks/useGetNfts';
+import CollectionHeader from './collectionHeader';
+import { Box, Flex, SimpleGrid } from '@chakra-ui/react';
 
 const Collection = () => {
   const { id } = useParams();

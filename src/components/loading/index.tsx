@@ -1,8 +1,10 @@
-import "./styles.css";
+import './styles.css';
+
 const Loader = () => {
+
 	return (
-		<div className="drawing" id="loading">
-			<div className="loading-dot"></div>
+		<div className='drawing' id='loading'>
+			<div className='loading-dot'></div>
 		</div>
 	);
 };

@@ -1,5 +1,5 @@
-import { DrawerBody } from "@chakra-ui/react";
-import CartItem from "./cartItem";
+import CartItem from './cartItem';
+import { DrawerBody } from '@chakra-ui/react';
 
 const CartDrawer = () => {
 	return (

@@ -1,6 +1,6 @@
+import { db } from '../firebase-config';
 import { useState, useEffect } from 'react';
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase-config";
+import { doc, getDoc } from 'firebase/firestore';
 
 const useDocRequest = (itemName: string, id: string, setData: (value: any) => void) => {
 

@@ -1,15 +1,16 @@
 import 'swiper/css';
-import { Flex, Center, Box } from '@chakra-ui/react';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper';
+import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { TypeAnimation } from 'react-type-animation';
+import { Flex, Center, Box } from '@chakra-ui/react';
 import useCollectionRequest from '../../../hooks/useCollectionRequest';
-import { useNavigate } from 'react-router-dom'; 
 
 const Carusel = () => {
 
-	const carouselImg = useCollectionRequest('carousel', '');
+	const carouselImg = useCollectionRequest('carousel');
 	const navigate = useNavigate();
+
 	return (
 		<>
 			<Center mb='2rem'>
@@ -44,7 +45,7 @@ const Carusel = () => {
 				>
 					{carouselImg.map((item, i) => (
 						<SwiperSlide key={i}>
-							<Box backgroundImage={`url(${item.feature})`} onClick={()=>navigate('/collection/'+item.id)}
+							<Box backgroundImage={`url(${item.feature})`} onClick={() => navigate('/collection/' + item.id)}
 								cursor='pointer'
 								borderRadius='15px'
 								w={['70px', '130px', '170px', '230px', '300px']}

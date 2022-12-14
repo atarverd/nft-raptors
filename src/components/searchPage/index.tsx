@@ -1,19 +1,19 @@
-import ItemCard from "./itemCard";
-import Accordions from "./accordion";
-import { useParams } from "react-router";
-import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react";
-import { db } from "../../firebase-config";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import Loader from "../loading";
-import Empty from "./empty";
+import Empty from './empty';
+import Loader from '../loading';
+import ItemCard from './itemCard';
+import Accordions from './accordion';
+import { useParams } from 'react-router';
+import { db } from '../../firebase-config';
+import { Box, Flex } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { collection, query, where, getDocs } from 'firebase/firestore';
 
 type TNft = {
-  id: string;
-  img: string;
-  name: string;
-  currentPrice: number;
-  ownerId: string;
+	id: string;
+	img: string;
+	name: string;
+	currentPrice: number;
+	ownerId: string;
   isForSold:boolean;
 };
 
@@ -26,13 +26,13 @@ const Search = () => {
 
 
 	const priceSort = (sortType: string) => {
-		if (sortType === "lowToHigh") {
-			setNfts((old:TNft[]) => [
-				
+		if (sortType === 'lowToHigh') {
+			setNfts((old: TNft[]) => [
+
 				...old.sort((a, b) => a.currentPrice - b.currentPrice),
 			]);
-		} else if (sortType === "highToLow") {
-			setNfts((old:TNft[]) => [
+		} else if (sortType === 'highToLow') {
+			setNfts((old: TNft[]) => [
 				...old.sort((a, b) => b.currentPrice - a.currentPrice),
 			]);
 		}
@@ -55,10 +55,10 @@ const Search = () => {
 	};
 
 	const asyncronus = async () => {
-		const question = query(collection(db, "nfts"), where("name", ">=", querys?.toUpperCase()));
+		const question = query(collection(db, 'nfts'), where('name', '>=', querys?.toUpperCase()));
 
 		const querySnapshot = await getDocs(question);
-		const result:TNft[] = [];
+		const result: TNft[] = [];
 		querySnapshot.forEach((doc) => {
 			const nft = doc.data();
 			result.push({
@@ -92,11 +92,11 @@ const Search = () => {
 	};
 
 	return (
-		<Box m='15px' minH="100vh">
+		<Box m='15px' minH='100vh'>
 			{isLoading ? (
 				<Loader />
 			) : (
-				<Box display={["block","block","block", "flex"]} justifyContent='space-between'>
+				<Box display={['block', 'block', 'block', 'flex']} justifyContent='space-between'>
 					<Flex display='flex'>
 						<Accordions
 							priceSort={priceSort}

@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Flex,
-  Text,
-  Button,
-  useToast,
-  useColorMode,
-  Spinner,
-} from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../../store/store";
-import { clearAllFromCart } from "../../features/cartSlice";
-import { buyNft } from "../../utils/buyNft";
-import { useNavigate } from "react-router";
-import { getAuth } from "firebase/auth";
+import { useState } from 'react';
+import { getAuth } from 'firebase/auth';
+import { useNavigate } from 'react-router';
+import { buyNft } from '../../utils/buyNft';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { clearAllFromCart } from '../../features/cartSlice';
+import { Box, Flex, Text, Button, useToast, useColorMode } from '@chakra-ui/react';
+
 
 type TProps = {
   sellerId: string;
@@ -64,6 +57,7 @@ const CartFooter = () => {
     return prev;
   }, []);
 
+
   return (
     <Box position='absolute' bottom='20px' left='40px'>
       <Box mt='30px'>
@@ -81,21 +75,18 @@ const CartFooter = () => {
         <Flex display='flex' justifyContent='space-around'>
           <Button
             onClick={handleBuy}
-            bg={colorMode === "dark" ? "#2051c4" : "#0078ff"}
+            bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
             color='white'
-            _hover={{
-              background:
-                colorMode === "dark" ? "messenger.800" : "messenger.600",
-            }}
+            _hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
             w='250px'
-            disabled={isClicked}
           >
-            {isClicked ? <Spinner /> : "Buy"}
+            Buy
           </Button>
         </Flex>
       </Box>
     </Box>
   );
+
 };
 
 export default CartFooter;

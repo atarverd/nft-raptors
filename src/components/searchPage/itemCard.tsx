@@ -1,5 +1,5 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import GlobCard from "../cards/globCard";
+import GlobCard from '../cards/globCard';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 
 type TNfts = {
   nfts?: {
@@ -11,6 +11,7 @@ type TNfts = {
     isForSold: boolean;
   }[];
 };
+
 
 const ItemCard = ({ nfts }: TNfts) => {
   return (

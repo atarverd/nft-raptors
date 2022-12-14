@@ -1,8 +1,8 @@
-import React from "react";
-import { Image, Flex } from "@chakra-ui/react";
+import React from 'react';
+import { Image, Flex } from '@chakra-ui/react';
 
 type TProp = {
-  img: string
+	img: string
 }
 const NftItemPage = ({ img }: TProp) => {
 	return (

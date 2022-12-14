@@ -1,10 +1,10 @@
 import { db } from '../firebase-config';
 import {
 	doc,
-	updateDoc,
 	getDoc,
-	arrayUnion,
+	updateDoc,
 	increment,
+	arrayUnion,
 } from 'firebase/firestore';
 
 type TProps = {

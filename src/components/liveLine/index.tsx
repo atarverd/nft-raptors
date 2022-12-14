@@ -1,9 +1,16 @@
-import { useState, useEffect } from "react";
-import { Box, Text, Avatar, HStack, Center } from "@chakra-ui/react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper";
+import {
+	Box,
+	Text,
+	Avatar,
+	HStack,
+	Center,
+} from '@chakra-ui/react';
+import { useState, useEffect } from 'react';
+import { Autoplay, Navigation } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const LiveList = () => {
+
   const [data, setData] = useState([]);
 
   const url =

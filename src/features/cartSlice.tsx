@@ -1,15 +1,15 @@
-import {  createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type TNft = {
-  id: string;
-  img: string;
-  name: string;
-  currentPrice: number;
-  ownerId: string;
+	id: string;
+	img: string;
+	name: string;
+	currentPrice: number;
+	ownerId: string;
 };
 
 type TInitialState = {
-  cart: TNft[];
+	cart: TNft[];
 };
 
 const initialState: TInitialState = {
@@ -17,12 +17,12 @@ const initialState: TInitialState = {
 };
 
 const cartSlice = createSlice({
-	name: "cart",
+	name: 'cart',
 	initialState,
 	reducers: {
 		addToCart: (state, action: PayloadAction<TNft>) => {
-			const validator=state.cart.find(item=>item.id===action.payload.id);
-			if(!validator)
+			const validator = state.cart.find(item => item.id === action.payload.id);
+			if (!validator)
 				state.cart.push(action.payload);
 		},
 		deleteFromCart: (state, action: PayloadAction<string>) => {
@@ -36,6 +36,6 @@ const cartSlice = createSlice({
 });
 
 export const { addToCart, deleteFromCart, clearAllFromCart } =
-  cartSlice.actions;
+	cartSlice.actions;
 
 export default cartSlice.reducer;
