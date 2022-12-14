@@ -23,9 +23,11 @@ const CartFooter = () => {
   const dispatch: AppDispatch = useDispatch();
   const { cart } = useSelector((state: RootState) => state.cart);
 
+
   const clearCartAfterPurchase = () => {
     dispatch(clearAllFromCart());
   };
+
 
   const handleBuy = () => {
     if (user?.currentUser?.uid) {
@@ -53,6 +55,28 @@ const CartFooter = () => {
       itemId: cur.id,
       price: cur.currentPrice,
     });
+
+	const handleBuy = () => {
+		if (user?.currentUser?.uid) {
+			setIsClicked(true);
+			buyNft(
+				user?.currentUser?.uid as string,
+				cartNfts,
+				clearCartAfterPurchase,
+				toast,
+				navigate
+			).then(()=>setIsClicked(false));
+			
+		} else {
+			toast({
+				position: 'top-right',
+				duration: 3000,
+				status: 'error',
+				title: 'You Need To Sign In'
+			});
+		}
+	};
+
 
     return prev;
   }, []);
