@@ -1,13 +1,21 @@
-import { useNavigate } from 'react-router';
-import { useEffect, useState } from 'react';
-import Cart from '../../components/cart/cart';
-import userLight from '../../assets/user.png';
-import userDark from '../../assets/userWhite.png';
-import logOutLight from '../../assets/logOut.png';
-import CardModal from '../../components/cardModal';
-import logOutDark from '../../assets/logOutWhite.png';
-import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth';
-import { Flex, Box, Image, useToast, useColorMode } from '@chakra-ui/react';
+import { useEffect, useState } from "react";
+import {
+  Flex,
+  Box,
+  Image,
+  useToast,
+  useColorMode,
+  Button,
+  Text,
+} from "@chakra-ui/react";
+import Cart from "../../components/cart/cart";
+import userDark from "../../assets/userWhite.png";
+import userLight from "../../assets/user.png";
+import { useNavigate } from "react-router";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import logOutDark from "../../assets/logOutWhite.png";
+import logOutLight from "../../assets/logOut.png";
+import CardModal from "../../components/cardModal";
 
 const HeaderIcons = () => {
   const navigate = useNavigate();
@@ -47,8 +55,12 @@ const HeaderIcons = () => {
     });
   };
   return (
-
-    <Flex mr='4.5rem'>
+    <Flex mr='4.5rem' alignItems='center'>
+      <Box ml='15px' cursor='pointer'>
+        <Text onClick={handleAboutUsPage} fontSize='1xl' mr='10px'>
+          About Us
+        </Text>
+      </Box>
       <Box ml='10px' cursor='pointer'>
         {/* <FaRegUser size='30px' /> */}
         <Image
