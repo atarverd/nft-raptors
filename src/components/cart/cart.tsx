@@ -9,11 +9,13 @@ import {
 	DrawerCloseButton,
 	useColorMode,
 } from '@chakra-ui/react';
+
 import CartFooter from './cartFooter';
 import CartDrawer from './cartDrawer';
 import CartHeader from './cartHeader';
-import cartLight from '../../assets/cartt.png';
-import cartDark from '../../assets/cartWhite.png';
+
+import cartLight from 'assets/cartt.png';
+import cartDark from 'assets/cartWhite.png';
 
 const Cart = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();

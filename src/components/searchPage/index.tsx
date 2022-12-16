@@ -1,9 +1,9 @@
 import Empty from './empty';
-import Loader from '../loading';
+import Loader from 'components/loading';
 import ItemCard from './itemCard';
 import Accordions from './accordion';
 import { useParams } from 'react-router';
-import { db } from '../../firebase-config';
+import { db } from 'firebase-config';
 import { Box, Flex } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';

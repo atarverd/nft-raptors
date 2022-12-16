@@ -20,11 +20,12 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import { addNft } from '../../utils/addNft';
 import { useNavigate } from 'react-router-dom';
-import UploadImage from '../createCollection/uploadImage';
-import { TCollection } from '../../types/collection.types';
-import useCollectionRequest from '../../hooks/useCollectionRequest';
+
+import { addNft } from 'utils/addNft';
+import { TCollection } from 'types/collection.types';
+import useCollectionRequest from 'hooks/useCollectionRequest';
+import UploadImage from 'components/createCollection/uploadImage';
 
 type TChoosed = {
 	collectionName: string,

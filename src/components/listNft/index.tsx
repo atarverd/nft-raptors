@@ -1,10 +1,11 @@
-import ListCard from './listCard';
-import ListInfo from './listInfo';
-import { useEffect, useState } from 'react';
+import { db } from 'firebase-config';
 import { useParams } from 'react-router';
-import { db } from '../../firebase-config';
+import { useEffect, useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { doc, getDoc } from 'firebase/firestore';
+
+import ListCard from './listCard';
+import ListInfo from './listInfo';
 
 
 type TNft = {
@@ -31,7 +32,6 @@ const ListNft = () => {
 				const nftData = snap.data();
 				//@ts-ignore
 				setNft({ img: nftData.img, name: nftData.name, id, price: 0 });
-				// setIsloading(false);
 			} else {
 				console.log('No such document');
 			}

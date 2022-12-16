@@ -1,11 +1,6 @@
-import CreateNft from '../components/createNft';
+import CreateNft from 'components/createNft';
 
-const CreateNftPage = () => {
-	return (
-		<div>
-			<CreateNft />
-		</div>
-	);
-};
+const CreateNftPage = () => <CreateNft />;
+
 
 export default CreateNftPage;

@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+
 import {
 	Box,
 	Flex,
@@ -14,11 +18,10 @@ import {
 	useColorMode,
 	InputRightElement,
 } from '@chakra-ui/react';
-import eye from '../../assets/eye.png';
-import login from '../../assets/login.jpg';
-import { useNavigate } from 'react-router';
-import hiddenEye from '../../assets/hiddenEye.png';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
+import eye from 'assets/eye.png';
+import login from 'assets/login.jpg';
+import hiddenEye from 'assets/hiddenEye.png';
 
 const LogIn = () => {
 

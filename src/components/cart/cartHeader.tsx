@@ -7,12 +7,12 @@ import {
 	DrawerHeader,
 	useColorMode,
 } from '@chakra-ui/react';
-import React from 'react';
+
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { RootState } from '../../store/store';
-import { AppDispatch } from '../../store/store';
-import { clearAllFromCart } from '../../features/cartSlice';
+import { RootState } from 'store/store';
+import { AppDispatch } from 'store/store';
+import { clearAllFromCart } from 'features/cartSlice';
 
 const CartHeader = () => {
 	const { cart } = useSelector((state: RootState) => state.cart);

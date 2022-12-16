@@ -1,4 +1,4 @@
-import { db } from '../firebase-config';
+import { db } from 'firebase-config';
 import { doc, updateDoc } from 'firebase/firestore';
 import { ref, getStorage, uploadBytes, getDownloadURL } from 'firebase/storage';
 

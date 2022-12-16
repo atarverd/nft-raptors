@@ -10,8 +10,9 @@ import {
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { updateUser } from '../../utils/updateUser';
-import UploadImage from '../createCollection/uploadImage';
+
+import { updateUser } from 'utils/updateUser';
+import UploadImage from 'components/createCollection/uploadImage';
 
 
 const SettingsBody = () => {

@@ -1,9 +1,10 @@
 import { Box, Text, Flex, Image, Button, useColorMode } from "@chakra-ui/react";
-import { RootState } from "../../store/store";
-import { AppDispatch } from "../../store/store";
-import { AiOutlineDelete } from "react-icons/ai";
+import { RootState } from "store/store";
+import { AppDispatch } from "store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFromCart } from "../../features/cartSlice";
+import { deleteFromCart } from "features/cartSlice";
+
+import { AiOutlineDelete } from "react-icons/ai";
 
 const CartItem = () => {
   const { cart } = useSelector((state: RootState) => state.cart);

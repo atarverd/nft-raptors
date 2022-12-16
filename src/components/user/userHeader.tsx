@@ -12,13 +12,15 @@ import {
   MenuButton,
   useColorMode,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import UserTabs from "./userTabs";
-import NotFound from "../notFound";
-import { TUserData } from "../../types/user.types";
 import { ChevronDownIcon } from "@chakra-ui/icons";
+
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import useDocRequest from "../../hooks/useDocRequest";
+
+import UserTabs from "./userTabs";
+import NotFound from "components/notFound";
+import { TUserData } from "types/user.types";
+import useDocRequest from "hooks/useDocRequest";
 
 const UserHeader = () => {
   const [show, setShow] = useState(false);

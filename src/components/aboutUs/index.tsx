@@ -1,21 +1,18 @@
 import {
   Box,
   Flex,
-  Image,
   Text,
+  Link,
   Avatar,
-  AvatarBadge,
-  AvatarGroup,
   VStack,
   HStack,
   useColorMode,
 } from "@chakra-ui/react";
-import signup from "../../assets/signup.jpg";
-import { Link } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
-import linkedIn from "../../assets/linkedin.png";
-import github from "../../assets/github.png";
-import darkgit from "../../assets/githubdark.png";
+
+import signup from "assets/signup.jpg";
+import linkedIn from "assets/linkedin.png";
+import github from "assets/github.png";
+import darkgit from "assets/githubdark.png";
 
 const AboutUs = () => {
   const { colorMode } = useColorMode();

@@ -1,7 +1,9 @@
-import { useParams } from "react-router";
-import CollectionCard from "../cards/collectionCard";
 import { SimpleGrid, Center, Box } from "@chakra-ui/react";
-import useCollectionRequest from "../../hooks/useCollectionRequest";
+import { useParams } from "react-router";
+
+import CollectionCard from "components/cards/collectionCard";
+
+import useCollectionRequest from "hooks/useCollectionRequest";
 
 const Category = () => {
   const { id } = useParams();

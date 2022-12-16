@@ -1,4 +1,3 @@
-import React from 'react';
 import { Image, Flex } from '@chakra-ui/react';
 
 type TProp = {

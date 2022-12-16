@@ -1,10 +1,11 @@
-import Body from './body';
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import UploadImage from './uploadImage';
 import { useNavigate } from 'react-router-dom';
-import { addCollection } from '../../utils/addCollection';
 import { Box, Text, Flex, Button, useToast, useColorMode, Spinner } from '@chakra-ui/react';
+
+import Body from './body';
+import UploadImage from './uploadImage';
+import { addCollection } from 'utils/addCollection';
 
 
 

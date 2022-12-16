@@ -6,13 +6,16 @@ import {
   Button,
   useColorMode,
 } from "@chakra-ui/react";
-import { getAuth } from "firebase/auth";
+
 import { useNavigate } from "react-router-dom";
-import { RootState } from "../../../store/store";
-import { AppDispatch } from "../../../store/store";
+import { getAuth } from "firebase/auth";
+
+import { RootState } from "store/store";
+import { AppDispatch } from "store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { checkItemIsInArray } from "../../../utils/checkItemInArray";
-import { addToCart, deleteFromCart } from "../../../features/cartSlice";
+import { addToCart, deleteFromCart } from "features/cartSlice";
+
+import { checkItemIsInArray } from "utils/checkItemInArray";
 
 type TNft = {
   nft: {

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router';
-import { buyNft } from '../../utils/buyNft';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../store/store';
-import { clearAllFromCart } from '../../features/cartSlice';
 import { Box, Flex, Text, Button, useToast, useColorMode } from '@chakra-ui/react';
+
+import { getAuth } from 'firebase/auth';
+import { buyNft } from 'utils/buyNft';
+import { RootState, AppDispatch } from 'store/store';
+import { clearAllFromCart } from 'features/cartSlice';
 
 
 type TProps = {
@@ -15,7 +15,6 @@ type TProps = {
 };
 
 const CartFooter = () => {
-  const [isClicked, setIsClicked] = useState(false);
   const user = getAuth();
   const toast = useToast();
   const navigate = useNavigate();
@@ -31,14 +30,13 @@ const CartFooter = () => {
 
   const handleBuy = () => {
     if (user?.currentUser?.uid) {
-      setIsClicked(true);
       buyNft(
         user?.currentUser?.uid as string,
         cartNfts,
         clearCartAfterPurchase,
         toast,
         navigate
-      ).then(() => setIsClicked(false));
+      )
     } else {
       toast({
         position: "top-right",
@@ -55,29 +53,6 @@ const CartFooter = () => {
       itemId: cur.id,
       price: cur.currentPrice,
     });
-
-	const handleBuy = () => {
-		if (user?.currentUser?.uid) {
-			setIsClicked(true);
-			buyNft(
-				user?.currentUser?.uid as string,
-				cartNfts,
-				clearCartAfterPurchase,
-				toast,
-				navigate
-			).then(()=>setIsClicked(false));
-			
-		} else {
-			toast({
-				position: 'top-right',
-				duration: 3000,
-				status: 'error',
-				title: 'You Need To Sign In'
-			});
-		}
-	};
-
-
     return prev;
   }, []);
 
@@ -99,6 +74,7 @@ const CartFooter = () => {
         <Flex display='flex' justifyContent='space-around'>
           <Button
             onClick={handleBuy}
+            disabled={!cart.length}
             bg={colorMode === 'dark' ? '#2051c4' : '#0078ff'}
             color='white'
             _hover={{ background: colorMode === 'dark' ? 'messenger.800' : 'messenger.600' }}
