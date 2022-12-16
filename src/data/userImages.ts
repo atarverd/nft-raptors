@@ -8,5 +8,4 @@ export const userImages={
         'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283756.jpg?alt=media&token=1c563926-2394-4581-b6fc-558bd6ebfea9',
         'https://firebasestorage.googleapis.com/v0/b/nft-raptors.appspot.com/o/wp8283653.jpg?alt=media&token=3687f95e-f749-45f0-bdd3-8d39209cceee'
     ]
-
-}
+};
