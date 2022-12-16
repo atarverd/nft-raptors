@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import LiveList from '../../components/liveLine';
+import LiveList from 'components/liveLine';
 
 const Footer = () => {
 

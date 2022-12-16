@@ -7,8 +7,7 @@ import {
 	CartesianGrid,
 	ResponsiveContainer,
 } from 'recharts';
-import React from 'react';
-import { TPriceHistory } from '../../types/nft.types';
+import { TPriceHistory } from 'types/nft.types';
 
 type TProp = {
 	priceHistory: TPriceHistory[];

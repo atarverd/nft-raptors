@@ -1,11 +1,6 @@
-import CreateCollection from '../components/createCollection';
+import CreateCollection from 'components/createCollection';
 
-const CreateCollectionPage = () => {
-	return (
-		<div>
-			<CreateCollection />
-		</div>
-	);
-};
+const CreateCollectionPage = () => <CreateCollection />;
+
 
 export default CreateCollectionPage;

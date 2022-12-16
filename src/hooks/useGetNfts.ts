@@ -1,5 +1,5 @@
-import { db } from '../firebase-config';
-import { TNft } from '../types/nft.types';
+import { db } from 'firebase-config';
+import { TNft } from 'types/nft.types';
 import { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 

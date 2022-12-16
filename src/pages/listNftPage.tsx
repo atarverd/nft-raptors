@@ -1,11 +1,6 @@
-import ListNft from '../components/listNft';
+import ListNft from 'components/listNft';
 
-const ListNftPage = () => {
-	return (
-		<div>
-			<ListNft />
-		</div>
-	);
-};
+const ListNftPage = () => <ListNft />;
+
 
 export default ListNftPage;

@@ -10,10 +10,11 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useParams } from 'react-router';
-import { db } from '../../firebase-config';
 import { useNavigate } from 'react-router-dom';
-import { formatter } from '../../utils/formatValue';
 import { doc, updateDoc } from 'firebase/firestore';
+
+import { db } from 'firebase-config';
+import { formatter } from 'utils/formatValue';
 
 
 const ListInfo = () => {

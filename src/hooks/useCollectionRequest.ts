@@ -1,6 +1,6 @@
-import { db } from '../firebase-config';
+import { db } from 'firebase-config';
 import { useState, useEffect } from 'react';
-import { TCollection } from '../types/collection.types';
+import { TCollection } from 'types/collection.types';
 import { getDocs, collection, query, limit, orderBy, where } from 'firebase/firestore';
 
 

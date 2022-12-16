@@ -2,9 +2,10 @@ import "swiper/css";
 import { Autoplay, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { TypeAnimation } from "react-type-animation";
 import { Flex, Center, Box } from "@chakra-ui/react";
-import useCollectionRequest from "../../../hooks/useCollectionRequest";
+import { TypeAnimation } from "react-type-animation";
+
+import useCollectionRequest from "hooks/useCollectionRequest";
 
 const Carusel = () => {
   const carouselImg = useCollectionRequest("carousel");
@@ -15,8 +16,8 @@ const Carusel = () => {
       <Center mb='2rem'>
         <TypeAnimation
           sequence={[
-            "In NFT We Trust", // Types 'One'
-            1500, // Waits 1s
+            "In NFT We Trust", 
+            1500, 
 
             "",
             1500,

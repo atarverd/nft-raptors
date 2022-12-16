@@ -1,11 +1,5 @@
-import Collection from '../components/collection';
+import Collection from 'components/collection';
 
-const CollectionPage = () => {
-	return (
-		<div>
-			<Collection />
-		</div>
-	);
-};
+const CollectionPage = () => <Collection />;
 
 export default CollectionPage;
