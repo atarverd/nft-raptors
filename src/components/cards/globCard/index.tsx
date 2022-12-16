@@ -78,7 +78,7 @@ const GlobCard = ({ nft }: TNft) => {
             {nft.name}
           </Text>
           <Text>
-            price: {nft.currentPrice ? nft.currentPrice : "Not For Sold"}
+            price: {nft.currentPrice ? nft.currentPrice : "Not For Sold"} $
           </Text>
 
           {isOwner ? (
