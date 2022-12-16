@@ -36,7 +36,7 @@ const CartFooter = () => {
         clearCartAfterPurchase,
         toast,
         navigate
-      )
+      );
     } else {
       toast({
         position: "top-right",
