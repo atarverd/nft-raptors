@@ -16,7 +16,6 @@ import RafLigth from "../../assets/team/Raf-Ligth.jpeg";
 import RafDark from "../../assets/team/Raf-Dark.jpeg";
 import RobLigth from "../../assets/team/Rob-Ligth.jpeg";
 import RobDark from "../../assets/team/Rob-Dark.jpeg";
-import { Link } from "@chakra-ui/react";
 import linkedIn from "../../assets/linkedin.png";
 import github from "../../assets/github.png";
 import darkgit from "../../assets/githubdark.png";
