@@ -10,9 +10,15 @@ import {
   HStack,
   useColorMode,
 } from "@chakra-ui/react";
-import signup from "../../assets/signup.jpg";
+import ArtLigth from "../../assets/team/Art-Ligth.jpeg";
+import ArtDark from "../../assets/team/Art-Dark.jpeg";
+import MinasLigth from "../../assets/team/Minas-Ligth.jpeg";
+import MinasDark from "../../assets/team/Minas-Dark.jpeg";
+import RafLigth from "../../assets/team/Raf-Ligth.jpeg";
+import RafDark from "../../assets/team/Raf-Dark.jpeg";
+import RobLigth from "../../assets/team/Rob-Ligth.jpeg";
+import RobDark from "../../assets/team/Rob-Dark.jpeg";
 import { Link } from "@chakra-ui/react";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
 import linkedIn from "../../assets/linkedin.png";
 import github from "../../assets/github.png";
 import darkgit from "../../assets/githubdark.png";
@@ -26,7 +32,7 @@ const AboutUs = () => {
         <Flex display='flex' alignItems='center'>
           <Avatar
             boxSize='200px'
-            src={signup}
+            src={colorMode === "dark" ? ArtDark : ArtLigth}
             m='30px'
             boxShadow={
               colorMode === "dark"
@@ -105,7 +111,7 @@ const AboutUs = () => {
 
           <Avatar
             boxSize='200px'
-            src={signup}
+            src={colorMode === "dark" ? MinasDark : MinasLigth}
             m='30px'
             boxShadow={
               colorMode === "dark"
@@ -122,7 +128,7 @@ const AboutUs = () => {
         <Flex display='flex' alignItems='center'>
           <Avatar
             boxSize='200px'
-            src={signup}
+            src={colorMode === "dark" ? RafDark : RafLigth}
             m='30px'
             boxShadow={
               colorMode === "dark"
@@ -198,7 +204,7 @@ const AboutUs = () => {
           </VStack>
           <Avatar
             boxSize='200px'
-            src={signup}
+            src={colorMode === "dark" ? RobDark : RobLigth}
             m='30px'
             boxShadow={
               colorMode === "dark"
