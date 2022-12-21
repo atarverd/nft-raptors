@@ -1,3 +1,4 @@
+
 import Empty from "./empty";
 import Loader from "../loading";
 import ItemCard from "./itemCard";
@@ -74,10 +75,6 @@ const Search = () => {
     setNfts(result);
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    asyncronus();
-  }, []);
 
   useEffect(() => {
     asyncronus();

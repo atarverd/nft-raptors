@@ -22,6 +22,7 @@ import { useNavigate } from "react-router";
 import hiddenEye from "../../assets/hiddenEye.png";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
+
 const LogIn = () => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");

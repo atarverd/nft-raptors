@@ -1,6 +1,6 @@
-import Card from '../../cards/card';
+import Card from 'components/cards/card';
 import { Box, Grid, Heading } from '@chakra-ui/react';
-import { categoryData } from '../../../categoriesData';
+import { categoryData } from 'data/categoriesData';
 
 const Categories = () => {
 

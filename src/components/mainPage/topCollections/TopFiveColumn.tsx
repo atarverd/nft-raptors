@@ -11,8 +11,9 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { formatter } from "../../../utils/formatValue";
-import { TCollection } from "../../../types/collection.types";
+
+import { formatter } from "utils/formatValue";
+import { TCollection } from "types/collection.types";
 
 type TProps = {
   data: TCollection[];

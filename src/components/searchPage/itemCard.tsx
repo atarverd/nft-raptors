@@ -1,4 +1,4 @@
-import GlobCard from '../cards/globCard';
+import GlobCard from 'components/cards/globCard';
 import { Box, SimpleGrid } from '@chakra-ui/react';
 
 type TNfts = {

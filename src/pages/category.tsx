@@ -1,12 +1,5 @@
-import Category from '../components/category';
+import Category from 'components/category';
 
-const CategoryPage = () => {
-	return (
-		<div>
-			<Category />
-		</div>
-
-	);
-};
+const CategoryPage = () => <Category />;
 
 export default CategoryPage;

@@ -8,20 +8,16 @@ import {
 	Tbody,
 	TableContainer,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { TPriceHistory } from '../../types/nft.types';
+
+import { TPriceHistory } from 'types/nft.types';
 
 type TProp = {
 	priceHistory: TPriceHistory[];
 };
 
 const NftTable = ({ priceHistory }: TProp) => {
-	const navigate = useNavigate();
 	const priceHistoryCopy = priceHistory?.slice();
   
-	const cdPrewOwner = (prevOwner: string) => {
-		navigate('/' + prevOwner);
-	};
 
 	return (
 		<TableContainer h='300px' overflowY='scroll'>
@@ -38,7 +34,7 @@ const NftTable = ({ priceHistory }: TProp) => {
 							<Td>
 								<Link
 									color='#2081e2'
-									_hover={{ textDecoration: 'none' }}
+									_hover={{ textDecoration: 'none',cursor:'none' }}
 								>
 									{item.prevOwner}
 								</Link>

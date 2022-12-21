@@ -10,12 +10,15 @@ import {
 	SimpleGrid,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import GlobCard from '../cards/globCard';
 import { useParams } from 'react-router';
-import useGetNfts from '../../hooks/useGetNfts';
-import CollectionCard from '../cards/collectionCard';
-import { TCollection } from '../../types/collection.types';
-import useCollectionRequest from '../../hooks/useCollectionRequest';
+
+import GlobCard from 'components/cards/globCard';
+import CollectionCard from 'components/cards/collectionCard';
+
+import { TCollection } from 'types/collection.types';
+
+import useGetNfts from 'hooks/useGetNfts';
+import useCollectionRequest from 'hooks/useCollectionRequest';
 
 
 const UserTabs = () => {

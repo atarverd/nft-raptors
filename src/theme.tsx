@@ -6,7 +6,7 @@ const styles = {
 	global: (props: Record<string, any>) => ({
 		body: {
 			color: mode('gray.800', 'whiteAlpha.900')(props),
-			bg: mode('gray.100', '#010914')(props),
+			bg: mode('#f2f9fc', '#010914')(props),
 		},
 		input: {
 			color: mode('black', 'white')(props),

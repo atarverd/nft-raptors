@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import {
   Box,
   Text,
@@ -6,11 +8,12 @@ import {
   Button,
   useColorMode,
 } from "@chakra-ui/react";
+
+import { db } from "firebase-config";
 import { getAuth } from "firebase/auth";
-import { db } from "../../../firebase-config";
-import { useNavigate } from "react-router-dom";
 import { deleteDoc, doc } from "firebase/firestore";
-import { TCollection } from "../../../types/collection.types";
+
+import { TCollection } from "types/collection.types";
 
 type TNft = {
   collection: TCollection;
@@ -39,7 +42,6 @@ const CollectionCard = ({ collection, asyncronusCollection }: TNft) => {
   return (
     <Box>
       <Box
-        // w='350px'
         borderRadius='8px'
         overflow='hidden'
         boxShadow={

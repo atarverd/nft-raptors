@@ -9,11 +9,13 @@ import {
 	Skeleton,
 	useColorMode,
 } from '@chakra-ui/react';
+
 import { useState } from 'react';
 import { getAuth } from 'firebase/auth';
-import useDocRequest from '../../hooks/useDocRequest';
 import { useNavigate, useParams } from 'react-router';
-import { TCollection } from '../../types/collection.types';
+
+import useDocRequest from 'hooks/useDocRequest';
+import { TCollection } from 'types/collection.types';
 
 type TProp = {
 	nftCount?: number;

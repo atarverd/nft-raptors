@@ -1,4 +1,5 @@
 import { Flex, Image, Center, Text, useColorMode } from "@chakra-ui/react";
+
 import { useNavigate } from "react-router";
 
 type PropsType = {

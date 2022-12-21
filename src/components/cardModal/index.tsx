@@ -1,3 +1,6 @@
+import { useRef, useState } from 'react';
+import { getAuth } from 'firebase/auth';
+
 import {
   Modal,
   Image,
@@ -20,11 +23,11 @@ import {
   ModalCloseButton,
   InputLeftElement,
 } from '@chakra-ui/react';
-import { getAuth } from 'firebase/auth';
-import { useRef, useState } from 'react';
-import walletLight from '../../assets/wallet.png';
-import walletDark from '../../assets/walletWhite.png';
-import { useIsAttached } from '../../hooks/useIsAttached';
+
+import walletLight from 'assets/wallet.png';
+import walletDark from 'assets/walletWhite.png';
+
+import { useIsAttached } from 'hooks/useIsAttached';
 
 
 const CardModal = () => {
